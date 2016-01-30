@@ -5,10 +5,10 @@
 dprive                                                      S. Dickinson
 Internet-Draft                                                   Sinodun
 Intended status: Standards Track                              D. Gillmor
-Expires: June 3, 2016                                               ACLU
+Expires: August 2, 2016                                             ACLU
                                                                 T. Reddy
                                                                    Cisco
-                                                                Dec 2015
+                                                        January 30, 2016
 
 
   Authentication and (D)TLS Profile for DNS-over-TLS and DNS-over-DTLS
@@ -37,11 +37,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 3, 2016.
+   This Internet-Draft will expire on August 2, 2016.
 
 Copyright Notice
 
-   Copyright (c) 2015 IETF Trust and the persons identified as the
+   Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 1]
+Dickinson, et al.        Expires August 2, 2016                 [Page 1]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    include Simplified BSD License text as described in Section 4.e of
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 2]
+Dickinson, et al.        Expires August 2, 2016                 [Page 2]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    o  DNS-over-TLS [I-D.ietf-dprive-dns-over-tls]
@@ -165,9 +165,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 3]
+Dickinson, et al.        Expires August 2, 2016                 [Page 3]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
       *  Implements the (D)TLS profile described in Section 11.
@@ -221,9 +221,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 4]
+Dickinson, et al.        Expires August 2, 2016                 [Page 4]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    o  Any server identifier other than domain names, including IP
@@ -277,9 +277,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 5]
+Dickinson, et al.        Expires August 2, 2016                 [Page 5]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
       +-----------------------+------------------+-----------------+
@@ -333,9 +333,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 6]
+Dickinson, et al.        Expires August 2, 2016                 [Page 6]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
 4.3.2.  Credential Verification
@@ -389,9 +389,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 7]
+Dickinson, et al.        Expires August 2, 2016                 [Page 7]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    described in Section 9 to authenticate the server, and MUST abort
@@ -445,9 +445,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 8]
+Dickinson, et al.        Expires August 2, 2016                 [Page 8]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    address of the intended privacy-enabling DNS server by doing a lookup
@@ -501,9 +501,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                  [Page 9]
+Dickinson, et al.        Expires August 2, 2016                 [Page 9]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    clients MUST verify the entire certification path per [RFC5280].  The
@@ -557,9 +557,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 10]
+Dickinson, et al.        Expires August 2, 2016                [Page 10]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    recursion.  The records MUST be validated using DNSSEC as described
@@ -613,9 +613,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 11]
+Dickinson, et al.        Expires August 2, 2016                [Page 11]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
 11.  (D)TLS Protocol Profile
@@ -669,9 +669,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 12]
+Dickinson, et al.        Expires August 2, 2016                [Page 12]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
 12.  IANA Considerations
@@ -725,9 +725,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 13]
+Dickinson, et al.        Expires August 2, 2016                [Page 13]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
 15.  References
@@ -781,9 +781,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 14]
+Dickinson, et al.        Expires August 2, 2016                [Page 14]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    [RFC7250]  Wouters, P., Ed., Tschofenig, H., Ed., Gilmore, J.,
@@ -837,9 +837,9 @@ Internet-Draft            (D)TLS Authentication                 Dec 2015
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 15]
+Dickinson, et al.        Expires August 2, 2016                [Page 15]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    [I-D.ietf-tls-falsestart]
@@ -893,9 +893,9 @@ Appendix A.  Server capability probing and caching by DNS clients
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 16]
+Dickinson, et al.        Expires August 2, 2016                [Page 16]
 
-Internet-Draft            (D)TLS Authentication                 Dec 2015
+Internet-Draft            (D)TLS Authentication             January 2016
 
 
    authenticated encrypted connection before falling back to a lower
@@ -949,4 +949,4 @@ Authors' Addresses
 
 
 
-Dickinson, et al.         Expires June 3, 2016                 [Page 17]
+Dickinson, et al.        Expires August 2, 2016                [Page 17]
