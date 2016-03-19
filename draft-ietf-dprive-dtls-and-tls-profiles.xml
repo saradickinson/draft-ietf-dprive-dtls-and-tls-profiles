@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="US-ASCII"?>
 <!-- was: <?xml version="1.0" encoding="US-ASCII"?> -->
 <!-- This template is for creating an Internet Draft using xml2rfc,
 which is available here: http://xml.resource.org. -->
@@ -32,436 +32,442 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-00" ipr="trust200902">
-    <!-- category values: std, bcp, info, exp, and historic
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-01"
+     ipr="trust200902">
+  <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN"
   they will automatically be output with "(if approved)" -->
-    <!-- ***** FRONT MATTER ***** -->
-    <front>
-        <!-- The abbreviated title is used in the page header - it is only necessary if the
+
+  <!-- ***** FRONT MATTER ***** -->
+
+  <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the
     full title is longer than 39 characters -->
-        <title abbrev="(D)TLS Authentication">Authentication and (D)TLS Profile
-            for DNS-over-TLS and DNS-over-DTLS</title>
-        <!-- add 'role="editor"' below for the editors if appropriate -->
-        <!-- Another author who claims to be an editor -->
-        <author fullname="Sara Dickinson" initials="S." surname="Dickinson">
-            <organization abbrev="Sinodun">Sinodun Internet Technologies</organization>
-            <address>
-                <postal>
-                    <street>Magdalen Centre</street>
-                    <street>Oxford Science Park</street>
-                    <city>Oxford</city>
-                    <region/>
-                    <code>OX4 4GA</code>
-                    <country>UK</country>
-                </postal>
-                <email>sara@sinodun.com</email>
-                <uri>http://sinodun.com</uri>
-            </address>
-        </author>
-        <author fullname="Daniel Kahn Gillmor" initials="D." surname="Gillmor">
-            <organization abbrev="ACLU">ACLU</organization>
-            <address>
-                <postal>
-                    <street>125 Broad Street, 18th Floor</street>
-                    <city>New York</city>
-                    <region/>
-                    <code>NY 10004</code>
-                    <country>USA</country>
-                </postal>
-                <email>dkg@fifthhorseman.net</email>
-            </address>
-        </author>
 
-        <author fullname="Tirumaleswar Reddy" initials="T." surname="Reddy">
-            <organization abbrev="Cisco">Cisco Systems, Inc.</organization>
-            <address>
-                <postal>
-                    <street>Cessna Business Park, Varthur Hobli</street>
-                    <street>Sarjapur Marathalli Outer Ring Road</street>
-                    <city>Bangalore</city>
-                    <region>Karnataka</region>
-                    <code>560103</code>
-                    <country>India</country>
-                </postal>
-                <email>tireddy@cisco.com</email>
-            </address>
-        </author>
+    <title abbrev="(D)TLS Authentication">Authentication and (D)TLS Profile
+    for DNS-over-TLS and DNS-over-DTLS</title>
 
-        <date month="Jan" year="2016"/>
-        <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
+    <!-- add 'role="editor"' below for the editors if appropriate -->
+
+    <!-- Another author who claims to be an editor -->
+
+    <author fullname="Sara Dickinson" initials="S." surname="Dickinson">
+      <organization abbrev="Sinodun">Sinodun Internet
+      Technologies</organization>
+
+      <address>
+        <postal>
+          <street>Magdalen Centre</street>
+
+          <street>Oxford Science Park</street>
+
+          <city>Oxford</city>
+
+          <region></region>
+
+          <code>OX4 4GA</code>
+
+          <country>UK</country>
+        </postal>
+
+        <email>sara@sinodun.com</email>
+
+        <uri>http://sinodun.com</uri>
+      </address>
+    </author>
+
+    <author fullname="Daniel Kahn Gillmor" initials="D." surname="Gillmor">
+      <organization abbrev="ACLU">ACLU</organization>
+
+      <address>
+        <postal>
+          <street>125 Broad Street, 18th Floor</street>
+
+          <city>New York</city>
+
+          <region></region>
+
+          <code>NY 10004</code>
+
+          <country>USA</country>
+        </postal>
+
+        <email>dkg@fifthhorseman.net</email>
+      </address>
+    </author>
+
+    <author fullname="Tirumaleswar Reddy" initials="T." surname="Reddy">
+      <organization abbrev="Cisco">Cisco Systems, Inc.</organization>
+
+      <address>
+        <postal>
+          <street>Cessna Business Park, Varthur Hobli</street>
+
+          <street>Sarjapur Marathalli Outer Ring Road</street>
+
+          <city>Bangalore</city>
+
+          <region>Karnataka</region>
+
+          <code>560103</code>
+
+          <country>India</country>
+        </postal>
+
+        <email>tireddy@cisco.com</email>
+      </address>
+    </author>
+
+    <date month="March" year="2016" />
+
+    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
           in the current day for you. If only the current year is specified, xml2rfc will fill
         in the current day and month for you. If the year is not the current one, it is
         necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the
         purpose of calculating the expiry date).  With drafts it is normally sufficient to
         specify just the year. -->
-        <!-- Meta-data Declarations -->
-        <area>int</area>
-        <workgroup>dprive</workgroup>
-        <!-- WG name at the upperleft corner of the doc,
+
+    <!-- Meta-data Declarations -->
+
+    <area>int</area>
+
+    <workgroup>dprive</workgroup>
+
+    <!-- WG name at the upperleft corner of the doc,
         IETF is fine for individual submissions.
         If this element is not present, the default is "Network Working Group",
         which is used by the RFC Editor as a nod to the history of the IETF. -->
-        <keyword>DNS</keyword>
-        <keyword>transport</keyword>
-        <!-- Keywords will be incorporated into HTML output
+
+    <keyword>DNS</keyword>
+
+    <keyword>transport</keyword>
+
+    <!-- Keywords will be incorporated into HTML output
         files in a meta tag but they have no effect on text or nroff
         output. If you submit your draft to the RFC Editor, the
         keywords will be used for the search engine. -->
-        <abstract>
-          <t>
-            This document describes how a DNS client can use a domain
-            name to authenticate a DNS server that uses
-            Transport Layer Security (TLS) and Datagram TLS
-            (DTLS). Additionally, it defines (D)TLS profiles for DNS
-            clients and servers implementing DNS-over-TLS and
-            DNS-over-DTLS.
-          </t>
-        </abstract>
-    </front>
-    <middle>
-      <section title="Introduction">
-            <t>The DPRIVE working group has
-               two active documents that provide DNS
-               privacy between DNS clients and DNS servers (to address the
-               concerns in <xref target="RFC7626"/>):
-               <list style="symbols">
-                   <t><xref target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref> </t>
-                   <t><xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref></t>
-                </list>
+
+    <abstract>
+      <t>This document describes how a DNS client can use a domain name to
+      authenticate a DNS server that uses Transport Layer Security (TLS) and
+      Datagram TLS (DTLS). Additionally, it defines (D)TLS profiles for DNS
+      clients and servers implementing DNS-over-TLS and DNS-over-DTLS.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>The DPRIVE working group has two active documents that provide DNS
+      privacy between DNS clients and DNS servers (to address the concerns in
+      <xref target="RFC7626"></xref>): <list style="symbols">
+          <t><xref
+          target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref></t>
+
+          <t><xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref></t>
+        </list></t>
+
+      <t>This document defines usage profiles and authentication mechanisms
+      for <xref target="RFC6347">DTLS</xref> and <xref
+      target="RFC5246">TLS</xref> that specify how a DNS client should
+      authenticate a DNS server based on a domain name. In particular, it
+      describes: <list style="symbols">
+          <t>How a DNS client can obtain a domain name for a DNS server to use
+          for (D)TLS authentication.</t>
+
+          <t>What are the acceptable credentials a DNS server can present to
+          prove its identity for (D)TLS authentication based on a given domain
+          name.</t>
+
+          <t>How a DNS client can verify that any given credential matches the
+          domain name obtained for a DNS server.</t>
+        </list></t>
+
+      <t>This document also defines a (D)TLS protocol profile for use with
+      DNS. This profile defines the configuration options and protocol
+      extensions required of both parties to optimize connection establishment
+      and session resumption for transporting DNS, and to support the
+      authentication profiles defined here.</t>
+    </section>
+
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119"></xref>.</t>
+
+      <t>Several terms are used specifically in the context of this draft:
+      <list style="symbols">
+          <t>DNS client: a DNS stub resolver or forwarder/proxy. In the case
+          of a forwarder, the term "DNS client" is used to discuss the side
+          that sends queries.</t>
+
+          <t>DNS server: a DNS recursive resolver or forwarder/proxy. In the
+          case of a forwarder, the term "DNS server" is used to discuss the
+          side that responds to queries.</t>
+
+          <t>Privacy-enabling DNS server: A DNS server that: <list
+              style="symbols">
+              <t>MUST implement <xref
+              target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref> and
+              MAY implement <xref
+              target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>.</t>
+
+              <t>Can offer at least one of the credentials described in <xref
+              target="credentials"></xref>.</t>
+
+              <t>Implements the (D)TLS profile described in <xref
+              target="tls-profile"></xref>.</t>
+            </list></t>
+
+          <t>(D)TLS: For brevity this term is used for statements that apply
+          to both <xref target="RFC5246">Transport Layer Security</xref> and
+          <xref target="RFC6347">Datagram Transport Layer Security</xref>.
+          Specific terms will be used for any statement that applies to either
+          protocol alone.</t>
+
+          <t>DNS-over-(D)TLS: For brevity this term is used for statements
+          that apply to both <xref
+          target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref> and <xref
+          target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>. Specific
+          terms will be used for any statement that applies to either protocol
+          alone.</t>
+
+          <t>Credential: Information available for a DNS server which proves
+          its identity for authentication purposes. Credentials discussed here
+          include: <list style="symbols">
+              <t>X.509 certificate</t>
+
+              <t>DNSSEC validated chain to a TLSA record</t>
+            </list> but may also include SPKI pinsets.</t>
+
+          <t>SPKI Pinsets: <xref target="I-D.ietf-dprive-dns-over-tls"></xref>
+          describes the use of cryptographic digests to "pin" public key
+          information in a manner similar to <xref
+          target="RFC7469">HPKP</xref>. An SPKI pinset is a collection of
+          these pins that constrains a DNS server.</t>
+
+          <t>Reference Identifier: a Reference Identifier as described in
+          <xref target="RFC6125"></xref>, constructed by the DNS client when
+          performing TLS authentication of a DNS server.</t>
+        </list></t>
+    </section>
+
+    <section title="Scope">
+      <t>This document is limited to domain-name-based authentication of DNS
+      servers by DNS clients (as defined in the terminology section), and the
+      (D)TLS profiles needed to support this. As such, the following things
+      are out of scope: <list style="symbols">
+          <t>Authentication of authoritative servers by recursive
+          resolvers.</t>
+
+          <t>Authentication of DNS clients by DNS servers.</t>
+
+          <t>SPKI-pinset-based authentication. This is defined in <xref
+          target="I-D.ietf-dprive-dns-over-tls"></xref>. However, <xref
+          target="combined-auth"></xref> does describe how to combine that
+          approach with the domain name based mechanism described here.</t>
+
+          <t>Any server identifier other than domain names, including IP
+          address, organizational name, country of origin, etc.</t>
+        </list></t>
+    </section>
+
+    <section title="Discussion">
+      <section title="Background">
+        <t>To protect against passive attacks DNS privacy requires encrypting
+        the query (and response). Such encryption typically provides integrity
+        protection as a side-effect, which means on-path attackers cannot
+        simply inject bogus DNS responses. For DNS privacy to also provide
+        protection against active attackers pretending to be the server, the
+        client must authenticate the server.</t>
+      </section>
+
+      <section title="Usage Profiles">
+        <t>A DNS client has a choice of privacy usage profiles available. This
+        choice is briefly discussed in both <xref
+        target="I-D.ietf-dprive-dns-over-tls"></xref> and <xref
+        target="I-D.ietf-dprive-dnsodtls"></xref>. In summary, the usage
+        profiles are: <list style="symbols">
+            <t>Strict Privacy: the DNS client requires both an encrypted and
+            authenticated connection to a privacy-enabling DNS Server. 
+            A hard failure occurs if
+            this is not available. This requires the client to securely obtain
+            information it can use to authenticate the server. This profile can
+            include some initial meta queries (performed using Opportunistic  
+            Privacy) to securely obtain the address of
+            or authentication information for the privacy-enabling DNS server
+            to which the DNS client
+            will subsequently connect. The rationale for this is that requiring 
+            Strict Privacy for such meta queries would introduce significant 
+            deployment obstacles.
+            This profile provides strong privacy guarantees to the client. This is
+            discussed in detail in <xref target="strict"></xref>. 
             </t>
 
-            <t>
-              This document defines usage profiles and authentication mechanisms
-              for <xref target="RFC6347">DTLS</xref> and <xref
-              target="RFC5246">TLS</xref> that specify how a DNS
-              client should authenticate a DNS server based on a domain name.
-              In particular, it describes:
-              <list style="symbols">
-                <t>
-                  How a DNS client can obtain a domain name for a
-                  DNS server to use for (D)TLS authentication.
-                </t>
-                <t>
-                  What are the acceptable credentials a DNS server can present
-                  to prove its identity for (D)TLS authentication based on a given
-                  domain name.
-                </t>
-                <t>
-                  How a DNS client can verify that any given
-                  credential matches the domain name obtained for a DNS server.
-                </t>
-              </list>
-            </t>
+            <t>Opportunistic Privacy: the DNS client uses Opportunistic
+            Security as described in <xref target="RFC7435"></xref> <list
+                style="none">
+                <t>"... the use of cleartext as the baseline communication
+                security policy, with encryption and authentication negotiated
+                and applied to the communication when available."</t>
+              </list> In the best case scenario (authenticated and encrypted
+            connection) this is equivalent to Strict Privacy, in the worst
+            case (clear text connection) this is equivalent to No Privacy.
+            Clients will try for the best case but are willing to fallback to
+            intermediate cases and eventually the worst case scenario in order
+            to obtain a response. This provides an undetermined privacy
+            guarantee to the user depending on what kind of connection is
+            actually used. This is discussed in <xref
+            target="opportunistic"></xref>.</t>
 
-            <t>
-              This document also defines a (D)TLS protocol profile for
-              use with DNS. This profile defines the configuration
-              options and protocol extensions required of both parties
-              to optimize connection establishment and session resumption for
-              transporting DNS, and to support the authentication
-              profiles defined here.
-            </t>
+            <t>No Privacy: the DNS client does not require or attempt to use
+            either encryption or authentication. Queries are always sent in
+            clear text. This provides no privacy guarantees to the client.</t>
+          </list></t>
+
+        <texttable anchor="table_ex"
+                   title="DNS Privacy Protection by Usage Profile and type of attacker">
+          <ttcol align="center">Usage Profile</ttcol>
+
+          <ttcol align="center">Passive Attacker</ttcol>
+
+          <ttcol align="center">Active Attacker</ttcol>
+
+          <c>No Privacy</c>
+
+          <c>N</c>
+
+          <c>N</c>
+
+          <c>Opportunistic Privacy</c>
+
+          <c>N (D)</c>
+
+          <c>N (D)</c>
+
+          <c>Strict Privacy</c>
+
+          <c>P</c>
+
+          <c>P</c>
+
+          <postamble>P == protection; N == no protection; D == detection is
+          possible</postamble>
+        </texttable>
+
+        <t>Since Strict Privacy provides the strongest privacy guarantees it
+        is preferable to Opportunistic Privacy which is preferable to No
+        Privacy. However since the different profiles require varying levels
+        of configuration (or a trusted relationship with a provider) DNS
+        clients will need to carefully select which profile to use based on
+        their communication privacy needs. For the case where a client has
+        a trusted relationship with a provider it is expected that the provider
+        will provide either a domain name (or SPKI pinset) via a secure out-of-band
+        mechanism and therefore Strict Privacy should be used.</t>
+
+        <t>A DNS client SHOULD select a particular usage profile when
+        resolving a query. A DNS client MUST NOT fallback from Strict Privacy
+        to Opportunistic Privacy during the resolution process as this could
+        invalidate the protection offered against active attackers.</t>
+      </section>
+
+      <section title="Authentication">
+        <t>This document describes authentication mechanisms that can be used
+        in either Strict or Opportunistic Privacy for DNS-over-(D)TLS.</t>
+
+        <section title="DNS-over-(D)TLS Bootstrapping Problems">
+          <t>Many (D)TLS clients use <xref target="RFC6125">PKIX
+          authentication</xref> based on a domain name for the server they are
+          contacting. These clients typically first look up the server's
+          network address in the DNS before making this connection. A DNS
+          client therefore has a bootstrap problem. DNS clients typically know
+          only the IP address of a DNS server.</t>
+
+          <t>As such, before connecting to a DNS server, a DNS client needs to
+          learn the domain name it should associate with the IP address of a
+          DNS server for authentication purposes. Sources of domains names are
+          discussed in <xref target="srv"></xref> and <xref
+          target="identifier-sources"></xref>.</t>
+
+          <t>One advantage of this domain name based approach is that it
+          encourages association of stable, human recognisable identifiers
+          with secure DNS service providers.</t>
+
+          <!-- TODO: Should we discuss here why PTR lookups are not proposed here?-->
         </section>
 
-        <section title="Terminology">
-          <t>
-            The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-            "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-            document are to be interpreted as described in <xref target="RFC2119"/>.
-          </t>
-          <t>
-            Several terms are used specifically in the context of this draft:
-            <list style="symbols">
-              <t>
-                DNS client: a DNS stub resolver or forwarder/proxy.
-                In the case of a forwarder, the term "DNS
-                client" is used to discuss the side that sends queries.
-              </t>
-              <t>
-                DNS server: a DNS recursive resolver or forwarder/proxy.
-                In the case of a forwarder, the term "DNS server"
-                is used to discuss the side that responds to queries.
-              </t>
-              <t>
-                Privacy-enabling DNS server: A DNS server that:
-                <list style="symbols">
-                  <t>
-                    MUST implement <xref
-                    target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref>
-                    and MAY implement <xref
-                    target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>.
-                  </t>
-                  <t>
-                    Can offer at least one of the credentials described
-                    in <xref target="credentials"/>.
-                  </t>
-                  <t>
-                    Implements the (D)TLS profile described in <xref
-                    target="tls-profile"/>.
-                  </t>
-                </list>
-              </t>
-              <t>
-                (D)TLS: For brevity this term is used for statements that apply
-                to both <xref target="RFC5246">Transport Layer Security</xref> 
-                and <xref target="RFC6347">Datagram Transport Layer Security</xref>.
-                Specific terms will be used for any statement that applies to 
-                either protocol alone.
-              </t>
-              <t>
-                DNS-over-(D)TLS: For brevity this term is used for statements that
-                apply to both
-                <xref target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref> and
-                <xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>.
-                Specific terms will be used for any statement that applies to
-                either protocol alone.
-              </t>
-              <t>
-                Credential: Information available for a DNS server which proves
-                its identity for authentication purposes. Credentials discussed 
-                here include:
-                <list style="symbols">
-                  <t>X.509 certificate</t>
-                  <t>DNSSEC validated chain to a TLSA record</t>
-                </list>
-                but may also include SPKI pinsets.
-              </t>
-              <t>
-                SPKI Pinsets: <xref
-                target="I-D.ietf-dprive-dns-over-tls"/> describes the
-                use of cryptographic digests to "pin" public key
-                information in a manner similar to <xref
-                target="RFC7469">HPKP</xref>.  An SPKI pinset is a
-                collection of these pins that constrains a DNS server.
-              </t>
-              <t>
-                Reference Identifier: a Reference Identifier as
-                described in <xref target="RFC6125"/>, constructed by
-                the DNS client when performing TLS authentication of a DNS server.
-              </t>
-          </list>
-          </t>
+        <section title="Credential Verification">
+          <t>The use of SPKI pinset verification is discussed in <xref
+          target="I-D.ietf-dprive-dns-over-tls"></xref>.</t>
+
+          <t>In terms of domain name based verification, once a domain name is
+          known for a DNS server a choice of mechanisms can be used for
+          authentication. <xref target="credentials"></xref> discusses these
+          mechanisms in detail, namely X.509 certificate based authentication
+          and DANE.</t>
+
+          <t>Note that the use of DANE adds requirements on the ability of the
+          client to get validated DNSSEC results. This is discussed in more
+          detail in <xref target="dane"></xref>.</t>
         </section>
 
-        <section title="Scope">
-          <t>
-            This document is limited to domain-name-based
-            authentication of DNS servers by DNS clients (as defined in the
-            terminology section), and the (D)TLS profiles needed to
-            support this.  As such, the following things are out of
-            scope:
-            <list style="symbols">
-              <t>
-                Authentication of authoritative servers by
-                recursive resolvers.
-              </t>
-              <t>
-                Authentication of DNS clients by DNS servers.
-              </t>
-              <t>
-                SPKI-pinset-based authentication.  This is defined in
-                <xref target="I-D.ietf-dprive-dns-over-tls"/>.
-                However, <xref target="combined-auth"/> does describe how to combine
-                that approach with the domain name based mechanism described here.</t>
-              <t>
-                Any server identifier other than domain names,
-                including IP address, organizational name, country of
-                origin, etc.
-              </t>
-            </list>
-          </t>
+        <section title="Implementation guidance">
+          <t><xref target="tls-profile"></xref> describes the (D)TLS profile
+          for DNS-over(D)TLS. Additional considerations relating to general
+          implementation guidelines are discussed in both <xref
+          target="security"></xref> and in <xref target="probing"></xref>.</t>
         </section>
-         
+      </section>
+    </section>
 
-        <section title="Discussion">
-          <section title="Background">
-            <t>
-              To protect against passive attacks DNS privacy requires 
-              encrypting the query (and response). Such encryption
-              typically provides integrity protection as a side-effect,
-              which means on-path attackers cannot simply inject bogus
-              DNS responses. For DNS privacy to also provide protection against
-              active attackers pretending to be
-              the server, the client must authenticate the server.
-            </t>
-          </section>
-          <section title="Usage Profiles">
-            <t>A DNS client has a choice of privacy
-                usage profiles available. This choice is briefly discussed in
-                both <xref target="I-D.ietf-dprive-dns-over-tls"/> and
-                <xref target="I-D.ietf-dprive-dnsodtls"/>. In summary, the usage
-                profiles are:
-                <list style="symbols">
-                    <t>Strict Privacy: the DNS client requires both an encrypted
-                        and authenticated connection to a DNS Server. A hard
-                        failure occurs if this is not available. This requires
-                        the client to securely obtain information it can use to
-                        authenticate the server.
-                        This provides strong privacy guarantees to the client. 
-                        This is discussed in detail in <xref target="strict"/>.
-                    </t>
-                    <t>Opportunistic Privacy: the DNS client uses Opportunistic
-                        Security as described in <xref target="RFC7435"/>
-                        <list style="none"><t>"... the use of cleartext as the 
-                            baseline communication security policy, with 
-                            encryption and authentication negotiated and applied
-                            to the communication when available."</t>
-                        </list>
-                        In the best case scenario (authenticated and encrypted 
-                        connection)
-                        this is equivalent to Strict Privacy, in the worst case
-                        (clear text connection) this is equivalent to No Privacy.
-                        Clients will try for the best case but are willing to
-                        fallback to intermediate cases and eventually the
-                        worst case scenario in order to obtain a response.
-                        This provides an undetermined privacy guarantee to the
-                        user depending on what
-                        kind of connection is actually used. This is discussed
-                        in <xref target="opportunistic"/>
-                    </t>
-                    <t>No Privacy: the DNS client does not require or attempt to
-                       use either encryption or authentication. Queries are always
-                        sent in clear text. This provides no privacy guarantees
-                        to the client.
-                        </t>
-                </list>
-            </t>
+    <section anchor="opportunistic"
+             title="Authentication in Opportunistic DNS-over(D)TLS Privacy">
+      <t>An <xref target="RFC7435">Opportunistic Security</xref> profile is
+      described in <xref target="I-D.ietf-dprive-dns-over-tls"></xref> which
+      MAY be used for DNS-over-(D)TLS.</t>
 
-            <texttable anchor="table_ex" title="DNS Privacy Protection by Usage Profile and type of attacker">
-              <ttcol align='center'>Usage Profile</ttcol>
-              <ttcol align='center'>Passive Attacker</ttcol>
-              <ttcol align='center'>Active Attacker</ttcol>
-              <c>No Privacy</c>
-              <c>N</c>
-              <c>N</c>
-              <c>Opportunistic Privacy</c>
-              <c>P</c>
-              <c>N (D)</c>
-              <c>Strict Privacy</c>
-              <c>P</c>
-              <c>P</c>
-              <postamble>P == protection;
-              N == no protection;
-              D == detection is possible</postamble>
-            </texttable>
-            <t>Since Strict Privacy provides the strongest privacy guarantees it
-                is preferable to Opportunistic Privacy which is preferable to 
-                No Privacy. However since the different profiles require varying
-                levels of configuration (or a trusted relationship with a 
-                provider) DNS
-                clients will need to carefully select which profile to use based
-                on their communication privacy needs.
-            </t>
-            <t>A DNS client SHOULD select a particular usage profile when 
-                resolving a query. A DNS client MUST NOT fallback from Strict
-                Privacy to Opportunistic Privacy during the resolution process
-                as this could invalidate the protection
-                offered against active attackers.
-            </t>
-          </section>
-          <section title= "Authentication">
-              <t>This document describes authentication mechanisms that can be
-                  used in either Strict or Opportunistic Privacy for 
-                  DNS-over-(D)TLS.</t>
-              <section title="DNS-over-(D)TLS Bootstrapping Problems">
-                <t>
-                  Many (D)TLS clients use <xref target="RFC6125">PKIX
-                  authentication</xref> based on a domain name for the
-                  server they are contacting.  These clients typically
-                  first look up the server's network address in the DNS
-                  before making this connection. A DNS client therefore
-                  has a bootstrap problem. DNS clients typically know only the
-                  IP address of a DNS server.
-                </t>
-                <t>
-                  As such, before connecting to a DNS server, a
-                  DNS client needs to learn the domain name it should associate
-                  with the IP address of a DNS server for authentication purposes.
-                  Sources of domains names are discussed in <xref target="srv"/>
-                  and <xref target="identifier-sources"/>.
-                </t>
-                <t>One advantage of this domain name based approach
-                 is that it encourages
-                 association of stable, human recognisable identifiers with 
-                 secure DNS service providers.</t>
-                <!-- TODO: Should we discuss here why PTR lookups are not proposed here?-->
-              </section>
-              <section title="Credential Verification">
-                  <t>The use of SPKI pinset verification is discussed in
-                     <xref target="I-D.ietf-dprive-dns-over-tls"/>.</t>
-                  <t>In terms of domain name based verification, once a domain 
-                     name is known for a DNS server a choice of mechanisms
-                     can be used for authentication. <xref target="credentials"/>
-                     discusses these mechanisms in detail, namely X.509 
-                     certificate based authentication and DANE.
-                  </t>
-                  <t>Note that the use of DANE adds
-                     requirements on the ability of the client to get validated 
-                     DNSSEC results. This is discussed in more detail in
-                     <xref target="dane"/>.
-                 </t>
-              </section>
-          <section title="Implementation guidance">
-              <t><xref target="tls-profile"/> describes the (D)TLS profile for
-                 DNS-over(D)TLS. Additional considerations relating to general 
-                 implementation guidelines are discussed in both
-                 <xref target="security"/> and in <xref target="probing"/>.
-                </t>
-          </section>
-          </section>
-        </section>
+      <t>DNS clients issuing queries under an opportunistic profile which know
+      of a domain name or SPKI pinset for a given privacy-enabling DNS server
+      MAY choose to try to authenticate the server using the mechanisms
+      described here. This is useful for detecting (but not preventing)
+      active attack, since the fact that authentication information is available
+      indicates that the server in question is a privacy-enabling DNS server to 
+      which it should be possible to establish an authenticated, encrypted
+      connection. In this case, whilst a client cannot know the reason for an 
+      authentication failure,
+      from a privacy standpoint the client should consider an active attack in
+      progress and proceed under that assumption.
+      Attempting authentication is also useful for
+      debugging or diagnostic purposes if there are
+      means to report the result. This
+      information can provide a basis for a DNS client to switch to
+      (preferred) Strict Privacy where it is viable.</t>
+    </section>
 
-        <section title="Authentication in Opportunistic DNS-over(D)TLS Privacy" anchor="opportunistic">
-          <t>
-            An <xref target="RFC7435">Opportunistic Security</xref>
-            profile is described in <xref
-            target="I-D.ietf-dprive-dns-over-tls"/> which MAY be used
-            for DNS-over-(D)TLS.
-          </t>
-          <t>
-            DNS clients issuing queries under an opportunistic profile
-            which know of a domain name for a DNS server MAY choose to
-            try to authenticate the server using the mechanisms
-            described here. This is useful for detecting (but not
-            preventing) active attack, and for debugging or diagnostic
-            purposes if there are means to report the result of the
-            authentication attempt. This information can provide a
-            basis for a DNS client to switch to (preferred) Strict
-            Privacy where it is viable.
-          </t>
-        </section>
+    <section anchor="strict"
+             title="Authentication in Strict DNS-over(D)TLS Privacy">
+      <t>To authenticate a privacy-enabling DNS server, a DNS client needs to
+      know the domain name for each server it is willing to contact. This is
+      necessary to protect against active attacks on DNS privacy.</t>
 
-        <section title="Authentication in Strict DNS-over(D)TLS Privacy" anchor="strict">
-          <t>
-            To authenticate a privacy-enabling DNS server, a DNS
-            client needs to know the domain name for each
-            server it is willing to contact.  This is necessary to
-            protect against active attacks on DNS privacy.
-          </t>
-          <t>
-            A DNS client requiring Strict Privacy MUST either use one of the
-            sources listed in <xref
-            target="identifier-sources"/> to obtain a domain name for
-            the server it contacts, or use an SPKI pinset as described
-            in <xref target="I-D.ietf-dprive-dns-over-tls"/>.
-          </t>
-          <t>
-            A DNS client requiring Strict Privacy MUST only attempt to connect
-            to DNS servers for which either a domain name or a SPKI pinset is
-            known (or both). The client MUST use the available
-            verification mechanisms described in <xref
-            target="credentials"/> to authenticate the server, and
-            MUST abort connections to a server when no verification
-            mechanism succeeds.
-          </t>
-          <t>
-           With Strict Privacy, the DNS client MUST NOT commence sending DNS 
-           queries until at least one of the privacy-enabling DNS servers becomes
-           available.
-          </t>
-          <!--<t> 
+      <t>A DNS client requiring Strict Privacy MUST either use one of the
+      sources listed in <xref target="identifier-sources"></xref> to obtain a
+      domain name for the server it contacts, or use an SPKI pinset as
+      described in <xref target="I-D.ietf-dprive-dns-over-tls"></xref>. </t>
+
+      <t>A DNS client requiring Strict Privacy MUST only attempt to connect to
+      DNS servers for which either a domain name or a SPKI pinset is known (or
+      both). The client MUST use the available verification mechanisms
+      described in <xref target="credentials"></xref> to authenticate the
+      server, and MUST abort connections to a server when no verification
+      mechanism succeeds.</t>
+
+      <t>With Strict Privacy, the DNS client MUST NOT commence sending DNS
+      queries until at least one of the privacy-enabling DNS servers becomes
+      available.</t>
+
+      <!--<t> 
             [ TODO: discuss situations where one name is sufficient
             for all IP addresses, or whether we want to mandate a
             strict one-to-one mapping of names to IP addresses ]
@@ -469,473 +475,473 @@ please see http://xml.resource.org/authoring/README.html. -->
             Dan Wing also pointed out the case where there are both A and AAAA
             addresses for a nameserver, but only one name is needed.
           </t>-->
-          <t>
-            A privacy-enabling DNS server may be temporarily unavailable when
-            configuring a network.  For example, for clients on
-            networks that require registration through web-based login
-            (a.k.a. "captive portals"), such registration may rely on
-            DNS interception and spoofing.  Techniques such as those
-            used by DNSSEC-trigger <xref target="dnssec-trigger"/> MAY be used during
-            network configuration, with the intent to transition to
-            the designated privacy-enabling DNS servers after captive
-            portal registration.  The system MUST alert by some means that the
-            DNS is not private during such bootstrap.
-          </t>
-          <!--[QUESION: Question from Allison Mankin about if any clear text bootstrapping
+
+      <t>A privacy-enabling DNS server may be temporarily unavailable when
+      configuring a network. For example, for clients on networks that require
+      registration through web-based login (a.k.a. "captive portals"), such
+      registration may rely on DNS interception and spoofing. Techniques such
+      as those used by DNSSEC-trigger <xref target="dnssec-trigger"></xref>
+      MAY be used during network configuration, with the intent to transition
+      to the designated privacy-enabling DNS servers after captive portal
+      registration. The system MUST alert by some means that the DNS is not
+      private during such bootstrap.</t>
+
+      <!--[QUESION: Question from Allison Mankin about if any clear text bootstrapping
               is allowed in Strict privacy.]-->
-        </section>
+    </section>
 
-        <section title="In Band Source of Domain Name: SRV Service Label" anchor="srv">
-          <t>
-            This specification adds a SRV service label "domain-s" for
-            privacy-enabling DNS servers.
-          </t>
-          <t>
-            Example service records (for TLS and DTLS respectively):
-            <list>
-              <t>
-                _domain-s._tcp.dns.example.com. SRV 0 1 853 dns1.example.com.
-                _domain-s._tcp.dns.example.com. SRV 0 1 853 dns2.example.com.
-              </t>
-              <t>
-                _domain-s._udp.dns.example.com. SRV 0 1 853 dns3.example.com.
-              </t>
-            </list>
-          </t>
-        </section>
-        <section title="Out of Band Sources of Domain Name" anchor="identifier-sources">
-            <section title="Full direct configuration">
-              <t>
-                DNS clients may be directly and securely provisioned
-                with the domain name of each privacy-enabling DNS server.  For
-                example, using a client specific configuration file or API.
-              </t>
-              <t>
-                In this case, direct configuration for a DNS client
-                would consist of both an IP address and a domain name for
-                each DNS server.
-              </t>
-            </section>
+    <section anchor="srv"
+             title="In Band Source of Domain Name: SRV Service Label">
+      <t>This specification adds a SRV service label "domain-s" for
+      privacy-enabling DNS servers.</t>
 
-            <section title="Direct configuration of name only">
-              <!--<t>
+      <t>Example service records (for TLS and DTLS respectively): <list>
+          <t>_domain-s._tcp.dns.example.com. SRV 0 1 853 dns1.example.com.
+          _domain-s._tcp.dns.example.com. SRV 0 1 853 dns2.example.com.</t>
+
+          <t>_domain-s._udp.dns.example.com. SRV 0 1 853 dns3.example.com.</t>
+        </list></t>
+    </section>
+
+    <section anchor="identifier-sources"
+             title="Out of Band Sources of Domain Name">
+      <section title="Full direct configuration">
+        <t>DNS clients may be directly and securely provisioned with the
+        domain name of each privacy-enabling DNS server. For example, using a
+        client specific configuration file or API.</t>
+
+        <t>In this case, direct configuration for a DNS client would consist
+        of both an IP address and a domain name for each DNS server.</t>
+      </section>
+
+      <section title="Direct configuration of name only">
+        <!--<t>
                 [ QUESTION: do we want to keep this section? ]
               </t>-->
-              <t>
-                A DNS client may be configured directly and securely with only the
-                domain name of its privacy-enabling DNS server. For
-                example, using a client specific configuration file or API.
-              </t>
-              <t>
-                It can then use opportunistic DNS connections to
-                untrusted DNS servers (e.g. provided by the local
-                DHCP service) to establish the IP address of the
-                intended privacy-enabling DNS server by doing a
-                lookup of SRV records. Such records MUST be validated using
-                DNSSEC.
-              </t>
-              <t>
-                Example: For a DNSSEC validating DNS client configured in this way to do
-                strict DNS privacy to dns.example.net, it would
-                opportunistically look up the SRV for
-                _domain-s._tcp.dns.example.net and determine addresses
-                (via opportunistic A and/or AAAA lookups) for the
-                resulting SRV response(s). The records obtained during this
-                process would only be used if they were validated by the client using DNSSEC.
-              </t>
-              <t>
-                A DNS client so configured that successfully connects
-                to a privacy-enabling DNS server MAY choose to
-                locally cache the looked up addresses in order to not
-                have to repeat the opportunistic lookup.
-              </t>
-              <!--<t>
+
+        <t>A DNS client may be configured directly and securely with only the
+        domain name of its privacy-enabling DNS server. For example, using a
+        client specific configuration file or API.</t>
+
+        <t>A DNS client might learn of a default recursive DNS resolver from
+        an untrusted source (such as DHCP's DNS server option <xref
+        target="RFC3646"></xref>). It can then use opportunistic DNS
+        connections to untrusted recursive DNS resolver to establish the IP
+        address of the intended privacy-enabling DNS server by doing a lookup
+        of SRV records. Such records MUST be validated using DNSSEC. Private
+        DNS resolution can now be done by the DNS client against the
+        configured privacy-enabling DNS server. </t>
+
+        <t>Example:
+            <list style="symbols">
+            <t>A DNSSEC validating DNS client is configured with the domain
+               name dns.example.net for a privacy-enabling DNS server</t>
+            <t>Using Opportunistic Privacy to a default DNS resolver (acquired,
+               for example, using DHCP) the client performs look ups for
+                <list style="symbols">
+                    <t>SRV record for _domain-s._tcp.dns.example.net to obtain 
+                        the server host name </t>
+                    <t>A and/or AAAA lookups to obtain IP address for the server
+                       host name</t>
+                </list> </t>
+            <t>Client validates all the records obtained in the previous step 
+                using DNSSEC.</t>
+            <t>If the records successfully validate the client proceeds to connect
+                to the privacy-enabling DNS server using Strict Privacy.</t>
+          </list>
+        </t>
+
+        <t>A DNS client so configured that successfully connects to a
+        privacy-enabling DNS server MAY choose to locally cache the looked up
+        addresses in order to not have to repeat the opportunistic lookup.</t>
+
+        <!--<t>
                 [ TODO: specify how long such caching is acceptable?
                 Is this limited to the TTL or can we make an
                 exception? ] Removed this question for first version as could
                 not think of a use case.
               </t>-->
-            </section>
-           
-            <section title="DHCP">
-              <t>
-                Some clients may have an established trust
-                relationship with a known <xref
-                target="RFC2131">DHCP</xref> server for discovering
-                their network configuration.  In the typical case, such
-                a DHCP server provides a list of IP addresses for DNS
-                servers (see section 3.8 of <xref
-                target="RFC2132"/>), but does not provide a domain
-                name for the DNS server itself.
-              </t>
-              <t>
-                A DHCP server might use a DHCP extension to provide a
-                list of domain names for the offered DNS servers,
-                which correspond to IP addresses listed. </t>
-              <t>
-                Note that this requires the client to trust the DHCP
-                server, and to have a secured/authenticated connection
-                to it. Therefore this mechanism may be limited to only
-                certain environments.  This document does not attempt
-                to describe secured and trusted relationships to DHCP
-                servers.
-              </t>
-              <t>[NOTE: It is noted (at the time
-                 of writing) that whilst some implementation work is in progress to 
-                secure IPv6 connections for DHCP, IPv4 connections have received
-                little to no implementation attention in this area.]</t>
-                <t>[QUESTION: The authors would like to solicit feedback on the
-                    use of DHCP to determine whether to pursue a new DHCP option in a 
-                    later version of this draft, or defer it.]
-                </t>
+      </section>
 
-            </section>
-        </section>
+      <section title="DHCP">
+        <t>Some clients may have an established trust relationship with a
+        known <xref target="RFC2131">DHCP</xref> server for discovering their
+        network configuration. In the typical case, such a DHCP server
+        provides a list of IP addresses for DNS servers (see section 3.8 of
+        <xref target="RFC2132"></xref>), but does not provide a domain name
+        for the DNS server itself.</t>
 
-        <section title="Credential Verification" anchor="credentials">
-          <section title="X.509 Certificate Based Authentication" anchor="certs">
-            <t>
-              When a DNS client configured with a domain name connects
-              to its configured DNS server over (D)TLS, the
-              server may present it with an X.509 certificate. In order to 
-              ensure proper authentication, DNS clients MUST verify 
-              the entire certification path per <xref target="RFC5280"/>. The
-              DNS client additionally uses <xref target="RFC6125"/> validation
-              techniques to compare the domain name to the certificate
-              provided.
-            </t>
-            <t>
-              A DNS client constructs two Reference Identifiers for
-              the server based on the domain name: A DNS-ID and an
-              <xref target="RFC4985">SRV-ID</xref>.  The DNS-ID is
-              simply the domain name itself.  The SRV-ID uses a
-              "_domain-s." prefix.  So if the configured domain name is
-              "dns.example.com", then the two Reference Identifiers
-              are:
-              <list style="ordered">
-                <t>
-                  DNS-ID: dns.example.com
-                </t>
-                <t>
-                  SRV-ID: _domain-s.dns.example.com
-                </t>
-              </list>
-            </t>
-            <t>
-              If either of the Reference Identifiers are found in the
-              X.509 certificate's subjectAltName extension as
-              described in section 6 of <xref target="RFC6125"/>, the
-              DNS client should accept the certificate for the server.
-            </t>
-            <!--<t>
+        <t>A DHCP server might use a DHCP extension to provide a list of
+        domain names for the offered DNS servers, which correspond to IP
+        addresses listed.</t>
+
+        <t>Note that this requires the client to trust the DHCP server, and to
+        have a secured/authenticated connection to it. Therefore this
+        mechanism may be limited to only certain environments. This document
+        does not attempt to describe secured and trusted relationships to DHCP
+        servers.</t>
+
+        <t>[NOTE: It is noted (at the time of writing) that whilst some
+        implementation work is in progress to secure IPv6 connections for
+        DHCP, IPv4 connections have received little to no implementation
+        attention in this area.]</t>
+
+        <t>[QUESTION: The authors would like to solicit feedback on the use of
+        DHCP to determine whether to pursue a new DHCP option in a later
+        version of this draft, or defer it.]</t>
+      </section>
+    </section>
+
+    <section anchor="credentials" title="Credential Verification">
+      <section anchor="certs" title="X.509 Certificate Based Authentication">
+        <t>When a DNS client configured with a domain name connects to its
+        configured DNS server over (D)TLS, the server may present it with an
+        X.509 certificate. In order to ensure proper authentication, DNS
+        clients MUST verify the entire certification path per <xref
+        target="RFC5280"></xref>. The DNS client additionally uses <xref
+        target="RFC6125"></xref> validation techniques to compare the domain
+        name to the certificate provided.</t>
+
+        <t>A DNS client constructs two Reference Identifiers for the server
+        based on the domain name: A DNS-ID and an <xref
+        target="RFC4985">SRV-ID</xref>. The DNS-ID is simply the domain name
+        itself. The SRV-ID uses a "_domain-s." prefix. So if the configured
+        domain name is "dns.example.com", then the two Reference Identifiers
+        are: <list style="ordered">
+            <t>DNS-ID: dns.example.com</t>
+
+            <t>SRV-ID: _domain-s.dns.example.com</t>
+          </list></t>
+
+        <t>If either of the Reference Identifiers are found in the X.509
+        certificate's subjectAltName extension as described in section 6 of
+        <xref target="RFC6125"></xref>, the DNS client should accept the
+        certificate for the server.</t>
+
+        <!--<t>
               [ QUESTION: do we want to talk about multiple domain names
               for a single server here? ]
               After review, not in this version of the draft.
             </t>-->
-            <t>
-              A compliant DNS client MUST only inspect the
-              certificate's subjectAltName extension for these
-              Reference Identifiers.  In particular, it MUST NOT
-              inspect the Subject field itself.
-            </t>
-          </section>
-         
-          <section title="DANE" anchor="dane">
-            <t>
-              <xref target="RFC6698">DANE</xref> provides mechanisms
-              to root certificate and raw public keys trust with
-              DNSSEC. However this requires a domain name which must
-              be obtained via a trusted source.
-            </t>
-            <t> It is noted that <xref target="RFC6698"/> says 
-                <list style="none"><t>
-                "Clients that validate the DNSSEC signatures themselves MUST use
-                 standard DNSSEC validation procedures.  Clients that rely 
-                 on another entity to perform the DNSSEC signature validation 
-                 MUST use a secure mechanism between themselves and the validator."
-                 </t></list>
-            </t>
-            <t>
-              The specific DANE record would take the form:
-              <list>
-                  <t>_853._tcp.[server-domain-name] for TLS </t>
-                  <t>_853._udp.[server-domain-name] for DTLS</t>
-              </list>
-            </t>
-            <section title="Direct DNS Lookup">
-              <t>
-                The DNS client MAY choose to perform the DNS lookups
-                to retrieve the required DANE records itself. The DNS
-                queries for such DANE records MAY use opportunistic
-                encryption or be in the clear to avoid trust
-                recursion. The records MUST be validated using DNSSEC as described
-                above in <xref target="RFC6698"/>.
-              </t>
-            </section>
-            <section title="TLS DNSSEC Chain extension">
-              <t>
-                The DNS client MAY offer the TLS extension described
-                in <xref
-                target="I-D.shore-tls-dnssec-chain-extension"/>.  If
-                the DNS server supports this extension, it can provide
-                the full chain to the client in the handshake.
-              </t>
-              <t>
-                If the DNS client offers the TLS DNSSEC Chain
-                extension, it MUST be capable of validating the full
-                DNSSEC authentication chain down to the leaf.  If the supplied 
-                DNSSEC chain does
-                not validate, the client MUST ignore the DNSSEC chain and
-                validate only via other supplied credentials.
-              </t>
-              <t>
-                  <!--[SARA->DKG: Could you fill out this section with more 
-                      detail?] -->
-                [ TODO: specify guidance for DANE parameters to be
-                used here.  For example, a suggestion to use
-                Certificate Usage of 3 (EE-DANE) (section 2.1.1 of
-                <xref target="RFC6698"/>) and a Selector of 1 (SPKI)
-                (section 2.1.2) would completely remove all X.509 and
-                certificate authorities from the verification path and
-                allows for private certification ]
-              </t>
-              <t>
-                [ TODO: discuss combination of DNSSEC Chain Extension
-                with cert validation.  Note that the combination
-                depends on the Certificate Usage value of the TLSA
-                response. ]
-              </t>
-            </section>
-          </section>
+
+        <t>A compliant DNS client MUST only inspect the certificate's
+        subjectAltName extension for these Reference Identifiers. In
+        particular, it MUST NOT inspect the Subject field itself.</t>
+      </section>
+
+      <section anchor="dane" title="DANE">
+        <t><xref target="RFC6698">DANE</xref> provides mechanisms to root
+        certificate and raw public keys trust with DNSSEC. However this
+        requires a domain name which must be obtained via a trusted
+        source.</t>
+
+        <t>It is noted that <xref target="RFC6698"></xref> says <list
+            style="none">
+            <t>"Clients that validate the DNSSEC signatures themselves MUST
+            use standard DNSSEC validation procedures. Clients that rely on
+            another entity to perform the DNSSEC signature validation MUST use
+            a secure mechanism between themselves and the validator."</t>
+          </list></t>
+
+        <t>The specific DANE record would take the form: <list>
+            <t>_853._tcp.[server-domain-name] for TLS</t>
+
+            <t>_853._udp.[server-domain-name] for DTLS</t>
+          </list></t>
+
+        <section title="Direct DNS Lookup">
+          <t>The DNS client MAY choose to perform the DNS lookups to retrieve
+          the required DANE records itself. The DNS queries for such DANE
+          records MAY use opportunistic encryption or be in the clear to avoid
+          trust recursion. The records MUST be validated using DNSSEC as
+          described above in <xref target="RFC6698"></xref>.</t>
         </section>
 
-        <section title="Combined Credentials with SPKI Pinsets" anchor="combined-auth">
-          <t>   The SPKI pinset profile described in
-            <xref target="I-D.ietf-dprive-dns-over-tls"/> MAY be used with
-            DNS-over-(D)TLS.</t>
+        <section title="TLS DNSSEC Chain extension">
+          <t>The DNS client MAY offer the TLS extension described in <xref
+          target="I-D.shore-tls-dnssec-chain-extension"></xref>. If the DNS
+          server supports this extension, it can provide the full chain to the
+          client in the handshake.</t>
 
-             <t>This draft does not make explicit recommendations about how a SPKI
-             pinset based authentication mechanism should be combined with a
-             domain based mechanism from an operator perspective. However
-             it can be envisaged that a DNS
-             server operator may wish to make both an SPKI pinset and a domain
-             name available to allow clients to choose which mechanism to use.
-             Therefore, the following is guidance on how clients ought to behave if they
-             choose to configure both, as is possible in <xref target="RFC7469">HPKP</xref>.</t>
+          <t>If the DNS client offers the TLS DNSSEC Chain extension, it MUST
+          be capable of validating the full DNSSEC authentication chain down
+          to the leaf. If the supplied DNSSEC chain does not validate, the
+          client MUST ignore the DNSSEC chain and validate only via other
+          supplied credentials.</t>
 
-            <t>A DNS client that is configured with both a domain name and
-            a SPKI pinset for a DNS sever
-            SHOULD match on both a valid credential for the domain name
-            and a valid SPKI pinset when connecting to that DNS server.
-          </t>
-          <!--<t>
+          <t><!--[SARA->DKG: Could you fill out this section with more 
+                      detail?] --> [ TODO: specify guidance for DANE
+          parameters to be used here. For example, a suggestion to use
+          Certificate Usage of 3 (EE-DANE) (section 2.1.1 of <xref
+          target="RFC6698"></xref>) and a Selector of 1 (SPKI) (section 2.1.2)
+          would completely remove all X.509 and certificate authorities from
+          the verification path and allows for private certification ]</t>
+
+          <t>[ TODO: discuss combination of DNSSEC Chain Extension with cert
+          validation. Note that the combination depends on the Certificate
+          Usage value of the TLSA response. ]</t>
+        </section>
+      </section>
+    </section>
+
+    <section anchor="combined-auth"
+             title="Combined Credentials with SPKI Pinsets">
+      <t>The SPKI pinset profile described in <xref
+      target="I-D.ietf-dprive-dns-over-tls"></xref> MAY be used with
+      DNS-over-(D)TLS.</t>
+
+      <t>This draft does not make explicit recommendations about how a SPKI
+      pinset based authentication mechanism should be combined with a domain
+      based mechanism from an operator perspective. However it can be
+      envisaged that a DNS server operator may wish to make both an SPKI
+      pinset and a domain name available to allow clients to choose which
+      mechanism to use. Therefore, the following is guidance on how clients
+      ought to behave if they choose to configure both, as is possible in
+      <xref target="RFC7469">HPKP</xref>.</t>
+
+      <t>A DNS client that is configured with both a domain name and a SPKI
+      pinset for a DNS sever SHOULD match on both a valid credential for the
+      domain name and a valid SPKI pinset when connecting to that DNS
+      server.</t>
+
+      <!--<t>
             [ TODO: describe in more detail why this conservative
             approach is the right one, and what implementations should
             do if they want a more lenient approach. ]
           </t>-->
-        </section>
+    </section>
 
-        <section title="(D)TLS Protocol Profile" anchor="tls-profile">
-            <t>This section defines the (D)TLS protocol profile of DNS-over-(D)TLS.</t>
+    <section anchor="tls-profile" title="(D)TLS Protocol Profile">
+      <t>This section defines the (D)TLS protocol profile of
+      DNS-over-(D)TLS.</t>
 
-               <t>There are known attacks on (D)TLS, such as machine-in-the-middle 
-                and protocol downgrade.  These are general attacks on (D)TLS and
-               not specific to DNS-over-TLS; please refer to the (D)TLS RFCs for
-               discussion of these security issues.  Clients and servers MUST
-               adhere to the (D)TLS implementation recommendations and security
-               considerations of <xref target="RFC7525"/> except with respect to
-               (D)TLS version. Since encryption of DNS using (D)TLS is virtually 
-               a green-field deployment
-               DNS clients and server MUST implement only (D)TLS 1.2 or later.</t>
+      <t>There are known attacks on (D)TLS, such as machine-in-the-middle and
+      protocol downgrade. These are general attacks on (D)TLS and not specific
+      to DNS-over-TLS; please refer to the (D)TLS RFCs for discussion of these
+      security issues. Clients and servers MUST adhere to the (D)TLS
+      implementation recommendations and security considerations of <xref
+      target="RFC7525"></xref> except with respect to (D)TLS version. Since
+      encryption of DNS using (D)TLS is virtually a green-field deployment DNS
+      clients and server MUST implement only (D)TLS 1.2 or later.</t>
 
-               <t>
-                 Implementations MUST NOT offer or provide TLS
-                 compression, since compression can leak significant
-                 amounts of information, especially to a network
-                 observer capable of forcing the user to do an
-                 arbitrary DNS lookup in the style of the <xref
-                 target="CRIME">CRIME attacks</xref>.
-               </t>
+      <t>Implementations MUST NOT offer or provide TLS compression, since
+      compression can leak significant amounts of information, especially to a
+      network observer capable of forcing the user to do an arbitrary DNS
+      lookup in the style of the <xref target="CRIME">CRIME
+      attacks</xref>.</t>
 
+      <t>Implementations compliant with this profile MUST implement all of the
+      following items:</t>
 
-               <t>Implementations compliant with this profile MUST implement all of
-               the following items:</t>
-                <t><list style="symbols">
-                <t><xref target="RFC5077">TLS session resumption without server-side state</xref>
-                    which eliminates the need for the server to retain cryptographic
-                    state for longer than necessary.</t>
-               <t><xref target="RFC7250">Raw public keys</xref>
-                   which reduce the size of the ServerHello, and can be used by servers
-                   that cannot obtain certificates (e.g., DNS servers on private networks). </t>
-                </list></t>
+      <t><list style="symbols">
+          <t><xref target="RFC5077">TLS session resumption without server-side
+          state</xref> which eliminates the need for the server to retain
+          cryptographic state for longer than necessary.</t>
 
-                <t>Implementations compliant with this profile SHOULD implement all of
-                   the following items:</t>
-                <t><list style="symbols">
-                <t><xref target="I-D.ietf-tls-falsestart">TLS False Start</xref>
-                   which reduces round-trips by allowing the TLS second flight of
-                   messages (ChangeCipherSpec) to also contain the (encrypted) DNS query</t>
-              
-                <t><xref target="I-D.ietf-tls-cached-info">Cached Information Extension</xref>
-                    which avoids transmitting the server's certificate and certificate
-                    chain if the client has cached that information from a previous TLS handshake</t>
-                </list></t>
+          <t><xref target="RFC7250">Raw public keys</xref> which reduce the
+          size of the ServerHello, and can be used by servers that cannot
+          obtain certificates (e.g., DNS servers on private networks).</t>
+        </list></t>
 
-                <t>[NOTE: The references to (works in progress) should be upgraded to
-                    MUST's if those references become RFC's prior to publication of this document.]</t>
+      <t>Implementations compliant with this profile SHOULD implement all of
+      the following items:</t>
 
-                <t>Guidance specific to TLS or DTLS is provided in either
-                    <xref target="I-D.ietf-dprive-dnsodtls"/> or
-                    <xref target="I-D.ietf-dprive-dns-over-tls"/>.</t>
-        </section>
+      <t><list style="symbols">
+          <t><xref target="I-D.ietf-tls-falsestart">TLS False Start</xref>
+          which reduces round-trips by allowing the TLS second flight of
+          messages (ChangeCipherSpec) to also contain the (encrypted) DNS
+          query</t>
 
-        <section anchor="IANA" title="IANA Considerations">
-            <t>This memo includes no request to IANA.</t>
-        </section>
+          <t><xref target="I-D.ietf-tls-cached-info">Cached Information
+          Extension</xref> which avoids transmitting the server's certificate
+          and certificate chain if the client has cached that information from
+          a previous TLS handshake</t>
+        </list></t>
 
-        <section title="Security Considerations" anchor="security">
-            <t>Security considerations discussed in <xref target="RFC7525"/>,
-            <xref target="I-D.ietf-dprive-dnsodtls"/> and
-            <xref target="I-D.ietf-dprive-dns-over-tls"/>
-            apply to this document.</t>
+      <t>[NOTE: The references to (works in progress) should be upgraded to
+      MUST's if those references become RFC's prior to publication of this
+      document.]</t>
 
-            <section title="Counter-measures to DNS Traffic Analysis" anchor="traffic">
-                <t>
-                  This section makes suggestions for measures that can reduce the
-                  ability of attackers to infer information pertaining to 
-                  encrypted client queries by other means (e.g. via an analysis
-                  of encrypted traffic size, or via monitoring of
-                  resolver to authoritative traffic).</t>
+      <t>Guidance specific to TLS or DTLS is provided in either <xref
+      target="I-D.ietf-dprive-dnsodtls"></xref> or <xref
+      target="I-D.ietf-dprive-dns-over-tls"></xref>.</t>
+    </section>
 
-                <t> DNS-over-(D)TLS clients and
-                  servers SHOULD consider implementing the following relevant
-                  DNS extensions
-                  <list style="symbols">
-                    <t>
-                      <xref
-                      target="I-D.ietf-dprive-edns0-padding">EDNS(0)
-                      padding</xref>, which allows encrypted queries
-                      and responses to hide their size.
-                    </t>
-                </list></t>
-                <t> DNS-over-(D)TLS clients SHOULD consider implementing the following relevant
-                   DNS extensions
-                   <list style="symbols">                
-                    <t>
-                      <xref
-                      target="I-D.ietf-dnsop-edns-client-subnet">Privacy Election using Client
-                        Subnet in DNS Queries</xref>. If a DNS client does not 
-                        include an EDNS0 Client Subnet Option
-                        with a SOURCE PREFIX-LENGTH set to 0 in a query, the DNS server may 
-                        potentially leak client address information to the upstream
-                        authoritative DNS servers.  A DNS client ought to be able to
-                        inform the DNS Resolver that it does not want any address
-                        information leaked, and the DNS Resolver should honor that
-                        request.
-                    </t>
-                </list></t>
-            </section>
-        </section>
+    <section anchor="IANA" title="IANA Considerations">
+      <t>This memo includes no request to IANA.</t>
+    </section>
 
-        <section anchor="Acknowledgements" title="Acknowledgements">
-            <t>Thanks to the authors of both
-               <xref target="I-D.ietf-dprive-dnsodtls"/> and
-               <xref target="I-D.ietf-dprive-dns-over-tls"/> for laying the ground
-               work that this draft builds on and for reviewing the contents. 
-               The authors would also like to thank
-               John Dickinson, Shumon Huque, Melinda Shore, Gowri Visweswaran
-               and Ray Bellis for review and discussion of the ideas presented here.
-            </t>
-        </section>
-    </middle>
+    <section anchor="security" title="Security Considerations">
+      <t>Security considerations discussed in <xref target="RFC7525"></xref>,
+      <xref target="I-D.ietf-dprive-dnsodtls"></xref> and <xref
+      target="I-D.ietf-dprive-dns-over-tls"></xref> apply to this
+      document.</t>
 
-    <back>
-        <references title="Normative References">
-            <?rfc include="reference.RFC.6125"?>
-            <?rfc include="reference.RFC.7525"?>
-            <?rfc include="reference.RFC.5077"?>
-            <?rfc include="reference.RFC.2119"?>
-            <?rfc include="reference.RFC.6347"?>
-            <?rfc include="reference.RFC.5246"?>
-            <?rfc include="reference.RFC.4985"?>
-            <?rfc include="reference.RFC.6698"?>
-            <?rfc include="reference.RFC.7250"?>
-            <?rfc include="reference.RFC.5280"?>
-        </references>
-        <references title="Informative References">
-            <?rfc include="reference.RFC.7469"?>
-            <?rfc include="reference.RFC.7626"?>
-            <?rfc include="reference.RFC.2131"?>
-            <?rfc include="reference.RFC.2132"?>
-            <?rfc include="reference.RFC.7435"?>
-            <?rfc include="reference.I-D.ietf-tls-falsestart"?>
-            <?rfc include="reference.I-D.ietf-tls-cached-info"?>
-            <?rfc include="reference.I-D.ietf-dprive-dnsodtls"?>
-            <?rfc include="reference.I-D.ietf-dprive-dns-over-tls"?>
-            <?rfc include="reference.I-D.shore-tls-dnssec-chain-extension"?>
-            <?rfc include="reference.I-D.ietf-dprive-edns0-padding"?>
-            <?rfc include="reference.I-D.ietf-dnsop-edns-client-subnet"?>
-            <reference anchor="CRIME">
-              <front>
-                <title>The CRIME Attack</title>
-                <author initials="J." surname="Rizzo" />
-                <author initials="T." surname="Duong">
-                  <organization>
-                    EKOparty Security Conference
-                  </organization>
-                </author>
-                <date year="2012" />
-              </front>
-            </reference>
-            <reference anchor="dnssec-trigger" target="https://www.nlnetlabs.nl/projects/dnssec-trigger/">
-              <front>
-                <title>Dnssec-Trigger</title>
-                <author>
-                  <organization>
-                    NLnetLabs
-                  </organization>
-                  </author>
-                <date month="May" year="2014" />
-              </front>
-            </reference>
-        </references>
+      <section anchor="traffic"
+               title="Counter-measures to DNS Traffic Analysis">
+        <t>This section makes suggestions for measures that can reduce the
+        ability of attackers to infer information pertaining to encrypted
+        client queries by other means (e.g. via an analysis of encrypted
+        traffic size, or via monitoring of resolver to authoritative
+        traffic).</t>
 
-        <section title="Server capability probing and caching by DNS clients" anchor="probing">
+        <t>DNS-over-(D)TLS clients and servers SHOULD consider implementing
+        the following relevant DNS extensions <list style="symbols">
+            <t><xref target="I-D.ietf-dprive-edns0-padding">EDNS(0)
+            padding</xref>, which allows encrypted queries and responses to
+            hide their size.</t>
+          </list></t>
 
-             <t>This section presents a non-normative discussion of how DNS
-                 clients might probe for and cache privacy capabilities of DNS
-                 servers.</t>
-             <t>
-                Deployment of both DNS-over-TLS and DNS-over-DTLS
-                will be gradual.  Not all servers will support one or both of these
-                protocols and the well-known port might be blocked by some
-                middleboxes. Clients will be expected to keep track of servers
-                that support DNS-over-TLS and/or DNS-over-DTLS, and those that
-                have been previously authenticated.</t>
+        <t>DNS-over-(D)TLS clients SHOULD consider implementing the following
+        relevant DNS extensions <list style="symbols">
+            <t><xref target="I-D.ietf-dnsop-edns-client-subnet">Privacy
+            Election using Client Subnet in DNS Queries</xref>. If a DNS
+            client does not include an EDNS0 Client Subnet Option with a
+            SOURCE PREFIX-LENGTH set to 0 in a query, the DNS server may
+            potentially leak client address information to the upstream
+            authoritative DNS servers. A DNS client ought to be able to inform
+            the DNS Resolver that it does not want any address information
+            leaked, and the DNS Resolver should honor that request.</t>
+          </list></t>
+      </section>
+    </section>
 
-            <t> If no server capability information is available then (unless
-                otherwise specified by the configuration of the DNS client) DNS
-                clients that implement both TLS and DTLS should try to authenticate
-                using both protocols before failing or falling back to a
-                lower security. DNS clients using opportunistic security should
-                try all available servers (possibly in parallel) in order to
-                obtain an authenticated
-                encrypted connection before falling back to a lower security.
-                (RATIONALE: This approach can increase latency while discovering
-                server capabilities but maximizes the chance of sending the
-                query over an authenticated encrypted connection.) </t>
+    <section anchor="Acknowledgements" title="Acknowledgements">
+      <t>Thanks to the authors of both <xref
+      target="I-D.ietf-dprive-dnsodtls"></xref> and <xref
+      target="I-D.ietf-dprive-dns-over-tls"></xref> for laying the ground work
+      that this draft builds on and for reviewing the contents. The authors
+      would also like to thank John Dickinson, Shumon Huque, Melinda Shore,
+      Gowri Visweswaran and Ray Bellis for review and discussion of the ideas
+      presented here.</t>
+    </section>
+  </middle>
 
-                <!--<t> [TODO: Should we make recommendations about what to do if
+  <back>
+    <references title="Normative References">
+      <?rfc include="reference.RFC.6125"?>
+
+      <?rfc include="reference.RFC.7525"?>
+
+      <?rfc include="reference.RFC.5077"?>
+
+      <?rfc include="reference.RFC.2119"?>
+
+      <?rfc include="reference.RFC.6347"?>
+
+      <?rfc include="reference.RFC.5246"?>
+
+      <?rfc include="reference.RFC.4985"?>
+
+      <?rfc include="reference.RFC.6698"?>
+
+      <?rfc include="reference.RFC.7250"?>
+
+      <?rfc include="reference.RFC.5280"?>
+    </references>
+
+    <references title="Informative References">
+      <?rfc include="reference.RFC.7469"?>
+
+      <?rfc include="reference.RFC.7626"?>
+
+      <?rfc include="reference.RFC.2131"?>
+
+      <?rfc include="reference.RFC.2132"?>
+
+      <?rfc include="reference.RFC.7435"?>
+
+      <?rfc include="reference.RFC.3646"?>
+
+      <?rfc include="reference.I-D.ietf-tls-falsestart"?>
+
+      <?rfc include="reference.I-D.ietf-tls-cached-info"?>
+
+      <?rfc include="reference.I-D.ietf-dprive-dnsodtls"?>
+
+      <?rfc include="reference.I-D.ietf-dprive-dns-over-tls"?>
+
+      <?rfc include="reference.I-D.shore-tls-dnssec-chain-extension"?>
+
+      <?rfc include="reference.I-D.ietf-dprive-edns0-padding"?>
+
+      <?rfc include="reference.I-D.ietf-dnsop-edns-client-subnet"?>
+
+      <reference anchor="CRIME">
+        <front>
+          <title>The CRIME Attack</title>
+
+          <author initials="J." surname="Rizzo"></author>
+
+          <author initials="T." surname="Duong">
+            <organization>EKOparty Security Conference</organization>
+          </author>
+
+          <date year="2012" />
+        </front>
+      </reference>
+
+      <reference anchor="dnssec-trigger"
+                 target="https://www.nlnetlabs.nl/projects/dnssec-trigger/">
+        <front>
+          <title>Dnssec-Trigger</title>
+
+          <author>
+            <organization>NLnetLabs</organization>
+          </author>
+
+          <date month="May" year="2014" />
+        </front>
+      </reference>
+    </references>
+
+    <section anchor="probing"
+             title="Server capability probing and caching by DNS clients">
+      <t>This section presents a non-normative discussion of how DNS clients
+      might probe for and cache privacy capabilities of DNS servers.</t>
+
+      <t>Deployment of both DNS-over-TLS and DNS-over-DTLS will be gradual.
+      Not all servers will support one or both of these protocols and the
+      well-known port might be blocked by some middleboxes. Clients will be
+      expected to keep track of servers that support DNS-over-TLS and/or
+      DNS-over-DTLS, and those that have been previously authenticated.</t>
+
+      <t>If no server capability information is available then (unless
+      otherwise specified by the configuration of the DNS client) DNS clients
+      that implement both TLS and DTLS should try to authenticate using both
+      protocols before failing or falling back to a lower security. DNS
+      clients using opportunistic security should try all available servers
+      (possibly in parallel) in order to obtain an authenticated encrypted
+      connection before falling back to a lower security. (RATIONALE: This
+      approach can increase latency while discovering server capabilities but
+      maximizes the chance of sending the query over an authenticated
+      encrypted connection.)</t>
+
+      <!--<t> [TODO: Should we make recommendations about what to do if
                     a previously authenticated server starts failing authentication?]
                     After review, removed for the first version.</t>-->
-         </section>
+    </section>
 
-        <section title="Changes between revisions">
-            <t>[Note to RFC Editor: please remove this section prior to publication.]</t>
-            <section title="draft-ietf-dprive-dtls-and-tls-profiles">
-                <t>Re-submission of draft-dgr-dprive-dtls-and-tls-profiles with name change
-                    to draft-ietf-dprive-dtls-and-tls-profiles. Also minor nits fixed.</t>
-            </section>
-        </section>
-    </back>
+    <section title="Changes between revisions">
+      <t>[Note to RFC Editor: please remove this section prior to
+      publication.]</t>
+
+      <section title="-01 version">
+        <t>Section 4.2: Make clear that the Strict Privacy Profile can include
+            meta queries performed using Opportunistic Privacy.</t>
+        <t>Section 4.2, Table 1: Update to clarify that Opportunistic Privacy does not 
+            guarantee protection against passive attack.</t>
+        <t>Section 4.2: Add sentence discussing client/provider trusted relationships.</t>
+        <t>Section 5: Add more discussion of detection of active attacks when 
+            using Opportunistic Privacy.</t>
+        <t>Section 8.2: Clarify description and example.</t>
+      </section>
+
+      <section title="draft-ietf-dprive-dtls-and-tls-profiles-00">
+        <t>Re-submission of draft-dgr-dprive-dtls-and-tls-profiles with name
+        change to draft-ietf-dprive-dtls-and-tls-profiles. Also minor nits
+        fixed.</t>
+      </section>
+    </section>
+  </back>
 </rfc>
