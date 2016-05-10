@@ -290,20 +290,17 @@ please see http://xml.resource.org/authoring/README.html. -->
         target="I-D.ietf-dprive-dnsodtls"></xref>. In summary, the usage
         profiles are: <list style="symbols">
             <t>Strict Privacy: the DNS client requires both an encrypted and
-            authenticated connection to a privacy-enabling DNS Server. 
-            A hard failure occurs if
-            this is not available. This requires the client to securely obtain
-            information it can use to authenticate the server. This profile can
-            include some initial meta queries (performed using Opportunistic  
-            Privacy) to securely obtain the address of
-            or authentication information for the privacy-enabling DNS server
-            to which the DNS client
-            will subsequently connect. The rationale for this is that requiring 
-            Strict Privacy for such meta queries would introduce significant 
-            deployment obstacles.
-            This profile provides strong privacy guarantees to the client. This is
-            discussed in detail in <xref target="strict"></xref>. 
-            </t>
+            authenticated connection to a privacy-enabling DNS Server. A hard
+            failure occurs if this is not available. This requires the client
+            to securely obtain information it can use to authenticate the
+            server. This profile can include some initial meta queries
+            (performed using Opportunistic Privacy) to securely obtain the IP
+            address and authentication information for the privacy-enabling
+            DNS server to which the DNS client will subsequently connect. The
+            rationale for this is that requiring Strict Privacy for such meta
+            queries would introduce significant deployment obstacles. This
+            profile provides strong privacy guarantees to the client. This is
+            discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
             Security as described in <xref target="RFC7435"></xref> <list
@@ -361,10 +358,10 @@ please see http://xml.resource.org/authoring/README.html. -->
         Privacy. However since the different profiles require varying levels
         of configuration (or a trusted relationship with a provider) DNS
         clients will need to carefully select which profile to use based on
-        their communication privacy needs. For the case where a client has
-        a trusted relationship with a provider it is expected that the provider
-        will provide either a domain name (or SPKI pinset) via a secure out-of-band
-        mechanism and therefore Strict Privacy should be used.</t>
+        their communication privacy needs. For the case where a client has a
+        trusted relationship with a provider it is expected that the provider
+        will provide either a domain name or SPKI pinset via a secure
+        out-of-band mechanism and therefore Strict Privacy should be used.</t>
 
         <t>A DNS client SHOULD select a particular usage profile when
         resolving a query. A DNS client MUST NOT fallback from Strict Privacy
@@ -430,19 +427,17 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>DNS clients issuing queries under an opportunistic profile which know
       of a domain name or SPKI pinset for a given privacy-enabling DNS server
       MAY choose to try to authenticate the server using the mechanisms
-      described here. This is useful for detecting (but not preventing)
-      active attack, since the fact that authentication information is available
-      indicates that the server in question is a privacy-enabling DNS server to 
-      which it should be possible to establish an authenticated, encrypted
-      connection. In this case, whilst a client cannot know the reason for an 
-      authentication failure,
-      from a privacy standpoint the client should consider an active attack in
-      progress and proceed under that assumption.
-      Attempting authentication is also useful for
-      debugging or diagnostic purposes if there are
-      means to report the result. This
-      information can provide a basis for a DNS client to switch to
-      (preferred) Strict Privacy where it is viable.</t>
+      described here. This is useful for detecting (but not preventing) active
+      attack, since the fact that authentication information is available
+      indicates that the server in question is a privacy-enabling DNS server
+      to which it should be possible to establish an authenticated, encrypted
+      connection. In this case, whilst a client cannot know the reason for an
+      authentication failure, from a privacy standpoint the client should
+      consider an active attack in progress and proceed under that assumption.
+      Attempting authentication is also useful for debugging or diagnostic
+      purposes if there are means to report the result. This information can
+      provide a basis for a DNS client to switch to (preferred) Strict Privacy
+      where it is viable.</t>
     </section>
 
     <section anchor="strict"
@@ -454,7 +449,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>A DNS client requiring Strict Privacy MUST either use one of the
       sources listed in <xref target="identifier-sources"></xref> to obtain a
       domain name for the server it contacts, or use an SPKI pinset as
-      described in <xref target="I-D.ietf-dprive-dns-over-tls"></xref>. </t>
+      described in <xref target="I-D.ietf-dprive-dns-over-tls"></xref>.</t>
 
       <t>A DNS client requiring Strict Privacy MUST only attempt to connect to
       DNS servers for which either a domain name or a SPKI pinset is known (or
@@ -530,26 +525,29 @@ please see http://xml.resource.org/authoring/README.html. -->
         address of the intended privacy-enabling DNS server by doing a lookup
         of SRV records. Such records MUST be validated using DNSSEC. Private
         DNS resolution can now be done by the DNS client against the
-        configured privacy-enabling DNS server. </t>
+        configured privacy-enabling DNS server.</t>
 
-        <t>Example:
-            <list style="symbols">
+        <t>Example: <list style="symbols">
             <t>A DNSSEC validating DNS client is configured with the domain
-               name dns.example.net for a privacy-enabling DNS server</t>
-            <t>Using Opportunistic Privacy to a default DNS resolver (acquired,
-               for example, using DHCP) the client performs look ups for
-                <list style="symbols">
-                    <t>SRV record for _domain-s._tcp.dns.example.net to obtain 
-                        the server host name </t>
-                    <t>A and/or AAAA lookups to obtain IP address for the server
-                       host name</t>
-                </list> </t>
-            <t>Client validates all the records obtained in the previous step 
-                using DNSSEC.</t>
-            <t>If the records successfully validate the client proceeds to connect
-                to the privacy-enabling DNS server using Strict Privacy.</t>
-          </list>
-        </t>
+            name dns.example.net for a privacy-enabling DNS server</t>
+
+            <t>Using Opportunistic Privacy to a default DNS resolver
+            (acquired, for example, using DHCP) the client performs look ups
+            for <list style="symbols">
+                <t>SRV record for _domain-s._tcp.dns.example.net to obtain the
+                server host name</t>
+
+                <t>A and/or AAAA lookups to obtain IP address for the server
+                host name</t>
+              </list></t>
+
+            <t>Client validates all the records obtained in the previous step
+            using DNSSEC.</t>
+
+            <t>If the records successfully validate the client proceeds to
+            connect to the privacy-enabling DNS server using Strict
+            Privacy.</t>
+          </list></t>
 
         <t>A DNS client so configured that successfully connects to a
         privacy-enabling DNS server MAY choose to locally cache the looked up
@@ -812,8 +810,8 @@ please see http://xml.resource.org/authoring/README.html. -->
       target="I-D.ietf-dprive-dns-over-tls"></xref> for laying the ground work
       that this draft builds on and for reviewing the contents. The authors
       would also like to thank John Dickinson, Shumon Huque, Melinda Shore,
-      Gowri Visweswaran and Ray Bellis for review and discussion of the ideas
-      presented here.</t>
+      Gowri Visweswaran, Ray Bellis, Stephane Bortzmeyer and Jinmei Tatuya for
+      review and discussion of the ideas presented here.</t>
     </section>
   </middle>
 
@@ -928,12 +926,17 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <section title="-01 version">
         <t>Section 4.2: Make clear that the Strict Privacy Profile can include
-            meta queries performed using Opportunistic Privacy.</t>
-        <t>Section 4.2, Table 1: Update to clarify that Opportunistic Privacy does not 
-            guarantee protection against passive attack.</t>
-        <t>Section 4.2: Add sentence discussing client/provider trusted relationships.</t>
-        <t>Section 5: Add more discussion of detection of active attacks when 
-            using Opportunistic Privacy.</t>
+        meta queries performed using Opportunistic Privacy.</t>
+
+        <t>Section 4.2, Table 1: Update to clarify that Opportunistic Privacy
+        does not guarantee protection against passive attack.</t>
+
+        <t>Section 4.2: Add sentence discussing client/provider trusted
+        relationships.</t>
+
+        <t>Section 5: Add more discussion of detection of active attacks when
+        using Opportunistic Privacy.</t>
+
         <t>Section 8.2: Clarify description and example.</t>
       </section>
 

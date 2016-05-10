@@ -5,10 +5,10 @@
 dprive                                                      S. Dickinson
 Internet-Draft                                                   Sinodun
 Intended status: Standards Track                              D. Gillmor
-Expires: September 20, 2016                                         ACLU
+Expires: September 22, 2016                                         ACLU
                                                                 T. Reddy
                                                                    Cisco
-                                                          March 19, 2016
+                                                          March 21, 2016
 
 
   Authentication and (D)TLS Profile for DNS-over-TLS and DNS-over-DTLS
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 20, 2016.
+   This Internet-Draft will expire on September 22, 2016.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 1]
+Dickinson, et al.      Expires September 22, 2016               [Page 1]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 2]
+Dickinson, et al.      Expires September 22, 2016               [Page 2]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -165,7 +165,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 3]
+Dickinson, et al.      Expires September 22, 2016               [Page 3]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -221,7 +221,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 4]
+Dickinson, et al.      Expires September 22, 2016               [Page 4]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -251,8 +251,8 @@ Internet-Draft            (D)TLS Authentication               March 2016
       failure occurs if this is not available.  This requires the client
       to securely obtain information it can use to authenticate the
       server.  This profile can include some initial meta queries
-      (performed using Opportunistic Privacy) to securely obtain the
-      address of or authentication information for the privacy-enabling
+      (performed using Opportunistic Privacy) to securely obtain the IP
+      address and authentication information for the privacy-enabling
       DNS server to which the DNS client will subsequently connect.  The
       rationale for this is that requiring Strict Privacy for such meta
       queries would introduce significant deployment obstacles.  This
@@ -277,7 +277,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 5]
+Dickinson, et al.      Expires September 22, 2016               [Page 5]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -305,8 +305,8 @@ Internet-Draft            (D)TLS Authentication               March 2016
    clients will need to carefully select which profile to use based on
    their communication privacy needs.  For the case where a client has a
    trusted relationship with a provider it is expected that the provider
-   will provide either a domain name (or SPKI pinset) via a secure out-
-   of-band mechanism and therefore Strict Privacy should be used.
+   will provide either a domain name or SPKI pinset via a secure out-of-
+   band mechanism and therefore Strict Privacy should be used.
 
    A DNS client SHOULD select a particular usage profile when resolving
    a query.  A DNS client MUST NOT fallback from Strict Privacy to
@@ -333,7 +333,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 6]
+Dickinson, et al.      Expires September 22, 2016               [Page 6]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -389,7 +389,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 7]
+Dickinson, et al.      Expires September 22, 2016               [Page 7]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -445,7 +445,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 8]
+Dickinson, et al.      Expires September 22, 2016               [Page 8]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -501,7 +501,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016               [Page 9]
+Dickinson, et al.      Expires September 22, 2016               [Page 9]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -557,7 +557,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 10]
+Dickinson, et al.      Expires September 22, 2016              [Page 10]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -613,7 +613,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 11]
+Dickinson, et al.      Expires September 22, 2016              [Page 11]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -669,7 +669,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 12]
+Dickinson, et al.      Expires September 22, 2016              [Page 12]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -725,7 +725,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 13]
+Dickinson, et al.      Expires September 22, 2016              [Page 13]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -754,8 +754,8 @@ Internet-Draft            (D)TLS Authentication               March 2016
    [I-D.ietf-dprive-dns-over-tls] for laying the ground work that this
    draft builds on and for reviewing the contents.  The authors would
    also like to thank John Dickinson, Shumon Huque, Melinda Shore, Gowri
-   Visweswaran and Ray Bellis for review and discussion of the ideas
-   presented here.
+   Visweswaran, Ray Bellis, Stephane Bortzmeyer and Jinmei Tatuya for
+   review and discussion of the ideas presented here.
 
 15.  References
 
@@ -781,7 +781,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 14]
+Dickinson, et al.      Expires September 22, 2016              [Page 14]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -837,7 +837,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 15]
+Dickinson, et al.      Expires September 22, 2016              [Page 15]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -893,7 +893,7 @@ Internet-Draft            (D)TLS Authentication               March 2016
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 16]
+Dickinson, et al.      Expires September 22, 2016              [Page 16]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -949,7 +949,7 @@ B.1.  -01 version
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 17]
+Dickinson, et al.      Expires September 22, 2016              [Page 17]
 
 Internet-Draft            (D)TLS Authentication               March 2016
 
@@ -1005,4 +1005,4 @@ Authors' Addresses
 
 
 
-Dickinson, et al.      Expires September 20, 2016              [Page 18]
+Dickinson, et al.      Expires September 22, 2016              [Page 18]
