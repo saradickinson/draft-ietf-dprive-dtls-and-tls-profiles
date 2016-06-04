@@ -100,8 +100,8 @@ Table of Contents
    Appendix B.  Changes between revisions  . . . . . . . . . . . . .  19
      B.1.  -02 version . . . . . . . . . . . . . . . . . . . . . . .  19
      B.2.  -01 version . . . . . . . . . . . . . . . . . . . . . . .  19
-     B.3.  draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  19
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
+     B.3.  draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  20
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  20
 
 
 
@@ -1028,6 +1028,23 @@ Appendix B.  Changes between revisions
 
 B.1.  -02 version
 
+   Introduction: Added paragraph on the background and scope of the
+   document.
+
+   Introduction and Discussion: Added more information on what a Usage
+   profiles is (and is not) the the two presented here.
+
+   Introduction: Added paragraph to make a comparison with the Strict
+   profile in RFC7858 clearer.
+
+   Section 4.2: Re-worked the description of Opportunistic and the
+   table.
+
+   Section 8.3: Clarified statement about use of DHCP in Opportunistic
+   profile
+
+   Title abbreviated.
+
 B.2.  -01 version
 
    Section 4.2: Make clear that the Strict Privacy Profile can include
@@ -1042,6 +1059,13 @@ B.2.  -01 version
    Section 5: Add more discussion of detection of active attacks when
    using Opportunistic Privacy.
 
+
+
+Dickinson, et al.       Expires December 6, 2016               [Page 19]
+
+Internet-Draft            (D)TLS Authentication                June 2016
+
+
    Section 8.2: Clarify description and example.
 
 B.3.  draft-ietf-dprive-dtls-and-tls-profiles-00
@@ -1051,20 +1075,6 @@ B.3.  draft-ietf-dprive-dtls-and-tls-profiles-00
    fixed.
 
 Authors' Addresses
-
-
-
-
-
-
-
-
-
-
-Dickinson, et al.       Expires December 6, 2016               [Page 19]
-
-Internet-Draft            (D)TLS Authentication                June 2016
-
 
    Sara Dickinson
    Sinodun Internet Technologies
@@ -1094,16 +1104,6 @@ Internet-Draft            (D)TLS Authentication                June 2016
    India
 
    Email: tireddy@cisco.com
-
-
-
-
-
-
-
-
-
-
 
 
 
