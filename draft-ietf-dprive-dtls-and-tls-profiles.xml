@@ -657,8 +657,9 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <t>Use of such a mechanism with any DHCP server when using an Opportunistic 
             profile is reasonable, given the security expectation of that profile. 
-            However when using a Strict profile only DHCP servers considered secure
-            and trustworthy should be used as sources of domain names. 
+            However when using a Strict profile the DHCP servers used as sources 
+            of domain names MUST be considered secure
+            and trustworthy. 
            This document
         does not attempt to describe secured and trusted relationships to DHCP
         servers.</t>
@@ -738,7 +739,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <section title="TLS DNSSEC Chain extension">
           <t>The DNS client MAY offer the TLS extension described in <xref
-          target="I-D.shore-tls-dnssec-chain-extension"></xref>. If the DNS
+          target="I-D.ietf-tls-dnssec-chain-extension"></xref>. If the DNS
           server supports this extension, it can provide the full chain to the
           client in the handshake.</t>
 
@@ -945,7 +946,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <?rfc include="reference.I-D.ietf-dprive-dnsodtls"?>
 
-      <?rfc include="reference.I-D.shore-tls-dnssec-chain-extension"?>
+      <?rfc include="reference.I-D.ietf-tls-dnssec-chain-extension"?>
 
       <reference anchor="CRIME">
         <front>
