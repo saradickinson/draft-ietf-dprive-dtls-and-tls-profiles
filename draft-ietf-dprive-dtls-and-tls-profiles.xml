@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-01"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-02"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -46,7 +46,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     full title is longer than 39 characters -->
 
     <title abbrev="(D)TLS Authentication">Authentication and (D)TLS Profile
-    for DNS-over-TLS and DNS-over-DTLS</title>
+    for DNS-over-(D)TLS</title>
 
     <!-- add 'role="editor"' below for the editors if appropriate -->
 
@@ -119,7 +119,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </address>
     </author>
 
-    <date month="March" year="2016" />
+    <date month="June" year="2016" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
           in the current day for you. If only the current year is specified, xml2rfc will fill
@@ -158,20 +158,42 @@ please see http://xml.resource.org/authoring/README.html. -->
 
   <middle>
     <section title="Introduction">
-      <t>The DPRIVE working group has two active documents that provide DNS
-      privacy between DNS clients and DNS servers (to address the concerns in
-      <xref target="RFC7626"></xref>): <list style="symbols">
+      <t>DNS Privacy issues are discussed in <xref target="RFC7626"></xref>. Two documents that provide DNS
+      privacy between DNS clients and DNS servers are: <list style="symbols">
           <t><xref
-          target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref></t>
+          target="RFC7858">Specification for DNS over Transport Layer Security (TLS)</xref>, referred to here as simply 'DNS-over-TLS'</t>
 
-          <t><xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref></t>
-        </list></t>
+          <t><xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS (DNSoD)</xref>, referred to here simply as 'DNS-over-DTLS'</t>
+        </list>
+        Both documents are limited in scope to encrypting DNS messages between stub clients
+        and recursive resolvers and the same scope is applied to this document 
+        (see <xref target="Terminology"></xref> and <xref target="Scope"></xref>).
+        The proposals here might be adapted or extended in future to be used for
+           recursive clients and authoritative servers, but this application
+           is out of scope for the DNS PRIVate Exchange (DPRIVE)
+           Working Group per its current charter.</t>
 
-      <t>This document defines usage profiles and authentication mechanisms
-      for <xref target="RFC6347">DTLS</xref> and <xref
-      target="RFC5246">TLS</xref> that specify how a DNS client should
-      authenticate a DNS server based on a domain name. In particular, it
-      describes: <list style="symbols">
+      <t>This document defines two Usage Profiles (Strict and Opportunistic) 
+          for <xref target="RFC6347">DTLS</xref> and <xref
+            target="RFC5246">TLS</xref> which define the
+          security properties a user should expect when using that profile to
+          connect to the available DNS servers. In essence:
+          <list style="symbols">
+              <t> the Strict Profile
+               requires an encrypted connection and successful authentication of the
+               DNS server which provides strong
+               privacy guarantees (at the expense of providing no DNS service if this
+               is not available).</t>
+               <t> the Opportunistic Profile will attempt, but does not require, encryption and 
+               successful authentication; it therefore provides no privacy guarantees but 
+               offers maximum chance of DNS service.</t>
+          </list> </t> 
+
+      <t>Additionally, a number of authentication mechanisms are defined
+         that specify how a DNS client should
+         authenticate a DNS server based on a domain name. In particular, the 
+         following is described: 
+         <list style="symbols">
           <t>How a DNS client can obtain a domain name for a DNS server to use
           for (D)TLS authentication.</t>
 
@@ -183,14 +205,26 @@ please see http://xml.resource.org/authoring/README.html. -->
           domain name obtained for a DNS server.</t>
         </list></t>
 
+        <t>It should be noted that <xref target="RFC7858"></xref>
+        includes a description of a specific case of a Strict Usage Profile
+        using a single authentication mechanism (SPKI pinning). This draft
+        generalises the picture by separating the Usage Profile,
+         which is based purely on the
+        security properties it offers the user, from the specific
+         mechanism that is used for authentication. Therefore
+        the "Out-of-band Key-pinned Privacy Profile" described in the
+        DNS-over-TLS draft would qualify as a "Strict Usage Profile" that used
+        SPKI pinning for authentication.
+        </t>
+
       <t>This document also defines a (D)TLS protocol profile for use with
       DNS. This profile defines the configuration options and protocol
       extensions required of both parties to optimize connection establishment
       and session resumption for transporting DNS, and to support the
-      authentication profiles defined here.</t>
+      authentication mechanisms defined here.</t>
     </section>
 
-    <section title="Terminology">
+    <section title="Terminology" anchor="Terminology">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
       "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
       document are to be interpreted as described in <xref
@@ -209,7 +243,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>Privacy-enabling DNS server: A DNS server that: <list
               style="symbols">
               <t>MUST implement <xref
-              target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref> and
+              target="RFC7858">DNS-over-TLS</xref> and
               MAY implement <xref
               target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>.</t>
 
@@ -228,7 +262,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
           <t>DNS-over-(D)TLS: For brevity this term is used for statements
           that apply to both <xref
-          target="I-D.ietf-dprive-dns-over-tls">DNS-over-TLS</xref> and <xref
+          target="RFC7858">DNS-over-TLS</xref> and <xref
           target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>. Specific
           terms will be used for any statement that applies to either protocol
           alone.</t>
@@ -241,7 +275,7 @@ please see http://xml.resource.org/authoring/README.html. -->
               <t>DNSSEC validated chain to a TLSA record</t>
             </list> but may also include SPKI pinsets.</t>
 
-          <t>SPKI Pinsets: <xref target="I-D.ietf-dprive-dns-over-tls"></xref>
+          <t>SPKI Pinsets: <xref target="RFC7858"></xref>
           describes the use of cryptographic digests to "pin" public key
           information in a manner similar to <xref
           target="RFC7469">HPKP</xref>. An SPKI pinset is a collection of
@@ -253,7 +287,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         </list></t>
     </section>
 
-    <section title="Scope">
+    <section title="Scope" anchor="Scope">
       <t>This document is limited to domain-name-based authentication of DNS
       servers by DNS clients (as defined in the terminology section), and the
       (D)TLS profiles needed to support this. As such, the following things
@@ -264,13 +298,14 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>Authentication of DNS clients by DNS servers.</t>
 
           <t>SPKI-pinset-based authentication. This is defined in <xref
-          target="I-D.ietf-dprive-dns-over-tls"></xref>. However, <xref
+          target="RFC7858"></xref>. However, <xref
           target="combined-auth"></xref> does describe how to combine that
           approach with the domain name based mechanism described here.</t>
 
           <t>Any server identifier other than domain names, including IP
           address, organizational name, country of origin, etc.</t>
         </list></t>
+
     </section>
 
     <section title="Discussion">
@@ -281,12 +316,23 @@ please see http://xml.resource.org/authoring/README.html. -->
         simply inject bogus DNS responses. For DNS privacy to also provide
         protection against active attackers pretending to be the server, the
         client must authenticate the server.</t>
+        
+        <t>This draft discusses Usage Profiles, which provide differing levels of 
+            privacy guarantees to DNS clients, based on the requirements for 
+            authentication and encryption, regardless of the context (for example,
+            which network the client is connected to).
+            A Usage Profile is a distinct concept to 
+            a usage policy or usage model, which might dictate which Profile should be used
+            in a particular context (enterprise vs coffee shop), 
+            with a particular set of DNS Servers or with reference
+            to other external factors. A description of the variety of usage policies
+            is out of scope of this document, but may be the subject of a future I-D.</t>
       </section>
 
       <section title="Usage Profiles">
         <t>A DNS client has a choice of privacy usage profiles available. This
         choice is briefly discussed in both <xref
-        target="I-D.ietf-dprive-dns-over-tls"></xref> and <xref
+        target="RFC7858"></xref> and <xref
         target="I-D.ietf-dprive-dnsodtls"></xref>. In summary, the usage
         profiles are: <list style="symbols">
             <t>Strict Privacy: the DNS client requires both an encrypted and
@@ -303,70 +349,106 @@ please see http://xml.resource.org/authoring/README.html. -->
             discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
-            Security as described in <xref target="RFC7435"></xref> <list
-                style="none">
+            Security as described in <xref target="RFC7435"></xref> 
+            <list style="none">
                 <t>"... the use of cleartext as the baseline communication
                 security policy, with encryption and authentication negotiated
-                and applied to the communication when available."</t>
-              </list> In the best case scenario (authenticated and encrypted
-            connection) this is equivalent to Strict Privacy, in the worst
-            case (clear text connection) this is equivalent to No Privacy.
-            Clients will try for the best case but are willing to fallback to
+                and applied to the communication when available."</t></list>
+                   The use of Opportunistic Privacy is intended to support incremental deployment of
+                   security capabilities with a view to widespread adoption of Strict Privacy.
+                   It should be employed when the DNS client might otherwise
+                   settle for cleartext; it provides the maximum protection available.
+                   As described in <xref target="RFC7435"></xref> it might result in 
+                   <list style="symbols">
+                       <t>an encrypted and authenticated connection</t> 
+                       <t>an encrypted connection</t>
+                       <t>a clear text connection</t>
+                       <t>hard failure</t></list>
+                   depending on the fallback logic of the client, the available 
+                   authentication information and the capabilities of
+                   the DNS Server. In the first three cases the DNS client is willing to continue with
+                   a connection to the DNS Server and perform resolution of queries.
+              </t> </list></t>
+              
+        <t>To compare the two Usage profiles the table below shows successful Strict Privacy
+            along side the 3 possible successful outcomes of Opportunistic Privacy.
+            In the best case scenario for Opportunistic (authenticated and encrypted
+            connection) it is equivalent to Strict Privacy. In the worst
+            case scenario it is equivalent to clear text.
+            Clients using Opportunistic Privacy SHOULD try for the best case but MAY fallback to
             intermediate cases and eventually the worst case scenario in order
-            to obtain a response. This provides an undetermined privacy
-            guarantee to the user depending on what kind of connection is
-            actually used. This is discussed in <xref
+            to obtain a response. It therefore provides no privacy
+            guarantee to the user and varying protection depending on what kind of connection is
+            actually used. Note that there is no requirement in Opportunistic to notify
+            the user what type of connection is actually used, the detection described below is
+            only possible if such connection information is available. This is discussed in <xref
             target="opportunistic"></xref>.</t>
 
-            <t>No Privacy: the DNS client does not require or attempt to use
-            either encryption or authentication. Queries are always sent in
-            clear text. This provides no privacy guarantees to the client.</t>
-          </list></t>
 
         <texttable anchor="table_ex"
                    title="DNS Privacy Protection by Usage Profile and type of attacker">
           <ttcol align="center">Usage Profile</ttcol>
 
+          <ttcol align="center">Connection</ttcol>
+
           <ttcol align="center">Passive Attacker</ttcol>
 
           <ttcol align="center">Active Attacker</ttcol>
 
-          <c>No Privacy</c>
+          <c>Strict</c>
 
-          <c>N</c>
-
-          <c>N</c>
-
-          <c>Opportunistic Privacy</c>
-
-          <c>N (D)</c>
-
-          <c>N (D)</c>
-
-          <c>Strict Privacy</c>
+          <c>A, E</c>
 
           <c>P</c>
 
           <c>P</c>
+
+          <c>Opportunistic</c>
+
+          <c>A, E</c>
+
+          <c>P</c>
+
+          <c>P</c>
+
+          <c>Opportunistic</c>
+
+          <c>E</c>
+
+          <c>P</c>
+
+          <c>N (D)</c>
+
+          <c>Opportunistic</c>
+
+          <c></c>
+
+          <c>N (D)</c>
+
+          <c>N (D)</c>
 
           <postamble>P == protection; N == no protection; D == detection is
-          possible</postamble>
+          possible; A == Authenticated Connection; E == Encrypted Connection</postamble>
         </texttable>
 
         <t>Since Strict Privacy provides the strongest privacy guarantees it
-        is preferable to Opportunistic Privacy which is preferable to No
-        Privacy. However since the different profiles require varying levels
-        of configuration (or a trusted relationship with a provider) DNS
+        is preferable to Opportunistic Privacy.</t> 
+
+        <t>However since the two profiles require varying levels
+        of configuration (or a trusted relationship with a provider) and DNS server
+        capabilities, DNS
         clients will need to carefully select which profile to use based on
         their communication privacy needs. For the case where a client has a
         trusted relationship with a provider it is expected that the provider
         will provide either a domain name or SPKI pinset via a secure
         out-of-band mechanism and therefore Strict Privacy should be used.</t>
 
+        <section title="DNS Resolution">
         <t>A DNS client SHOULD select a particular usage profile when
         resolving a query. A DNS client MUST NOT fallback from Strict Privacy
         to Opportunistic Privacy during the resolution process as this could
         invalidate the protection offered against active attackers.</t>
+        </section>
       </section>
 
       <section title="Authentication">
@@ -396,7 +478,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <section title="Credential Verification">
           <t>The use of SPKI pinset verification is discussed in <xref
-          target="I-D.ietf-dprive-dns-over-tls"></xref>.</t>
+          target="RFC7858"></xref>.</t>
 
           <t>In terms of domain name based verification, once a domain name is
           known for a DNS server a choice of mechanisms can be used for
@@ -421,7 +503,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section anchor="opportunistic"
              title="Authentication in Opportunistic DNS-over(D)TLS Privacy">
       <t>An <xref target="RFC7435">Opportunistic Security</xref> profile is
-      described in <xref target="I-D.ietf-dprive-dns-over-tls"></xref> which
+      described in <xref target="RFC7858"></xref> which
       MAY be used for DNS-over-(D)TLS.</t>
 
       <t>DNS clients issuing queries under an opportunistic profile which know
@@ -449,7 +531,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>A DNS client requiring Strict Privacy MUST either use one of the
       sources listed in <xref target="identifier-sources"></xref> to obtain a
       domain name for the server it contacts, or use an SPKI pinset as
-      described in <xref target="I-D.ietf-dprive-dns-over-tls"></xref>.</t>
+      described in <xref target="RFC7858"></xref>.</t>
 
       <t>A DNS client requiring Strict Privacy MUST only attempt to connect to
       DNS servers for which either a domain name or a SPKI pinset is known (or
@@ -569,13 +651,16 @@ please see http://xml.resource.org/authoring/README.html. -->
         <xref target="RFC2132"></xref>), but does not provide a domain name
         for the DNS server itself.</t>
 
-        <t>A DHCP server might use a DHCP extension to provide a list of
+        <t>In the future, a DHCP server might use a DHCP extension to provide a list of
         domain names for the offered DNS servers, which correspond to IP
         addresses listed.</t>
 
-        <t>Note that this requires the client to trust the DHCP server, and to
-        have a secured/authenticated connection to it. Therefore this
-        mechanism may be limited to only certain environments. This document
+        <t>Use of such a mechanism with any DHCP server when using an Opportunistic 
+            profile is reasonable, given the security expectation of that profile. 
+            However when using a Strict profile the DHCP servers used as sources 
+            of domain names MUST be considered secure
+            and trustworthy. 
+           This document
         does not attempt to describe secured and trusted relationships to DHCP
         servers.</t>
 
@@ -584,9 +669,6 @@ please see http://xml.resource.org/authoring/README.html. -->
         DHCP, IPv4 connections have received little to no implementation
         attention in this area.]</t>
 
-        <t>[QUESTION: The authors would like to solicit feedback on the use of
-        DHCP to determine whether to pursue a new DHCP option in a later
-        version of this draft, or defer it.]</t>
       </section>
     </section>
 
@@ -657,7 +739,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <section title="TLS DNSSEC Chain extension">
           <t>The DNS client MAY offer the TLS extension described in <xref
-          target="I-D.shore-tls-dnssec-chain-extension"></xref>. If the DNS
+          target="I-D.ietf-tls-dnssec-chain-extension"></xref>. If the DNS
           server supports this extension, it can provide the full chain to the
           client in the handshake.</t>
 
@@ -685,7 +767,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section anchor="combined-auth"
              title="Combined Credentials with SPKI Pinsets">
       <t>The SPKI pinset profile described in <xref
-      target="I-D.ietf-dprive-dns-over-tls"></xref> MAY be used with
+      target="RFC7858"></xref> MAY be used with
       DNS-over-(D)TLS.</t>
 
       <t>This draft does not make explicit recommendations about how a SPKI
@@ -760,9 +842,9 @@ please see http://xml.resource.org/authoring/README.html. -->
       MUST's if those references become RFC's prior to publication of this
       document.]</t>
 
-      <t>Guidance specific to TLS or DTLS is provided in either <xref
-      target="I-D.ietf-dprive-dnsodtls"></xref> or <xref
-      target="I-D.ietf-dprive-dns-over-tls"></xref>.</t>
+      <t>Guidance specific to TLS is provided in <xref
+        target="RFC7858"></xref> and that specific to DTLS it is provided in<xref
+      target="I-D.ietf-dprive-dnsodtls"></xref>.</t>
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
@@ -772,7 +854,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section anchor="security" title="Security Considerations">
       <t>Security considerations discussed in <xref target="RFC7525"></xref>,
       <xref target="I-D.ietf-dprive-dnsodtls"></xref> and <xref
-      target="I-D.ietf-dprive-dns-over-tls"></xref> apply to this
+      target="RFC7858"></xref> apply to this
       document.</t>
 
       <section anchor="traffic"
@@ -785,14 +867,14 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <t>DNS-over-(D)TLS clients and servers SHOULD consider implementing
         the following relevant DNS extensions <list style="symbols">
-            <t><xref target="I-D.ietf-dprive-edns0-padding">EDNS(0)
+            <t><xref target="RFC7830">EDNS(0)
             padding</xref>, which allows encrypted queries and responses to
             hide their size.</t>
           </list></t>
 
         <t>DNS-over-(D)TLS clients SHOULD consider implementing the following
         relevant DNS extensions <list style="symbols">
-            <t><xref target="I-D.ietf-dnsop-edns-client-subnet">Privacy
+            <t><xref target="RFC7871">Privacy
             Election using Client Subnet in DNS Queries</xref>. If a DNS
             client does not include an EDNS0 Client Subnet Option with a
             SOURCE PREFIX-LENGTH set to 0 in a query, the DNS server may
@@ -807,10 +889,11 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>Thanks to the authors of both <xref
       target="I-D.ietf-dprive-dnsodtls"></xref> and <xref
-      target="I-D.ietf-dprive-dns-over-tls"></xref> for laying the ground work
+      target="RFC7858"></xref> for laying the ground work
       that this draft builds on and for reviewing the contents. The authors
       would also like to thank John Dickinson, Shumon Huque, Melinda Shore,
-      Gowri Visweswaran, Ray Bellis, Stephane Bortzmeyer and Jinmei Tatuya for
+      Gowri Visweswaran, Ray Bellis, Stephane Bortzmeyer, Jinmei Tatuya, Paul Hoffman and
+      Christian Huitema for
       review and discussion of the ideas presented here.</t>
     </section>
   </middle>
@@ -836,6 +919,10 @@ please see http://xml.resource.org/authoring/README.html. -->
       <?rfc include="reference.RFC.7250"?>
 
       <?rfc include="reference.RFC.5280"?>
+
+      <?rfc include="reference.RFC.7858"?>
+
+      <?rfc include="reference.RFC.7830"?>
     </references>
 
     <references title="Informative References">
@@ -851,19 +938,15 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <?rfc include="reference.RFC.3646"?>
 
+      <?rfc include="reference.RFC.7871"?>
+
       <?rfc include="reference.I-D.ietf-tls-falsestart"?>
 
       <?rfc include="reference.I-D.ietf-tls-cached-info"?>
 
       <?rfc include="reference.I-D.ietf-dprive-dnsodtls"?>
 
-      <?rfc include="reference.I-D.ietf-dprive-dns-over-tls"?>
-
-      <?rfc include="reference.I-D.shore-tls-dnssec-chain-extension"?>
-
-      <?rfc include="reference.I-D.ietf-dprive-edns0-padding"?>
-
-      <?rfc include="reference.I-D.ietf-dnsop-edns-client-subnet"?>
+      <?rfc include="reference.I-D.ietf-tls-dnssec-chain-extension"?>
 
       <reference anchor="CRIME">
         <front>
@@ -923,6 +1006,17 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+
+      <section title="-02 version">
+          <t>Introduction: Added paragraph on the background and scope of the document.</t>
+          <t>Introduction and Discussion: Added more information 
+              on what a Usage profiles is (and is not) the the two presented here.</t>
+          <t>Introduction: Added paragraph to make a comparison with
+              the Strict profile in RFC7858 clearer.</t>
+          <t>Section 4.2: Re-worked the description of Opportunistic and the table.</t>
+          <t>Section 8.3: Clarified statement about use of DHCP in Opportunistic profile </t>
+          <t>Title abbreviated.</t>
+      </section>
 
       <section title="-01 version">
         <t>Section 4.2: Make clear that the Strict Privacy Profile can include
