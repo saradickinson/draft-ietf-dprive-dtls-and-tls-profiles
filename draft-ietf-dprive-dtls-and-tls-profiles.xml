@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-02"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-03"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -119,7 +119,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </address>
     </author>
 
-    <date month="June" year="2016" />
+    <date month="July" year="2016" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
           in the current day for you. If only the current year is specified, xml2rfc will fill
@@ -473,7 +473,6 @@ please see http://xml.resource.org/authoring/README.html. -->
           encourages association of stable, human recognisable identifiers
           with secure DNS service providers.</t>
 
-          <!-- TODO: Should we discuss here why PTR lookups are not proposed here?-->
         </section>
 
         <section title="Credential Verification">
@@ -544,15 +543,6 @@ please see http://xml.resource.org/authoring/README.html. -->
       queries until at least one of the privacy-enabling DNS servers becomes
       available.</t>
 
-      <!--<t> 
-            [ TODO: discuss situations where one name is sufficient
-            for all IP addresses, or whether we want to mandate a
-            strict one-to-one mapping of names to IP addresses ]
-            After review, agreement was to not add a restriction on the mapping. 
-            Dan Wing also pointed out the case where there are both A and AAAA
-            addresses for a nameserver, but only one name is needed.
-          </t>-->
-
       <t>A privacy-enabling DNS server may be temporarily unavailable when
       configuring a network. For example, for clients on networks that require
       registration through web-based login (a.k.a. "captive portals"), such
@@ -563,8 +553,6 @@ please see http://xml.resource.org/authoring/README.html. -->
       registration. The system MUST alert by some means that the DNS is not
       private during such bootstrap.</t>
 
-      <!--[QUESION: Question from Allison Mankin about if any clear text bootstrapping
-              is allowed in Strict privacy.]-->
     </section>
 
     <section anchor="srv"
@@ -592,9 +580,6 @@ please see http://xml.resource.org/authoring/README.html. -->
       </section>
 
       <section title="Direct configuration of name only">
-        <!--<t>
-                [ QUESTION: do we want to keep this section? ]
-              </t>-->
 
         <t>A DNS client may be configured directly and securely with only the
         domain name of its privacy-enabling DNS server. For example, using a
@@ -635,12 +620,6 @@ please see http://xml.resource.org/authoring/README.html. -->
         privacy-enabling DNS server MAY choose to locally cache the looked up
         addresses in order to not have to repeat the opportunistic lookup.</t>
 
-        <!--<t>
-                [ TODO: specify how long such caching is acceptable?
-                Is this limited to the TTL or can we make an
-                exception? ] Removed this question for first version as could
-                not think of a use case.
-              </t>-->
       </section>
 
       <section title="DHCP">
@@ -711,9 +690,15 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <section anchor="dane" title="DANE">
         <t><xref target="RFC6698">DANE</xref> provides mechanisms to root
-        certificate and raw public keys trust with DNSSEC. However this
-        requires a domain name which must be obtained via a trusted
-        source.</t>
+        certificate and raw public key trust with DNSSEC. However this
+        requires the DNS client to have a domain name for the DNS Privacy Server
+        which must be obtained via a trusted source.</t>
+        
+        <t>This section assumes a solid understanding of both 
+            <xref target="RFC6698">DANE</xref> and 
+            <xref target="RFC7671">DANE Operations</xref>. A few pertinent
+            issues covered in these documents are outlined here as useful pointers,
+            but familiarity with both these documents in their entirety is expected.</t>
 
         <t>It is noted that <xref target="RFC6698"></xref> says <list
             style="none">
@@ -722,8 +707,28 @@ please see http://xml.resource.org/authoring/README.html. -->
             another entity to perform the DNSSEC signature validation MUST use
             a secure mechanism between themselves and the validator."</t>
           </list></t>
+          
+         <t>It is noted that <xref target="RFC7671"></xref> covers the following topics:
+            <list style='symbols'>
+                <t>Section 4.1: Opportunistic Security and PKIX Usages and Section 14:
+                    Security Considerations, which both discuss the use 
+                    of PKIX-TA(0) and PKIX-EE(1) for OS.</t>
+                <t>Section 5: Certificate-Usage-Specific DANE Updates and Guidelines.
+                    Specifically Section 5.1 which outlines the combination of
+                    Certificate Usage DANE-EE(3) and Selector Usage SPKI(1) with
+                    Raw Public Keys <xref target="RFC7250"></xref>.
+                    Section 5.1 also discusses the security implications
+                    of this mode, for example, it discusses
+                    key lifetimes and specifies that validity period enforcement
+                    is based solely on the TLSA RRset properties for this case. [QUESTION: Should
+                    an appendix be added with an example of how to use DANE without
+                    X.509 certificates?]</t>
+                <t>Section 13: Operational Considerations, which discusses TLSA TTLs
+                    and signature validity periods.</t>
+            </list>
+         </t>
 
-        <t>The specific DANE record would take the form: <list>
+        <t>The specific DANE record for a DNS Privacy Server would take the form: <list>
             <t>_853._tcp.[server-domain-name] for TLS</t>
 
             <t>_853._udp.[server-domain-name] for DTLS</t>
@@ -749,17 +754,6 @@ please see http://xml.resource.org/authoring/README.html. -->
           client MUST ignore the DNSSEC chain and validate only via other
           supplied credentials.</t>
 
-          <t><!--[SARA->DKG: Could you fill out this section with more 
-                      detail?] --> [ TODO: specify guidance for DANE
-          parameters to be used here. For example, a suggestion to use
-          Certificate Usage of 3 (EE-DANE) (section 2.1.1 of <xref
-          target="RFC6698"></xref>) and a Selector of 1 (SPKI) (section 2.1.2)
-          would completely remove all X.509 and certificate authorities from
-          the verification path and allows for private certification ]</t>
-
-          <t>[ TODO: discuss combination of DNSSEC Chain Extension with cert
-          validation. Note that the combination depends on the Certificate
-          Usage value of the TLSA response. ]</t>
         </section>
       </section>
     </section>
@@ -923,6 +917,8 @@ please see http://xml.resource.org/authoring/README.html. -->
       <?rfc include="reference.RFC.7858"?>
 
       <?rfc include="reference.RFC.7830"?>
+
+      <?rfc include="reference.RFC.7671"?>
     </references>
 
     <references title="Informative References">
@@ -1006,6 +1002,10 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+
+      <section title="-03 version">
+           <t>Section 9: Update DANE section with better references to RFC7671 and RFC7250</t>
+       </section>
 
       <section title="-02 version">
           <t>Introduction: Added paragraph on the background and scope of the document.</t>
