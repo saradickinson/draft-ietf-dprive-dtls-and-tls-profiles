@@ -5,10 +5,10 @@
 dprive                                                      S. Dickinson
 Internet-Draft                                                   Sinodun
 Intended status: Standards Track                              D. Gillmor
-Expires: April 9, 2017                                              ACLU
+Expires: April 10, 2017                                             ACLU
                                                                 T. Reddy
                                                                    Cisco
-                                                         October 6, 2016
+                                                         October 7, 2016
 
 
          Authentication and (D)TLS Profile for DNS-over-(D)TLS
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 9, 2017.
+   This Internet-Draft will expire on April 10, 2017.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 1]
+Dickinson, et al.        Expires April 10, 2017                 [Page 1]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 2]
+Dickinson, et al.        Expires April 10, 2017                 [Page 2]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -165,7 +165,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 3]
+Dickinson, et al.        Expires April 10, 2017                 [Page 3]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -221,7 +221,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 4]
+Dickinson, et al.        Expires April 10, 2017                 [Page 4]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -277,7 +277,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 5]
+Dickinson, et al.        Expires April 10, 2017                 [Page 5]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -333,7 +333,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 6]
+Dickinson, et al.        Expires April 10, 2017                 [Page 6]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -389,7 +389,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 7]
+Dickinson, et al.        Expires April 10, 2017                 [Page 7]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -445,7 +445,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 8]
+Dickinson, et al.        Expires April 10, 2017                 [Page 8]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -501,7 +501,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                 [Page 9]
+Dickinson, et al.        Expires April 10, 2017                 [Page 9]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -557,7 +557,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 10]
+Dickinson, et al.        Expires April 10, 2017                [Page 10]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -613,7 +613,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 11]
+Dickinson, et al.        Expires April 10, 2017                [Page 11]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -669,7 +669,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 12]
+Dickinson, et al.        Expires April 10, 2017                [Page 12]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -725,7 +725,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 13]
+Dickinson, et al.        Expires April 10, 2017                [Page 13]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -746,8 +746,8 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
    A DNS client that is configured with both a domain name and a SPKI
    pinset for a DNS server SHOULD match on both a valid credential for
-   the domain name and a valid SPKI pinset if an X.509 certificate is
-   presented when connecting to that DNS server.
+   the domain name and a valid SPKI pinset if both are available when
+   connecting to that DNS server.
 
 11.  (D)TLS Protocol Profile
 
@@ -781,7 +781,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 14]
+Dickinson, et al.        Expires April 10, 2017                [Page 14]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -837,7 +837,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 15]
+Dickinson, et al.        Expires April 10, 2017                [Page 15]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -893,7 +893,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 16]
+Dickinson, et al.        Expires April 10, 2017                [Page 16]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -949,7 +949,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 17]
+Dickinson, et al.        Expires April 10, 2017                [Page 17]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -1005,7 +1005,7 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 18]
+Dickinson, et al.        Expires April 10, 2017                [Page 18]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -1061,7 +1061,7 @@ B.3.  -02 version
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 19]
+Dickinson, et al.        Expires April 10, 2017                [Page 19]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -1117,7 +1117,7 @@ Authors' Addresses
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 20]
+Dickinson, et al.        Expires April 10, 2017                [Page 20]
 
 Internet-Draft            (D)TLS Authentication             October 2016
 
@@ -1173,4 +1173,4 @@ Internet-Draft            (D)TLS Authentication             October 2016
 
 
 
-Dickinson, et al.         Expires April 9, 2017                [Page 21]
+Dickinson, et al.        Expires April 10, 2017                [Page 21]
