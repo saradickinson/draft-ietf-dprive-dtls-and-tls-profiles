@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-03"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-04"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -119,7 +119,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </address>
     </author>
 
-    <date month="July" year="2016" />
+    <date month="October" year="2016" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
           in the current day for you. If only the current year is specified, xml2rfc will fill
@@ -163,7 +163,8 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t><xref
           target="RFC7858">Specification for DNS over Transport Layer Security (TLS)</xref>, referred to here as simply 'DNS-over-TLS'</t>
 
-          <t><xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS (DNSoD)</xref>, referred to here simply as 'DNS-over-DTLS'</t>
+          <t><xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS (DNSoD)</xref>, referred to here simply as 'DNS-over-DTLS'. 
+          Note that this document has the Intended status of Experimental.</t>
         </list>
         Both documents are limited in scope to encrypting DNS messages between stub clients
         and recursive resolvers and the same scope is applied to this document 
@@ -330,7 +331,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </section>
 
       <section title="Usage Profiles">
-        <t>A DNS client has a choice of privacy usage profiles available. This
+        <t>A DNS client has a choice of privacy Usage Profiles available. This
         choice is briefly discussed in both <xref
         target="RFC7858"></xref> and <xref
         target="I-D.ietf-dprive-dnsodtls"></xref>. In summary, the usage
@@ -346,7 +347,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             rationale for this is that requiring Strict Privacy for such meta
             queries would introduce significant deployment obstacles. This
             profile provides strong privacy guarantees to the client. This is
-            discussed in detail in <xref target="strict"></xref>.</t>
+            Profile discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
             Security as described in <xref target="RFC7435"></xref> 
@@ -372,7 +373,7 @@ please see http://xml.resource.org/authoring/README.html. -->
               
         <t>To compare the two Usage profiles the table below shows successful Strict Privacy
             along side the 3 possible successful outcomes of Opportunistic Privacy.
-            In the best case scenario for Opportunistic (authenticated and encrypted
+            In the best case scenario for Opportunistic Privacy (an authenticated and encrypted
             connection) it is equivalent to Strict Privacy. In the worst
             case scenario it is equivalent to clear text.
             Clients using Opportunistic Privacy SHOULD try for the best case but MAY fallback to
@@ -380,7 +381,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             to obtain a response. It therefore provides no privacy
             guarantee to the user and varying protection depending on what kind of connection is
             actually used. Note that there is no requirement in Opportunistic to notify
-            the user what type of connection is actually used, the detection described below is
+            the user what type of connection is actually used, the 'detection' described below is
             only possible if such connection information is available. This is discussed in <xref
             target="opportunistic"></xref>.</t>
 
@@ -774,9 +775,9 @@ please see http://xml.resource.org/authoring/README.html. -->
       <xref target="RFC7469">HPKP</xref>.</t>
 
       <t>A DNS client that is configured with both a domain name and a SPKI
-      pinset for a DNS sever SHOULD match on both a valid credential for the
-      domain name and a valid SPKI pinset when connecting to that DNS
-      server.</t>
+      pinset for a DNS server SHOULD match on both a valid credential for the
+      domain name and a valid SPKI pinset if both are available
+      when connecting to that DNS server.</t>
 
       <!--<t>
             [ TODO: describe in more detail why this conservative
@@ -821,20 +822,16 @@ please see http://xml.resource.org/authoring/README.html. -->
       the following items:</t>
 
       <t><list style="symbols">
-          <t><xref target="I-D.ietf-tls-falsestart">TLS False Start</xref>
+          <t><xref target="RFC7918">TLS False Start</xref>
           which reduces round-trips by allowing the TLS second flight of
           messages (ChangeCipherSpec) to also contain the (encrypted) DNS
           query</t>
 
-          <t><xref target="I-D.ietf-tls-cached-info">Cached Information
+          <t><xref target="RFC7924">Cached Information
           Extension</xref> which avoids transmitting the server's certificate
           and certificate chain if the client has cached that information from
           a previous TLS handshake</t>
         </list></t>
-
-      <t>[NOTE: The references to (works in progress) should be upgraded to
-      MUST's if those references become RFC's prior to publication of this
-      document.]</t>
 
       <t>Guidance specific to TLS is provided in <xref
         target="RFC7858"></xref> and that specific to DTLS it is provided in<xref
@@ -936,9 +933,9 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <?rfc include="reference.RFC.7871"?>
 
-      <?rfc include="reference.I-D.ietf-tls-falsestart"?>
+      <?rfc include="reference.RFC.7918"?>
 
-      <?rfc include="reference.I-D.ietf-tls-cached-info"?>
+      <?rfc include="reference.RFC.7924"?>
 
       <?rfc include="reference.I-D.ietf-dprive-dnsodtls"?>
 
@@ -1002,6 +999,11 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+
+      <section title="-04 version">
+           <t>Introduction: Add comment that DNS-over-DTLS draft is Experiments</t>
+           <t>Update 2 I-D references to RFCs.</t>
+       </section>
 
       <section title="-03 version">
            <t>Section 9: Update DANE section with better references to RFC7671 and RFC7250</t>
