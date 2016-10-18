@@ -346,8 +346,8 @@ please see http://xml.resource.org/authoring/README.html. -->
             DNS server to which the DNS client will subsequently connect. The
             rationale for this is that requiring Strict Privacy for such meta
             queries would introduce significant deployment obstacles. This
-            profile provides strong privacy guarantees to the client. This is
-            Profile discussed in detail in <xref target="strict"></xref>.</t>
+            profile provides strong privacy guarantees to the client. This
+            Profile is discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
             Security as described in <xref target="RFC7435"></xref> 
@@ -384,12 +384,12 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <t>Note that there is no requirement in Opportunistic Security to notify
             the user what type of connection is actually used, the 'detection' described below is
-            only possible if such connection information is available. However if it 
+            only possible if such connection information is available. However, if it 
             is available and the user
             is informed that an unencrypted connection was used to connect to a server
             then the user should assume (detect) that the connection is subject to both active and passive
             attack since the DNS queries are sent in clear text. This might be particularly useful
-            if the a new connection to a particular server is unencrypted when all previous
+            if a new connection to a certain server is unencrypted when all previous
             connections were encrypted. Similarly if the user is informed that an
             encrypted but unauthenticated connection was used then user can detect that 
             the connection may be subject to active attack. This is discussed in <xref
@@ -990,7 +990,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       expected to keep track of servers that support DNS-over-TLS and/or
       DNS-over-DTLS, and those that have been previously authenticated.</t>
 
-      <t>If no server capability information is available then (unlessQ
+      <t>If no server capability information is available then (unless
       otherwise specified by the configuration of the DNS client) DNS clients
       that implement both TLS and DTLS should try to authenticate using both
       protocols before failing or falling back to a lower security. DNS
