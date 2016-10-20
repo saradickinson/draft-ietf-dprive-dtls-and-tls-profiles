@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-04"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-05"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -271,7 +271,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>Credential: Information available for a DNS server which proves
           its identity for authentication purposes. Credentials discussed here
           include: <list style="symbols">
-              <t>X.509 certificate</t>
+              <t>PKIX certificate</t>
 
               <t>DNSSEC validated chain to a TLSA record</t>
             </list> but may also include SPKI pinsets.</t>
@@ -327,7 +327,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             in a particular context (enterprise vs coffee shop), 
             with a particular set of DNS Servers or with reference
             to other external factors. A description of the variety of usage policies
-            is out of scope of this document, but may be the subject of a future I-D.</t>
+            is out of scope of this document, but may be the subject of future work.</t>
       </section>
 
       <section title="Usage Profiles">
@@ -346,8 +346,8 @@ please see http://xml.resource.org/authoring/README.html. -->
             DNS server to which the DNS client will subsequently connect. The
             rationale for this is that requiring Strict Privacy for such meta
             queries would introduce significant deployment obstacles. This
-            profile provides strong privacy guarantees to the client. This is
-            Profile discussed in detail in <xref target="strict"></xref>.</t>
+            profile provides strong privacy guarantees to the client. This
+            Profile is discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
             Security as described in <xref target="RFC7435"></xref> 
@@ -380,9 +380,19 @@ please see http://xml.resource.org/authoring/README.html. -->
             intermediate cases and eventually the worst case scenario in order
             to obtain a response. It therefore provides no privacy
             guarantee to the user and varying protection depending on what kind of connection is
-            actually used. Note that there is no requirement in Opportunistic to notify
+            actually used.</t>
+
+        <t>Note that there is no requirement in Opportunistic Security to notify
             the user what type of connection is actually used, the 'detection' described below is
-            only possible if such connection information is available. This is discussed in <xref
+            only possible if such connection information is available. However, if it 
+            is available and the user
+            is informed that an unencrypted connection was used to connect to a server
+            then the user should assume (detect) that the connection is subject to both active and passive
+            attack since the DNS queries are sent in clear text. This might be particularly useful
+            if a new connection to a certain server is unencrypted when all previous
+            connections were encrypted. Similarly if the user is informed that an
+            encrypted but unauthenticated connection was used then user can detect that 
+            the connection may be subject to active attack. This is discussed in <xref
             target="opportunistic"></xref>.</t>
 
 
@@ -483,7 +493,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>In terms of domain name based verification, once a domain name is
           known for a DNS server a choice of mechanisms can be used for
           authentication. <xref target="credentials"></xref> discusses these
-          mechanisms in detail, namely X.509 certificate based authentication
+          mechanisms in detail, namely PKIX certificate based authentication
           and DANE.</t>
 
           <t>Note that the use of DANE adds requirements on the ability of the
@@ -653,10 +663,10 @@ please see http://xml.resource.org/authoring/README.html. -->
     </section>
 
     <section anchor="credentials" title="Credential Verification">
-      <section anchor="certs" title="X.509 Certificate Based Authentication">
+      <section anchor="certs" title="PKIX Certificate Based Authentication">
         <t>When a DNS client configured with a domain name connects to its
         configured DNS server over (D)TLS, the server may present it with an
-        X.509 certificate. In order to ensure proper authentication, DNS
+        PKIX certificate. In order to ensure proper authentication, DNS
         clients MUST verify the entire certification path per <xref
         target="RFC5280"></xref>. The DNS client additionally uses <xref
         target="RFC6125"></xref> validation techniques to compare the domain
@@ -673,7 +683,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             <t>SRV-ID: _domain-s.dns.example.com</t>
           </list></t>
 
-        <t>If either of the Reference Identifiers are found in the X.509
+        <t>If either of the Reference Identifiers are found in the PKIX
         certificate's subjectAltName extension as described in section 6 of
         <xref target="RFC6125"></xref>, the DNS client should accept the
         certificate for the server.</t>
@@ -723,7 +733,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                     key lifetimes and specifies that validity period enforcement
                     is based solely on the TLSA RRset properties for this case. [QUESTION: Should
                     an appendix be added with an example of how to use DANE without
-                    X.509 certificates?]</t>
+                    PKIX certificates?]</t>
                 <t>Section 13: Operational Considerations, which discusses TLSA TTLs
                     and signature validity periods.</t>
             </list>
@@ -999,6 +1009,13 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+
+      <section title="-05 version">
+           <t>Add more details on detecting passive attacks to section 4.2</t>
+           <t>Changed X.509 to PKIX throughout</t>
+           <t>Change comment about future I-D on usage policies.</t>
+       </section>
+
 
       <section title="-04 version">
            <t>Introduction: Add comment that DNS-over-DTLS draft is Experiments</t>
