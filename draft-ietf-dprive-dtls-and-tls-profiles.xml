@@ -194,15 +194,14 @@ please see http://xml.resource.org/authoring/README.html. -->
          authenticate a DNS server based on a domain name. In particular, the 
          following is described: 
          <list style="symbols">
-          <t>How a DNS client can obtain an 'authentication domain name' for a DNS server to use
-          for (D)TLS authentication.</t>
+          <t>How a DNS client can obtain the combination of an authentication domain name and IP address for a DNS server.</t>
 
           <t>What are the acceptable credentials a DNS server can present to
           prove its identity for (D)TLS authentication based on a given domain
           name.</t>
 
           <t>How a DNS client can verify that any given credential matches the
-          'authentication domain name' obtained for a DNS server.</t>
+          authentication domain name obtained for a DNS server.</t>
         </list></t>
 
         <t>It should be noted that <xref target="RFC7858"></xref>
@@ -447,17 +446,25 @@ please see http://xml.resource.org/authoring/README.html. -->
           possible; A == Authenticated Connection; E == Encrypted Connection</postamble>
         </texttable>
 
-        <t>Since Strict Privacy provides the strongest privacy guarantees it
-        is preferable to Opportunistic Privacy.</t> 
+        <t>Strict Privacy provides the strongest privacy guarantees and therefore SHOULD
+        always be implemented in DNS clients along with Opportunistic Privacy.</t>
 
-        <t>However since the two profiles require varying levels
-        of configuration (or a trusted relationship with a provider) and DNS server
-        capabilities, DNS
-        clients will need to carefully select which profile to use based on
-        their communication privacy needs. For the case where a client has a
-        trusted relationship with a provider it is expected that the provider
-        will provide either a domain name or SPKI pinset via a secure
-        out-of-band mechanism and therefore Strict Privacy should be used.</t>
+        <t>A DNS client that implements DNS-over-(D)TLS SHOULD NOT default to the use of
+        clear text (no privacy).</t>
+
+        <t>The choice between the two profiles depends on a number of factors including
+        which is more important to the particular client:<list style="symbols">
+        <t>DNS service at the cost of no privacy guarantee (Opportunistic) or</t>
+        <t>guaranteed privacy at the potential cost of no DNS service (Strict).</t></list></t>
+
+        <t>Additionally the two profiles require varying levels of configuration (or a
+        trusted relationship with a provider) and DNS server capabilities therefore DNS
+        clients will need to carefully select which profile to use based on their 
+        communication privacy needs. </t>
+
+        <t>A DNS server that implements DNS-over-TLS SHOULD provide at least one credential
+        in order that those DNS clients that wish to do so are able to use Strict
+        Privacy (see Section 2).</t>
 
         <section title="DNS Resolution">
         <t>A DNS client SHOULD select a particular usage profile when
