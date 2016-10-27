@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-05"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-06"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -170,9 +170,8 @@ please see http://xml.resource.org/authoring/README.html. -->
         and recursive resolvers and the same scope is applied to this document 
         (see <xref target="Terminology"></xref> and <xref target="Scope"></xref>).
         The proposals here might be adapted or extended in future to be used for
-           recursive clients and authoritative servers, but this application
-           is out of scope for the DNS PRIVate Exchange (DPRIVE)
-           Working Group per its current charter.</t>
+           recursive clients and authoritative servers, but this application was out
+          of scope for the Working Group charter at the time this document was finished.</t>
 
       <t>This document defines two Usage Profiles (Strict and Opportunistic) 
           for <xref target="RFC6347">DTLS</xref> and <xref
@@ -195,7 +194,7 @@ please see http://xml.resource.org/authoring/README.html. -->
          authenticate a DNS server based on a domain name. In particular, the 
          following is described: 
          <list style="symbols">
-          <t>How a DNS client can obtain a domain name for a DNS server to use
+          <t>How a DNS client can obtain an 'authentication domain name' for a DNS server to use
           for (D)TLS authentication.</t>
 
           <t>What are the acceptable credentials a DNS server can present to
@@ -203,18 +202,19 @@ please see http://xml.resource.org/authoring/README.html. -->
           name.</t>
 
           <t>How a DNS client can verify that any given credential matches the
-          domain name obtained for a DNS server.</t>
+          'authentication domain name' obtained for a DNS server.</t>
         </list></t>
 
         <t>It should be noted that <xref target="RFC7858"></xref>
         includes a description of a specific case of a Strict Usage Profile
-        using a single authentication mechanism (SPKI pinning). This draft
+        using a single authentication mechanism (SPKI pinning). This document
         generalises the picture by separating the Usage Profile,
          which is based purely on the
         security properties it offers the user, from the specific
          mechanism that is used for authentication. Therefore
-        the "Out-of-band Key-pinned Privacy Profile" described in the
-        DNS-over-TLS draft would qualify as a "Strict Usage Profile" that used
+        the "Out-of-band Key-pinned Privacy Profile" described in 
+        <xref
+          target="RFC7858"></xref> would qualify as a "Strict Usage Profile" that used
         SPKI pinning for authentication.
         </t>
 
@@ -233,11 +233,11 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <t>Several terms are used specifically in the context of this draft:
       <list style="symbols">
-          <t>DNS client: a DNS stub resolver or forwarder/proxy. In the case
+          <t>DNS client: a DNS stub resolver or forwarder. In the case
           of a forwarder, the term "DNS client" is used to discuss the side
           that sends queries.</t>
 
-          <t>DNS server: a DNS recursive resolver or forwarder/proxy. In the
+          <t>DNS server: a DNS recursive resolver or forwarder. In the
           case of a forwarder, the term "DNS server" is used to discuss the
           side that responds to queries.</t>
 
@@ -267,6 +267,11 @@ please see http://xml.resource.org/authoring/README.html. -->
           target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>. Specific
           terms will be used for any statement that applies to either protocol
           alone.</t>
+
+          <t>Authentication domain name: A domain name that can be used to authenticate a 
+             DNS Privacy enabling server. Sources of authentication domain names are
+            discussed in  <xref target="srv"></xref> and <xref
+               target="identifier-sources"></xref>.</t>
 
           <t>Credential: Information available for a DNS server which proves
           its identity for authentication purposes. Credentials discussed here
@@ -428,15 +433,15 @@ please see http://xml.resource.org/authoring/README.html. -->
 
           <c>P</c>
 
-          <c>N (D)</c>
+          <c>N, D</c>
 
           <c>Opportunistic</c>
 
           <c></c>
 
-          <c>N (D)</c>
+          <c>N, D</c>
 
-          <c>N (D)</c>
+          <c>N, D</c>
 
           <postamble>P == protection; N == no protection; D == detection is
           possible; A == Authenticated Connection; E == Encrypted Connection</postamble>
@@ -466,7 +471,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         <t>This document describes authentication mechanisms that can be used
         in either Strict or Opportunistic Privacy for DNS-over-(D)TLS.</t>
 
-        <section title="DNS-over-(D)TLS Bootstrapping Problems">
+        <section title="DNS-over-(D)TLS Startup Configuration Problems">
           <t>Many (D)TLS clients use <xref target="RFC6125">PKIX
           authentication</xref> based on a domain name for the server they are
           contacting. These clients typically first look up the server's
@@ -654,10 +659,10 @@ please see http://xml.resource.org/authoring/README.html. -->
         does not attempt to describe secured and trusted relationships to DHCP
         servers.</t>
 
-        <t>[NOTE: It is noted (at the time of writing) that whilst some
+        <t>It is noted (at the time of writing) that whilst some
         implementation work is in progress to secure IPv6 connections for
         DHCP, IPv4 connections have received little to no implementation
-        attention in this area.]</t>
+        attention in this area.</t>
 
       </section>
     </section>
@@ -803,9 +808,13 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>There are known attacks on (D)TLS, such as machine-in-the-middle and
       protocol downgrade. These are general attacks on (D)TLS and not specific
       to DNS-over-TLS; please refer to the (D)TLS RFCs for discussion of these
-      security issues. Clients and servers MUST adhere to the (D)TLS
+      security issues.</t>
+
+      <t>Clients and servers MUST adhere to the (D)TLS
       implementation recommendations and security considerations of <xref
-      target="RFC7525"></xref> except with respect to (D)TLS version. Since
+      target="RFC7525"></xref> except with respect to (D)TLS version.</t> 
+
+      <t>Since
       encryption of DNS using (D)TLS is virtually a green-field deployment DNS
       clients and server MUST implement only (D)TLS 1.2 or later.</t>
 
