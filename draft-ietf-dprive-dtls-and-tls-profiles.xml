@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-06"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-07"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -149,10 +149,14 @@ please see http://xml.resource.org/authoring/README.html. -->
         keywords will be used for the search engine. -->
 
     <abstract>
-      <t>This document describes how a DNS client can use a domain name to
-      authenticate a DNS server that uses Transport Layer Security (TLS) and
-      Datagram TLS (DTLS). Additionally, it defines (D)TLS profiles for DNS
-      clients and servers implementing DNS-over-TLS and DNS-over-DTLS.</t>
+      <t> This document discusses Usage Profiles, based on one or more
+          authentication mechanisms, which can be used
+          for DNS over Transport Layer Security (TLS) or
+          Datagram TLS (DTLS).
+          This document also specifies new authentication mechanisms - it describes
+          several ways a DNS client can use an authentication domain name to
+          authenticate a DNS server. Additionally, it defines (D)TLS profiles for DNS
+          clients and servers implementing DNS-over-(D)TLS.</t>
     </abstract>
   </front>
 
@@ -173,55 +177,67 @@ please see http://xml.resource.org/authoring/README.html. -->
            recursive clients and authoritative servers, but this application was out
           of scope for the Working Group charter at the time this document was finished.</t>
 
-      <t>This document defines two Usage Profiles (Strict and Opportunistic) 
+      <t>This document specifies two Usage Profiles (Strict and Opportunistic) 
           for <xref target="RFC6347">DTLS</xref> and <xref
             target="RFC5246">TLS</xref> which define the
           security properties a user should expect when using that profile to
-          connect to the available DNS servers. In essence:
+          connect to the available DNS servers. <xref target="usageprofiles"></xref> presents a 
+          generalised discussion of Usage Profiles by separating the Usage Profile,
+          which is based purely on the
+          security properties it offers the user, from the specific
+          mechanism(s) that are used for authentication. The Profiles described are:
           <list style="symbols">
-              <t> the Strict Profile
+              <t> A Strict Profile that
                requires an encrypted connection and successful authentication of the
                DNS server which provides strong
                privacy guarantees (at the expense of providing no DNS service if this
                is not available).</t>
-               <t> the Opportunistic Profile will attempt, but does not require, encryption and 
+               <t> An Opportunistic Profile that will attempt, but does not require, encryption and 
                successful authentication; it therefore provides no privacy guarantees but 
                offers maximum chance of DNS service.</t>
           </list> </t> 
 
-      <t>Additionally, a number of authentication mechanisms are defined
-         that specify how a DNS client should
-         authenticate a DNS server based on a domain name. In particular, the 
-         following is described: 
-         <list style="symbols">
-          <t>How a DNS client can obtain the combination of an authentication domain name and IP address for a DNS server.</t>
+          <t>The above Usage Profiles attempt authentication of the server using at least one authentication mechanism.
+              <xref target="combined-auth"></xref>  discusses how to combine authentication mechanisms
+              to determine the overall authentication result.
+              Depending on that overall authentication result (and whether encryption is available) the Usage Profile
+              will determine if the connection should proceed, fallback or fail. </t>
+
+             <t>One authentication mechanism is already described in <xref target="RFC7858"></xref>.
+              That document specifies an SPKI based authentication mechanism for DNS-over-TLS in the context of a specific case of a Strict Usage Profile
+              using that single authentication mechanism. Therefore
+               the "Out-of-band Key-pinned Privacy Profile" described in 
+               <xref
+                 target="RFC7858"></xref> would qualify as a "Strict Usage Profile" that used
+               SPKI pinning for authentication.
+               </t>
+               
+               <t>This document extends the use of SPKI pinset based authentication so that it is considered a general
+                   authentication mechanism that can be used with either DNS-over-(D)TLS Usage Profile.
+                   That is, the SPKI pinset mechanism described in <xref target="RFC7858"></xref> MAY be used with
+                     DNS-over-(D)TLS.</t>
+
+           <t>This document also describes a 
+               number of additional authentication mechanisms all of which
+               specify how a DNS client should
+              authenticate a DNS server based on an 'authentication domain name'. In particular, the 
+              following is described: 
+              <list style="symbols">
+          <t>How a DNS client can obtain the combination of an authentication domain name and IP address for a DNS server. See <xref target="authdomainname"></xref>.</t>
 
           <t>What are the acceptable credentials a DNS server can present to
-          prove its identity for (D)TLS authentication based on a given domain
-          name.</t>
+          prove its identity for (D)TLS authentication based on a given authentication domain
+          name. See <xref target="credentials"></xref>.</t>
 
           <t>How a DNS client can verify that any given credential matches the
-          authentication domain name obtained for a DNS server.</t>
+          authentication domain name obtained for a DNS server. See <xref target="credentials"></xref>.</t>
         </list></t>
 
-        <t>It should be noted that <xref target="RFC7858"></xref>
-        includes a description of a specific case of a Strict Usage Profile
-        using a single authentication mechanism (SPKI pinning). This document
-        generalises the picture by separating the Usage Profile,
-         which is based purely on the
-        security properties it offers the user, from the specific
-         mechanism that is used for authentication. Therefore
-        the "Out-of-band Key-pinned Privacy Profile" described in 
-        <xref
-          target="RFC7858"></xref> would qualify as a "Strict Usage Profile" that used
-        SPKI pinning for authentication.
-        </t>
-
-      <t>This document also defines a (D)TLS protocol profile for use with
+      <t>In <xref target="tls-profile"></xref> this document defines a (D)TLS protocol profile for use with
       DNS. This profile defines the configuration options and protocol
       extensions required of both parties to optimize connection establishment
-      and session resumption for transporting DNS, and to support the
-      authentication mechanisms defined here.</t>
+      and session resumption for transporting DNS, and to support all currently specified
+      authentication mechanisms.</t>
     </section>
 
     <section title="Terminology" anchor="Terminology">
@@ -269,8 +285,23 @@ please see http://xml.resource.org/authoring/README.html. -->
 
           <t>Authentication domain name: A domain name that can be used to authenticate a 
              DNS Privacy enabling server. Sources of authentication domain names are
-            discussed in  <xref target="srv"></xref> and <xref
-               target="identifier-sources"></xref>.</t>
+            discussed in  <xref target="authdomainname"></xref>.</t>
+
+          <t>SPKI Pinsets: <xref target="RFC7858"></xref>
+          describes the use of cryptographic digests to "pin" public key
+          information in a manner similar to <xref
+          target="RFC7469">HPKP</xref>. An SPKI pinset is a collection of
+          these pins that constrains a DNS server.</t>
+
+          <t>Authentication information: Information a DNS client may use as the basis of
+              an authentication mechanism. In this context that can be either a:
+              <list style="symbols">
+                  <t>a SPKI pinset or</t>
+                  <t>an authentication domain name</t></list> </t>
+
+          <t>Reference Identifier: a Reference Identifier as described in
+          <xref target="RFC6125"></xref>, constructed by the DNS client when
+          performing TLS authentication of a DNS server.</t>
 
           <t>Credential: Information available for a DNS server which proves
           its identity for authentication purposes. Credentials discussed here
@@ -279,33 +310,26 @@ please see http://xml.resource.org/authoring/README.html. -->
 
               <t>DNSSEC validated chain to a TLSA record</t>
             </list> but may also include SPKI pinsets.</t>
-
-          <t>SPKI Pinsets: <xref target="RFC7858"></xref>
-          describes the use of cryptographic digests to "pin" public key
-          information in a manner similar to <xref
-          target="RFC7469">HPKP</xref>. An SPKI pinset is a collection of
-          these pins that constrains a DNS server.</t>
-
-          <t>Reference Identifier: a Reference Identifier as described in
-          <xref target="RFC6125"></xref>, constructed by the DNS client when
-          performing TLS authentication of a DNS server.</t>
         </list></t>
     </section>
 
     <section title="Scope" anchor="Scope">
-      <t>This document is limited to domain-name-based authentication of DNS
-      servers by DNS clients (as defined in the terminology section), and the
-      (D)TLS profiles needed to support this. As such, the following things
+      <t>This document is limited to describing
+          <list style="symbols">
+              <t>Usage Profiles based on general authentication mechanisms</t> 
+              <t>The details of domain-name-based authentication of DNS
+                 servers by DNS clients (as defined in the terminology section)</t>
+            <t>The (D)TLS profiles needed to support authentication in DNS-over-(D)TLS.</t></list></t>
+
+                <t>As such, the following things
       are out of scope: <list style="symbols">
           <t>Authentication of authoritative servers by recursive
           resolvers.</t>
 
           <t>Authentication of DNS clients by DNS servers.</t>
 
-          <t>SPKI-pinset-based authentication. This is defined in <xref
-          target="RFC7858"></xref>. However, <xref
-          target="combined-auth"></xref> does describe how to combine that
-          approach with the authentication domain name based mechanism described here.</t>
+          <t>The details of how to perform SPKI-pinset-based authentication. This is defined in <xref
+          target="RFC7858"></xref>.</t>
 
           <t>Any server identifier other than domain names, including IP
           address, organizational name, country of origin, etc.</t>
@@ -314,7 +338,6 @@ please see http://xml.resource.org/authoring/README.html. -->
     </section>
 
     <section title="Discussion">
-      <section title="Background">
         <t>To protect against passive attacks DNS privacy requires encrypting
         the query (and response). Such encryption typically provides integrity
         protection as a side-effect, which means on-path attackers cannot
@@ -334,16 +357,16 @@ please see http://xml.resource.org/authoring/README.html. -->
             is out of scope of this document, but may be the subject of future work.</t>
       </section>
 
-      <section title="Usage Profiles">
+      <section anchor="usageprofiles" title="Usage Profiles">
         <t>A DNS client has a choice of privacy Usage Profiles available. This
         choice is briefly discussed in both <xref
         target="RFC7858"></xref> and <xref
-        target="I-D.ietf-dprive-dnsodtls"></xref>. In summary, the usage
-        profiles are: <list style="symbols">
+        target="I-D.ietf-dprive-dnsodtls"></xref>. These Usage
+        Profiles are: <list style="symbols">
             <t>Strict Privacy: the DNS client requires both an encrypted and
             authenticated connection to a privacy-enabling DNS Server. A hard
             failure occurs if this is not available. This requires the client
-            to securely obtain information it can use to authenticate the
+            to securely obtain authentication information it can use to authenticate the
             server. This profile can include some initial meta queries
             (performed using Opportunistic Privacy) to securely obtain the IP
             address and authentication information for the privacy-enabling
@@ -467,30 +490,29 @@ please see http://xml.resource.org/authoring/README.html. -->
         Privacy (see Section 2).</t>
 
         <section title="DNS Resolution">
-        <t>A DNS client SHOULD select a particular usage profile when
+        <t>A DNS client SHOULD select a particular Usage Profile when
         resolving a query. A DNS client MUST NOT fallback from Strict Privacy
         to Opportunistic Privacy during the resolution process as this could
         invalidate the protection offered against active attackers.</t>
         </section>
       </section>
 
-      <section title="Authentication">
-        <t>This document describes authentication mechanisms that can be used
-        in either Strict or Opportunistic Privacy for DNS-over-(D)TLS.</t>
+      <section title="Authentication in DNS-over(D)TLS">
+         <t>This section describes authentication mechanisms and how they can be used
+         in either Strict or Opportunistic Privacy for DNS-over-(D)TLS.</t>
 
         <section title="DNS-over-(D)TLS Startup Configuration Problems">
           <t>Many (D)TLS clients use <xref target="RFC6125">PKIX
           authentication</xref> based on an authentication domain name for the server they are
           contacting. These clients typically first look up the server's
-          network address in the DNS before making this connection. A DNS
+          network address in the DNS before making this connection. Such a DNS
           client therefore has a bootstrap problem. DNS clients typically know
           only the IP address of a DNS server.</t>
 
-          <t>As such, before connecting to a DNS server, a DNS client needs to
+          <t>In this case, before connecting to a DNS server, a DNS client needs to
           learn the authentication domain name it should associate with the IP address of a
-          DNS server for authentication purposes. Sources of domains names are
-          discussed in <xref target="srv"></xref> and <xref
-          target="identifier-sources"></xref>.</t>
+          DNS server for authentication purposes. Sources of authentication domains names are
+          discussed in <xref target="authdomainname"></xref>.</t>
 
           <t>One advantage of this domain name based approach is that it
           encourages association of stable, human recognisable identifiers
@@ -503,8 +525,8 @@ please see http://xml.resource.org/authoring/README.html. -->
           target="RFC7858"></xref>.</t>
 
           <t>In terms of domain name based verification, once an authentication domain name is
-          known for a DNS server a choice of mechanisms can be used for
-          authentication. <xref target="credentials"></xref> discusses these
+          known for a DNS server a choice of authentication mechanisms can be used for
+          credential verification. <xref target="credentials"></xref> discusses these
           mechanisms in detail, namely PKIX certificate based authentication
           and DANE.</t>
 
@@ -513,23 +535,39 @@ please see http://xml.resource.org/authoring/README.html. -->
           detail in <xref target="dane"></xref>.</t>
         </section>
 
-        <section title="Implementation guidance">
-          <t><xref target="tls-profile"></xref> describes the (D)TLS profile
-          for DNS-over(D)TLS. Additional considerations relating to general
-          implementation guidelines are discussed in both <xref
-          target="security"></xref> and in <xref target="probing"></xref>.</t>
+        <section anchor="combined-auth"
+                 title="Combining Authentication Mechanisms">
+
+          <t>This draft does not make explicit recommendations about how an SPKI
+          pinset based authentication mechanism should be combined with a domain
+          based mechanism from an operator perspective. However it can be
+          envisaged that a DNS server operator may wish to make both an SPKI
+          pinset and an authentication domain name available to allow clients to choose which
+          mechanism to use. Therefore, the following is guidance on how clients
+          ought to behave if they choose to configure both, as is possible in
+          <xref target="RFC7469">HPKP</xref>.</t>
+
+          <t>A DNS client that is configured with both an authentication domain name and a SPKI
+          pinset for a DNS server SHOULD match on both a valid credential for the
+          authentication domain name and a valid SPKI pinset (if both are available)
+          when connecting to that DNS server. The overall authentication result should only
+          be considered successful if both authentication mechanisms are successful.</t>
+
+          <!--<t>
+                [ TODO: describe in more detail why this conservative
+                approach is the right one, and what implementations should
+                do if they want a more lenient approach. ]
+              </t>-->
         </section>
-      </section>
-    </section>
 
     <section anchor="opportunistic"
-             title="Authentication in Opportunistic DNS-over(D)TLS Privacy">
+             title="Authentication in Opportunistic Privacy">
       <t>An <xref target="RFC7435">Opportunistic Security</xref> profile is
       described in <xref target="RFC7858"></xref> which
       MAY be used for DNS-over-(D)TLS.</t>
 
       <t>DNS clients issuing queries under an opportunistic profile which know
-      of an authentication domain name or SPKI pinset for a given privacy-enabling DNS server
+      authentication information for a given privacy-enabling DNS server
       MAY choose to try to authenticate the server using the mechanisms
       described here. This is useful for detecting (but not preventing) active
       attack, since the fact that authentication information is available
@@ -545,9 +583,9 @@ please see http://xml.resource.org/authoring/README.html. -->
     </section>
 
     <section anchor="strict"
-             title="Authentication in Strict DNS-over(D)TLS Privacy">
+             title="Authentication in Strict Privacy">
       <t>To authenticate a privacy-enabling DNS server, a DNS client needs to
-      know the domain name for each server it is willing to contact. This is
+      know authentication information for each server it is willing to contact. This is
       necessary to protect against active attacks on DNS privacy.</t>
 
       <t>A DNS client requiring Strict Privacy MUST either use one of the
@@ -556,8 +594,8 @@ please see http://xml.resource.org/authoring/README.html. -->
       described in <xref target="RFC7858"></xref>.</t>
 
       <t>A DNS client requiring Strict Privacy MUST only attempt to connect to
-      DNS servers for which either an authentication domain name or a SPKI pinset is known (or
-      both). The client MUST use the available verification mechanisms
+      DNS servers for which at least on piece of authentication information is known. 
+      The client MUST use the available verification mechanisms
       described in <xref target="credentials"></xref> to authenticate the
       server, and MUST abort connections to a server when no verification
       mechanism succeeds.</t>
@@ -578,8 +616,18 @@ please see http://xml.resource.org/authoring/README.html. -->
 
     </section>
 
+    <section title="Implementation guidance">
+      <t><xref target="tls-profile"></xref> describes the (D)TLS profile
+      for DNS-over(D)TLS. Additional considerations relating to general
+      implementation guidelines are discussed in both <xref
+      target="security"></xref> and in <xref target="probing"></xref>.</t>
+    </section>
+    </section>
+    
+    <section anchor="authdomainname" title="Sources of Authentication Domain Names">
+
     <section anchor="srv"
-             title="In Band Source of Authentication Domain Name: SRV Service Label">
+             title="In Band Sources: SRV Service Label">
       <t>This specification adds a SRV service label "domain-s" for
       privacy-enabling DNS servers.</t>
 
@@ -592,7 +640,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     </section>
 
     <section anchor="identifier-sources"
-             title="Out of Band Sources of Authentication Domain Name">
+             title="Out of Band Sources">
       <section title="Full direct configuration">
         <t>DNS clients may be directly and securely provisioned with the
         authentication domain name of each privacy-enabling DNS server. For example, using a
@@ -673,8 +721,9 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       </section>
     </section>
+    </section>
 
-    <section anchor="credentials" title="Credential Verification">
+    <section anchor="credentials" title="Authentication Domain Name based Credential Verification">
       <section anchor="certs" title="PKIX Certificate Based Authentication">
         <t>When a DNS client configured with an authentication domain name connects to its
         configured DNS server over (D)TLS, the server may present it with an
@@ -781,32 +830,6 @@ please see http://xml.resource.org/authoring/README.html. -->
       </section>
     </section>
 
-    <section anchor="combined-auth"
-             title="Combined Credentials with SPKI Pinsets">
-      <t>The SPKI pinset profile described in <xref
-      target="RFC7858"></xref> MAY be used with
-      DNS-over-(D)TLS.</t>
-
-      <t>This draft does not make explicit recommendations about how a SPKI
-      pinset based authentication mechanism should be combined with a domain
-      based mechanism from an operator perspective. However it can be
-      envisaged that a DNS server operator may wish to make both an SPKI
-      pinset and an authentication domain name available to allow clients to choose which
-      mechanism to use. Therefore, the following is guidance on how clients
-      ought to behave if they choose to configure both, as is possible in
-      <xref target="RFC7469">HPKP</xref>.</t>
-
-      <t>A DNS client that is configured with both an authentication domain name and a SPKI
-      pinset for a DNS server SHOULD match on both a valid credential for the
-      authentication domain name and a valid SPKI pinset if both are available
-      when connecting to that DNS server.</t>
-
-      <!--<t>
-            [ TODO: describe in more detail why this conservative
-            approach is the right one, and what implementations should
-            do if they want a more lenient approach. ]
-          </t>-->
-    </section>
 
     <section anchor="tls-profile" title="(D)TLS Protocol Profile">
       <t>This section defines the (D)TLS protocol profile of
@@ -1025,6 +1048,14 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+      
+      <section title="-07 version">
+           <t>Re-work of the Abstract and Introduction to better describe the contents in this version.</t>
+           <t>Terminology: New definition of 'authentication information'.</t>
+           <t>Scope: Changes to the Scope section.</t>
+           <t>Moved discussion of combining authentication mechanism earlier.</t>
+           <t>Changes to the section headings and groupings to make the presentation more logical.</t>
+       </section>
 
       <section title="-06 version">
            <t>Introduction: Re-word discussion of Working group charter.</t>
