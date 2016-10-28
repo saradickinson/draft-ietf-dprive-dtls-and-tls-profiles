@@ -305,7 +305,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>SPKI-pinset-based authentication. This is defined in <xref
           target="RFC7858"></xref>. However, <xref
           target="combined-auth"></xref> does describe how to combine that
-          approach with the domain name based mechanism described here.</t>
+          approach with the authentication domain name based mechanism described here.</t>
 
           <t>Any server identifier other than domain names, including IP
           address, organizational name, country of origin, etc.</t>
@@ -480,14 +480,14 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <section title="DNS-over-(D)TLS Startup Configuration Problems">
           <t>Many (D)TLS clients use <xref target="RFC6125">PKIX
-          authentication</xref> based on a domain name for the server they are
+          authentication</xref> based on an authentication domain name for the server they are
           contacting. These clients typically first look up the server's
           network address in the DNS before making this connection. A DNS
           client therefore has a bootstrap problem. DNS clients typically know
           only the IP address of a DNS server.</t>
 
           <t>As such, before connecting to a DNS server, a DNS client needs to
-          learn the domain name it should associate with the IP address of a
+          learn the authentication domain name it should associate with the IP address of a
           DNS server for authentication purposes. Sources of domains names are
           discussed in <xref target="srv"></xref> and <xref
           target="identifier-sources"></xref>.</t>
@@ -502,7 +502,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>The use of SPKI pinset verification is discussed in <xref
           target="RFC7858"></xref>.</t>
 
-          <t>In terms of domain name based verification, once a domain name is
+          <t>In terms of domain name based verification, once an authentication domain name is
           known for a DNS server a choice of mechanisms can be used for
           authentication. <xref target="credentials"></xref> discusses these
           mechanisms in detail, namely PKIX certificate based authentication
@@ -529,7 +529,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       MAY be used for DNS-over-(D)TLS.</t>
 
       <t>DNS clients issuing queries under an opportunistic profile which know
-      of a domain name or SPKI pinset for a given privacy-enabling DNS server
+      of an authentication domain name or SPKI pinset for a given privacy-enabling DNS server
       MAY choose to try to authenticate the server using the mechanisms
       described here. This is useful for detecting (but not preventing) active
       attack, since the fact that authentication information is available
@@ -551,12 +551,12 @@ please see http://xml.resource.org/authoring/README.html. -->
       necessary to protect against active attacks on DNS privacy.</t>
 
       <t>A DNS client requiring Strict Privacy MUST either use one of the
-      sources listed in <xref target="identifier-sources"></xref> to obtain a
-      domain name for the server it contacts, or use an SPKI pinset as
+      sources listed in <xref target="identifier-sources"></xref> to obtain an
+      authentication domain name for the server it contacts, or use an SPKI pinset as
       described in <xref target="RFC7858"></xref>.</t>
 
       <t>A DNS client requiring Strict Privacy MUST only attempt to connect to
-      DNS servers for which either a domain name or a SPKI pinset is known (or
+      DNS servers for which either an authentication domain name or a SPKI pinset is known (or
       both). The client MUST use the available verification mechanisms
       described in <xref target="credentials"></xref> to authenticate the
       server, and MUST abort connections to a server when no verification
@@ -579,7 +579,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     </section>
 
     <section anchor="srv"
-             title="In Band Source of Domain Name: SRV Service Label">
+             title="In Band Source of Authentication Domain Name: SRV Service Label">
       <t>This specification adds a SRV service label "domain-s" for
       privacy-enabling DNS servers.</t>
 
@@ -592,10 +592,10 @@ please see http://xml.resource.org/authoring/README.html. -->
     </section>
 
     <section anchor="identifier-sources"
-             title="Out of Band Sources of Domain Name">
+             title="Out of Band Sources of Authentication Domain Name">
       <section title="Full direct configuration">
         <t>DNS clients may be directly and securely provisioned with the
-        domain name of each privacy-enabling DNS server. For example, using a
+        authentication domain name of each privacy-enabling DNS server. For example, using a
         client specific configuration file or API.</t>
 
         <t>In this case, direct configuration for a DNS client would consist
@@ -605,7 +605,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       <section title="Direct configuration of name only">
 
         <t>A DNS client may be configured directly and securely with only the
-        domain name of its privacy-enabling DNS server. For example, using a
+        authentication domain name of its privacy-enabling DNS server. For example, using a
         client specific configuration file or API.</t>
 
         <t>A DNS client might learn of a default recursive DNS resolver from
@@ -654,13 +654,13 @@ please see http://xml.resource.org/authoring/README.html. -->
         for the DNS server itself.</t>
 
         <t>In the future, a DHCP server might use a DHCP extension to provide a list of
-        domain names for the offered DNS servers, which correspond to IP
+        authentication domain names for the offered DNS servers, which correspond to IP
         addresses listed.</t>
 
         <t>Use of such a mechanism with any DHCP server when using an Opportunistic 
             profile is reasonable, given the security expectation of that profile. 
             However when using a Strict profile the DHCP servers used as sources 
-            of domain names MUST be considered secure
+            of authentication domain names MUST be considered secure
             and trustworthy. 
            This document
         does not attempt to describe secured and trusted relationships to DHCP
@@ -676,7 +676,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
     <section anchor="credentials" title="Credential Verification">
       <section anchor="certs" title="PKIX Certificate Based Authentication">
-        <t>When a DNS client configured with a domain name connects to its
+        <t>When a DNS client configured with an authentication domain name connects to its
         configured DNS server over (D)TLS, the server may present it with an
         PKIX certificate. In order to ensure proper authentication, DNS
         clients MUST verify the entire certification path per <xref
@@ -685,10 +685,10 @@ please see http://xml.resource.org/authoring/README.html. -->
         name to the certificate provided.</t>
 
         <t>A DNS client constructs two Reference Identifiers for the server
-        based on the domain name: A DNS-ID and an <xref
-        target="RFC4985">SRV-ID</xref>. The DNS-ID is simply the domain name
+        based on the authentication domain name: A DNS-ID and an <xref
+        target="RFC4985">SRV-ID</xref>. The DNS-ID is simply the authentication domain name
         itself. The SRV-ID uses a "_domain-s." prefix. So if the configured
-        domain name is "dns.example.com", then the two Reference Identifiers
+        authentication domain name is "dns.example.com", then the two Reference Identifiers
         are: <list style="ordered">
             <t>DNS-ID: dns.example.com</t>
 
@@ -714,7 +714,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       <section anchor="dane" title="DANE">
         <t><xref target="RFC6698">DANE</xref> provides mechanisms to root
         certificate and raw public key trust with DNSSEC. However this
-        requires the DNS client to have a domain name for the DNS Privacy Server
+        requires the DNS client to have an authentication domain name for the DNS Privacy Server
         which must be obtained via a trusted source.</t>
         
         <t>This section assumes a solid understanding of both 
@@ -791,14 +791,14 @@ please see http://xml.resource.org/authoring/README.html. -->
       pinset based authentication mechanism should be combined with a domain
       based mechanism from an operator perspective. However it can be
       envisaged that a DNS server operator may wish to make both an SPKI
-      pinset and a domain name available to allow clients to choose which
+      pinset and an authentication domain name available to allow clients to choose which
       mechanism to use. Therefore, the following is guidance on how clients
       ought to behave if they choose to configure both, as is possible in
       <xref target="RFC7469">HPKP</xref>.</t>
 
-      <t>A DNS client that is configured with both a domain name and a SPKI
+      <t>A DNS client that is configured with both an authentication domain name and a SPKI
       pinset for a DNS server SHOULD match on both a valid credential for the
-      domain name and a valid SPKI pinset if both are available
+      authentication domain name and a valid SPKI pinset if both are available
       when connecting to that DNS server.</t>
 
       <!--<t>
@@ -1025,6 +1025,19 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+
+      <section title="-06 version">
+           <t>Introduction: Re-word discussion of Working group charter.</t>
+           <t>Introduction: Re-word first and third bullet point about 'obtaining' a domain name and IP address.</t>
+           <t>Introduction: Update reference to DNS-over-TLS draft.</t>
+           <t>Terminology: Change forwarder/proxy to just forwarder</t>
+           <t>Terminology: Add definition of 'Authentication domain name' and use this throughout</t>
+           <t>Section 4.2: Remove parenthesis in the table.</t>
+           <t>Section 4.2: Change the text after the table as agreed with Paul Hoffman.</t>
+           <t>Section 4.3.1: Change title and remove brackets around last statement.</t>
+           <t>Section 11: Split second paragraph.</t>
+           <t></t>
+       </section>
 
       <section title="-05 version">
            <t>Add more details on detecting passive attacks to section 4.2</t>
