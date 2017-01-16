@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-07"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-08"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -119,7 +119,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </address>
     </author>
 
-    <date month="October" year="2016" />
+    <date month="January" year="2017" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
           in the current day for you. If only the current year is specified, xml2rfc will fill
@@ -391,20 +391,20 @@ please see http://xml.resource.org/authoring/README.html. -->
                        <t>an encrypted and authenticated connection</t> 
                        <t>an encrypted connection</t>
                        <t>a clear text connection</t>
-                       <t>hard failure</t></list>
+                   </list>
                    depending on the fallback logic of the client, the available 
                    authentication information and the capabilities of
-                   the DNS Server. In the first three cases the DNS client is willing to continue with
+                   the DNS Server. In all these cases the DNS client is willing to continue with
                    a connection to the DNS Server and perform resolution of queries.
               </t> </list></t>
               
         <t>To compare the two Usage profiles the table below shows successful Strict Privacy
-            along side the 3 possible successful outcomes of Opportunistic Privacy.
+            along side the 3 possible outcomes of Opportunistic Privacy.
             In the best case scenario for Opportunistic Privacy (an authenticated and encrypted
             connection) it is equivalent to Strict Privacy. In the worst
             case scenario it is equivalent to clear text.
             Clients using Opportunistic Privacy SHOULD try for the best case but MAY fallback to
-            intermediate cases and eventually the worst case scenario in order
+            the intermediate case and eventually the worst case scenario in order
             to obtain a response. It therefore provides no privacy
             guarantee to the user and varying protection depending on what kind of connection is
             actually used.</t>
@@ -535,6 +535,86 @@ please see http://xml.resource.org/authoring/README.html. -->
           detail in <xref target="dane"></xref>.</t>
         </section>
 
+        <section title="Summary of Authentication Mechanisms">
+
+            <t>This section provides an overview of the various authentication mechanisms. 
+                The table below indicates how the DNS client obtains information to use for
+                    authentication for each option; either statically via direct configuration or dynamically. Of course, the
+                Opportunistic Usage Profile does not require authentication and so a client using that profile may choose to
+                connect to a Privacy Enabling DNS server on the basis of just an IP address.</t>
+
+            <texttable anchor="table_summary"
+                       title="Overview of Authentication Mechanisms">
+              <ttcol align="center">#</ttcol>
+              <ttcol align="left" width="17%">Static Config</ttcol>
+
+              <ttcol align="left">Dynamically Obtained</ttcol>
+
+              <ttcol align="left">Short name: Description</ttcol>
+
+              <c>1</c>  <c>SPKI + IP</c>  <c></c> <c>SPKI: SPKI pinset(s) and IP address obtained out of band <xref
+                target="RFC7858"></xref> </c>
+
+              <c></c><c></c><c></c><c></c>
+
+              <c>2</c>  <c>ADN + IP</c>   <c></c> <c>ADN: ADN and IP address obtained out of band (see <xref target="Fullconfig"></xref>)</c>
+
+              <c></c><c></c><c></c><c></c>
+
+              <c>3</c>  <c>ADN     </c>    <c>IP </c> <c>ADN only: DNSSEC validated Opportunistic lookups to a NP DNS server for SRV, A/AAAA (see <xref target="ADNonly"></xref>)</c>
+
+              <c></c><c></c><c></c><c></c>
+
+              <c>4</c>  <c>    </c>    <c>ADN + IP </c> <c>DHCP: DHCP configuration only (see <xref target="DHCP"></xref>)</c>
+
+              <c></c><c></c><c></c><c></c>
+
+              <c>5</c>  <c>[ADN + IP]    </c>  <c>[ADN + IP] TLSA record </c> <c>DANE: DNSSEC chain obtained via Opportunistic lookups to NP DNS server (see <xref target="directDANE"></xref>)</c>
+
+              <c></c><c></c><c></c><c></c>
+
+              <c>6</c>  <c>[ADN + IP]    </c>  <c>[ADN + IP] TLSA record </c> <c>TLS extension: DNSSEC chain provided by PE DNS server in TLS DNSSEC chain extension (see <xref target="TLSext"></xref>)</c>
+
+              <postamble>SPKI == SPKI pinset(s),  IP == IP Address,  ADN == Authentication Domain Name,  NP == Network provided, PE == Privacy-enabling, [ ] == Data may be obtained either statically or dynamically </postamble>
+            </texttable>
+
+            <t>The following summary attempts to present some key attributes of each of the mechanisms (using the 'Short name' from Table 2), indicating attractive attributes with a '+' and undesirable attributes with a '-'. </t>
+
+            <t><list style="numbers"> 
+                <t>SPKI<list style="empty">
+                    <t>+ Minimal leakage (Note that the ADN is always leaked in the SNI field in the Client Hello in TLS when communicating with a privacy enabling DNS server)</t>
+                    <t>- Overhead of on-going key management required</t>
+                </list></t>
+                <t>ADN<list style="empty">
+                    <t>+ Minimal leakage</t>
+                    <t>+ One-off direct configuration only</t>
+                </list></t>
+                <t>ADN only<list style="empty">
+                    <t>+ Minimal one-off direct configuration, only a human recognisable domain name needed</t>
+                    <t>- SRV, A/AAAA queries leaked to network provided DNS server</t>
+                </list></t>
+                <t>DHCP<list style="empty">
+                    <t>+ No static config</t>
+                    <t>- Requires a non-standard or future DHCP option in order to provide the ADN</t>
+                    <t>- Requires secure and trustworthy connection to DHCP server</t>
+                </list></t>
+                <t>DANE<list style="empty">
+                    <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
+                    <t>+ DANE options (e.g. matching on entire certificate)</t>
+                    <t>- Requires a DNSSEC validating stub implementation (deployment of which is limited at the time of writing)</t>
+                    <t>- DNSSEC chain queries leaked to network provided DNS server</t>
+                </list></t>
+                <t>TLS extension<list style="empty">
+                    <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
+                    <t>+ Reduced latency</t>
+                    <t>+ No network provided DNS server required if ADN and IP statically configured</t>
+                    <t>+ DANE options (e.g. matching on entire certificate)</t>
+                    <t>- Requires a DNSSEC validating stub implementation</t>
+                </list></t>
+        </list></t>
+
+        </section>
+
         <section anchor="combined-auth"
                  title="Combining Authentication Mechanisms">
 
@@ -594,7 +674,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       described in <xref target="RFC7858"></xref>.</t>
 
       <t>A DNS client requiring Strict Privacy MUST only attempt to connect to
-      DNS servers for which at least on piece of authentication information is known. 
+      DNS servers for which at least one piece of authentication information is known. 
       The client MUST use the available verification mechanisms
       described in <xref target="credentials"></xref> to authenticate the
       server, and MUST abort connections to a server when no verification
@@ -641,7 +721,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
     <section anchor="identifier-sources"
              title="Out of Band Sources">
-      <section title="Full direct configuration">
+      <section anchor="Fullconfig" title="Full direct configuration">
         <t>DNS clients may be directly and securely provisioned with the
         authentication domain name of each privacy-enabling DNS server. For example, using a
         client specific configuration file or API.</t>
@@ -650,7 +730,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         of both an IP address and a domain name for each DNS server.</t>
       </section>
 
-      <section title="Direct configuration of name only">
+      <section anchor="ADNonly" title="Direct configuration of name only">
 
         <t>A DNS client may be configured directly and securely with only the
         authentication domain name of its privacy-enabling DNS server. For example, using a
@@ -693,7 +773,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       </section>
 
-      <section title="DHCP">
+      <section anchor="DHCP" title="DHCP">
         <t>Some clients may have an established trust relationship with a
         known <xref target="RFC2131">DHCP</xref> server for discovering their
         network configuration. In the typical case, such a DHCP server
@@ -792,9 +872,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                     Section 5.1 also discusses the security implications
                     of this mode, for example, it discusses
                     key lifetimes and specifies that validity period enforcement
-                    is based solely on the TLSA RRset properties for this case. [QUESTION: Should
-                    an appendix be added with an example of how to use DANE without
-                    PKIX certificates?]</t>
+                    is based solely on the TLSA RRset properties for this case.</t>
                 <t>Section 13: Operational Considerations, which discusses TLSA TTLs
                     and signature validity periods.</t>
             </list>
@@ -806,7 +884,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             <t>_853._udp.[server-domain-name] for DTLS</t>
           </list></t>
 
-        <section title="Direct DNS Lookup">
+        <section anchor="directDANE" title="Direct DNS Lookup">
           <t>The DNS client MAY choose to perform the DNS lookups to retrieve
           the required DANE records itself. The DNS queries for such DANE
           records MAY use opportunistic encryption or be in the clear to avoid
@@ -814,7 +892,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           described above in <xref target="RFC6698"></xref>.</t>
         </section>
 
-        <section title="TLS DNSSEC Chain extension">
+        <section anchor="TLSext" title="TLS DNSSEC Chain extension">
           <t>The DNS client MAY offer the TLS extension described in <xref
           target="I-D.ietf-tls-dnssec-chain-extension"></xref>. If the DNS
           server supports this extension, it can provide the full chain to the
