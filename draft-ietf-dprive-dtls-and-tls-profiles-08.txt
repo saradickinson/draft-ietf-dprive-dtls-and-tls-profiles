@@ -101,11 +101,11 @@ Table of Contents
      13.2.  Informative References . . . . . . . . . . . . . . . . .  21
    Appendix A.  Server capability probing and caching by DNS clients  23
    Appendix B.  Changes between revisions  . . . . . . . . . . . . .  23
-     B.1.  -07 version . . . . . . . . . . . . . . . . . . . . . . .  23
-     B.2.  -06 version . . . . . . . . . . . . . . . . . . . . . . .  24
-     B.3.  -05 version . . . . . . . . . . . . . . . . . . . . . . .  24
-     B.4.  -04 version . . . . . . . . . . . . . . . . . . . . . . .  24
-     B.5.  -03 version . . . . . . . . . . . . . . . . . . . . . . .  24
+     B.1.  -08 version . . . . . . . . . . . . . . . . . . . . . . .  23
+     B.2.  -07 version . . . . . . . . . . . . . . . . . . . . . . .  23
+     B.3.  -06 version . . . . . . . . . . . . . . . . . . . . . . .  24
+     B.4.  -05 version . . . . . . . . . . . . . . . . . . . . . . .  24
+     B.5.  -04 version . . . . . . . . . . . . . . . . . . . . . . .  24
 
 
 
@@ -114,10 +114,11 @@ Dickinson, et al.         Expires July 22, 2017                 [Page 2]
 Internet-Draft            (D)TLS Authentication             January 2017
 
 
-     B.6.  -02 version . . . . . . . . . . . . . . . . . . . . . . .  25
-     B.7.  -01 version . . . . . . . . . . . . . . . . . . . . . . .  25
-     B.8.  draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  25
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
+     B.6.  -03 version . . . . . . . . . . . . . . . . . . . . . . .  25
+     B.7.  -02 version . . . . . . . . . . . . . . . . . . . . . . .  25
+     B.8.  -01 version . . . . . . . . . . . . . . . . . . . . . . .  25
+     B.9.  draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  25
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
 1.  Introduction
 
@@ -161,7 +162,6 @@ Internet-Draft            (D)TLS Authentication             January 2017
    at least one authentication mechanism.  Section 6.4 discusses how to
    combine authentication mechanisms to determine the overall
    authentication result.  Depending on that overall authentication
-
 
 
 
@@ -1081,9 +1081,9 @@ Internet-Draft            (D)TLS Authentication             January 2017
    [RFC7858] for laying the ground work that this draft builds on and
    for reviewing the contents.  The authors would also like to thank
    John Dickinson, Shumon Huque, Melinda Shore, Gowri Visweswaran, Ray
-   Bellis, Stephane Bortzmeyer, Jinmei Tatuya, Paul Hoffman and
-   Christian Huitema for review and discussion of the ideas presented
-   here.
+   Bellis, Stephane Bortzmeyer, Jinmei Tatuya, Paul Hoffman, Christian
+   Huitema and John Levine for review and discussion of the ideas
+   presented here.
 
 13.  References
 
@@ -1271,16 +1271,16 @@ Appendix B.  Changes between revisions
    [Note to RFC Editor: please remove this section prior to
    publication.]
 
-B.1.  -07 version
+B.1.  -08 version
+
+   Removed hard failure as an option for Opportunistic Usage profile.
+
+   Added a new section comparing the Authentication Mechanisms
+
+B.2.  -07 version
 
    Re-work of the Abstract and Introduction to better describe the
    contents in this version.
-
-   Terminology: New definition of 'authentication information'.
-
-   Scope: Changes to the Scope section.
-
-   Moved discussion of combining authentication mechanism earlier.
 
 
 
@@ -1290,10 +1290,16 @@ Dickinson, et al.         Expires July 22, 2017                [Page 23]
 Internet-Draft            (D)TLS Authentication             January 2017
 
 
+   Terminology: New definition of 'authentication information'.
+
+   Scope: Changes to the Scope section.
+
+   Moved discussion of combining authentication mechanism earlier.
+
    Changes to the section headings and groupings to make the
    presentation more logical.
 
-B.2.  -06 version
+B.3.  -06 version
 
    Introduction: Re-word discussion of Working group charter.
 
@@ -1317,7 +1323,7 @@ B.2.  -06 version
 
    Section 11: Split second paragraph.
 
-B.3.  -05 version
+B.4.  -05 version
 
    Add more details on detecting passive attacks to section 4.2
 
@@ -1325,17 +1331,11 @@ B.3.  -05 version
 
    Change comment about future I-D on usage policies.
 
-B.4.  -04 version
+B.5.  -04 version
 
    Introduction: Add comment that DNS-over-DTLS draft is Experiments
 
    Update 2 I-D references to RFCs.
-
-B.5.  -03 version
-
-   Section 9: Update DANE section with better references to RFC7671 and
-   RFC7250
-
 
 
 
@@ -1346,7 +1346,12 @@ Dickinson, et al.         Expires July 22, 2017                [Page 24]
 Internet-Draft            (D)TLS Authentication             January 2017
 
 
-B.6.  -02 version
+B.6.  -03 version
+
+   Section 9: Update DANE section with better references to RFC7671 and
+   RFC7250
+
+B.7.  -02 version
 
    Introduction: Added paragraph on the background and scope of the
    document.
@@ -1365,7 +1370,7 @@ B.6.  -02 version
 
    Title abbreviated.
 
-B.7.  -01 version
+B.8.  -01 version
 
    Section 4.2: Make clear that the Strict Privacy Profile can include
    meta queries performed using Opportunistic Privacy.
@@ -1381,16 +1386,11 @@ B.7.  -01 version
 
    Section 8.2: Clarify description and example.
 
-B.8.  draft-ietf-dprive-dtls-and-tls-profiles-00
+B.9.  draft-ietf-dprive-dtls-and-tls-profiles-00
 
    Re-submission of draft-dgr-dprive-dtls-and-tls-profiles with name
    change to draft-ietf-dprive-dtls-and-tls-profiles.  Also minor nits
    fixed.
-
-Authors' Addresses
-
-
-
 
 
 
@@ -1401,6 +1401,8 @@ Dickinson, et al.         Expires July 22, 2017                [Page 25]
 
 Internet-Draft            (D)TLS Authentication             January 2017
 
+
+Authors' Addresses
 
    Sara Dickinson
    Sinodun Internet Technologies
@@ -1430,8 +1432,6 @@ Internet-Draft            (D)TLS Authentication             January 2017
    India
 
    Email: tireddy@cisco.com
-
-
 
 
 
