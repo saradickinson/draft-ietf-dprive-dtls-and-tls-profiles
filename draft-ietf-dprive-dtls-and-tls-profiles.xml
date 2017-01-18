@@ -591,7 +591,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                 </list></t>
                 <t>ADN only<list style="empty">
                     <t>+ Minimal one-off direct configuration, only a human recognisable domain name needed</t>
-                    <t>- SRV, A/AAAA queries leaked to network provided DNS server</t>
+                    <t>- SRV, A/AAAA meta queries leaked to network provided DNS server</t>
                 </list></t>
                 <t>DHCP<list style="empty">
                     <t>+ No static config</t>
@@ -602,11 +602,11 @@ please see http://xml.resource.org/authoring/README.html. -->
                     <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
                     <t>+ DANE options (e.g. matching on entire certificate)</t>
                     <t>- Requires a DNSSEC validating stub implementation (deployment of which is limited at the time of writing)</t>
-                    <t>- DNSSEC chain queries leaked to network provided DNS server</t>
+                    <t>- DNSSEC chain meta queries leaked to network provided DNS server</t>
                 </list></t>
                 <t>TLS extension<list style="empty">
                     <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
-                    <t>+ Reduced latency</t>
+                    <t>+ Reduced latency compared with 'DANE'</t>
                     <t>+ No network provided DNS server required if ADN and IP statically configured</t>
                     <t>+ DANE options (e.g. matching on entire certificate)</t>
                     <t>- Requires a DNSSEC validating stub implementation</t>
