@@ -418,7 +418,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             attack since the DNS queries are sent in clear text. This might be particularly useful
             if a new connection to a certain server is unencrypted when all previous
             connections were encrypted. Similarly if the user is informed that an
-            encrypted but unauthenticated connection was used then user can detect that 
+            encrypted but unauthenticated connection was used then the user can detect that 
             the connection may be subject to active attack. This is discussed in <xref
             target="opportunistic"></xref>.</t>
 
@@ -481,12 +481,12 @@ please see http://xml.resource.org/authoring/README.html. -->
         <t>guaranteed privacy at the potential cost of no DNS service (Strict).</t></list></t>
 
         <t>Additionally the two profiles require varying levels of configuration (or a
-        trusted relationship with a provider) and DNS server capabilities therefore DNS
+        trusted relationship with a provider) and DNS server capabilities, therefore DNS
         clients will need to carefully select which profile to use based on their 
         communication privacy needs. </t>
 
         <t>A DNS server that implements DNS-over-TLS SHOULD provide at least one credential
-        in order that those DNS clients that wish to do so are able to use Strict
+        so that those DNS clients that wish to do so are able to use Strict
         Privacy (see Section 2).</t>
 
         <section title="DNS Resolution">
@@ -506,12 +506,12 @@ please see http://xml.resource.org/authoring/README.html. -->
           authentication</xref> based on an authentication domain name for the server they are
           contacting. These clients typically first look up the server's
           network address in the DNS before making this connection. Such a DNS
-          client therefore has a bootstrap problem. DNS clients typically know
-          only the IP address of a DNS server.</t>
+          client therefore has a bootstrap problem, as it will typically only know
+          the IP address of its DNS server.</t>
 
           <t>In this case, before connecting to a DNS server, a DNS client needs to
           learn the authentication domain name it should associate with the IP address of a
-          DNS server for authentication purposes. Sources of authentication domains names are
+          DNS server for authentication purposes. Sources of authentication domain names are
           discussed in <xref target="authdomainname"></xref>.</t>
 
           <t>One advantage of this domain name based approach is that it
@@ -739,11 +739,11 @@ please see http://xml.resource.org/authoring/README.html. -->
         <t>A DNS client might learn of a default recursive DNS resolver from
         an untrusted source (such as DHCP's DNS server option <xref
         target="RFC3646"></xref>). It can then use opportunistic DNS
-        connections to untrusted recursive DNS resolver to establish the IP
+        connections to an untrusted recursive DNS resolver to establish the IP
         address of the intended privacy-enabling DNS server by doing a lookup
         of SRV records. Such records MUST be validated using DNSSEC. Private
         DNS resolution can now be done by the DNS client against the
-        configured privacy-enabling DNS server.</t>
+        learned privacy-enabling DNS server.</t>
 
         <t>Example: <list style="symbols">
             <t>A DNSSEC validating DNS client is configured with the domain
@@ -755,11 +755,11 @@ please see http://xml.resource.org/authoring/README.html. -->
                 <t>SRV record for _domain-s._tcp.dns.example.net to obtain the
                 server host name</t>
 
-                <t>A and/or AAAA lookups to obtain IP address for the server
-                host name</t>
+                <t>A and/or AAAA records to obtain IP addresses for the server
+                host name(s)</t>
               </list></t>
 
-            <t>Client validates all the records obtained in the previous step
+            <t>The client validates all the records obtained in the previous step
             using DNSSEC.</t>
 
             <t>If the records successfully validate the client proceeds to
@@ -768,7 +768,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           </list></t>
 
         <t>A DNS client so configured that successfully connects to a
-        privacy-enabling DNS server MAY choose to locally cache the looked up
+        privacy-enabling DNS server MAY choose to locally cache the server host IP
         addresses in order to not have to repeat the opportunistic lookup.</t>
 
       </section>
@@ -806,7 +806,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section anchor="credentials" title="Authentication Domain Name based Credential Verification">
       <section anchor="certs" title="PKIX Certificate Based Authentication">
         <t>When a DNS client configured with an authentication domain name connects to its
-        configured DNS server over (D)TLS, the server may present it with an
+        configured DNS server over (D)TLS, the server may present it with a
         PKIX certificate. In order to ensure proper authentication, DNS
         clients MUST verify the entire certification path per <xref
         target="RFC5280"></xref>. The DNS client additionally uses <xref
@@ -841,7 +841,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </section>
 
       <section anchor="dane" title="DANE">
-        <t><xref target="RFC6698">DANE</xref> provides mechanisms to root
+        <t><xref target="RFC6698">DANE</xref> provides mechanisms to anchor
         certificate and raw public key trust with DNSSEC. However this
         requires the DNS client to have an authentication domain name for the DNS Privacy Server
         which must be obtained via a trusted source.</t>
@@ -864,7 +864,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             <list style='symbols'>
                 <t>Section 4.1: Opportunistic Security and PKIX Usages and Section 14:
                     Security Considerations, which both discuss the use 
-                    of PKIX-TA(0) and PKIX-EE(1) for OS.</t>
+                    of PKIX-TA(0) and PKIX-EE(1) for Opportunistic Security.</t>
                 <t>Section 5: Certificate-Usage-Specific DANE Updates and Guidelines.
                     Specifically Section 5.1 which outlines the combination of
                     Certificate Usage DANE-EE(3) and Selector Usage SPKI(1) with
@@ -923,8 +923,8 @@ please see http://xml.resource.org/authoring/README.html. -->
       target="RFC7525"></xref> except with respect to (D)TLS version.</t> 
 
       <t>Since
-      encryption of DNS using (D)TLS is virtually a green-field deployment DNS
-      clients and server MUST implement only (D)TLS 1.2 or later.</t>
+      encryption of DNS using (D)TLS is a green-field deployment DNS
+      clients and servers MUST implement only (D)TLS 1.2 or later.</t>
 
       <t>Implementations MUST NOT offer or provide TLS compression, since
       compression can leak significant amounts of information, especially to a
