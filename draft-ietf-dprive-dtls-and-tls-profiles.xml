@@ -33,7 +33,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
 <rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-08"
-     ipr="trust200902">
+     ipr="trust200902" updates="7858">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -45,7 +45,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     <!-- The abbreviated title is used in the page header - it is only necessary if the
     full title is longer than 39 characters -->
 
-    <title abbrev="(D)TLS Authentication">Authentication and (D)TLS Profile
+    <title abbrev="(D)TLS Authentication for DNS">Authentication and (D)TLS Profile
     for DNS-over-(D)TLS</title>
 
     <!-- add 'role="editor"' below for the editors if appropriate -->
@@ -119,7 +119,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </address>
     </author>
 
-    <date month="January" year="2017" />
+    <date month="April" year="2017" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
           in the current day for you. If only the current year is specified, xml2rfc will fill
@@ -563,7 +563,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
               <c></c><c></c><c></c><c></c>
 
-              <c>3</c>  <c>ADN     </c>    <c>IP </c> <c>ADN only: DNSSEC validated Opportunistic lookups to a NP DNS server for SRV, A/AAAA (see <xref target="ADNonly"></xref>)</c>
+              <c>3</c>  <c>ADN     </c>    <c>IP </c> <c>ADN only: Opportunistic lookups to a NP DNS server for A/AAAA (see <xref target="ADNonly"></xref>)</c>
 
               <c></c><c></c><c></c><c></c>
 
@@ -593,7 +593,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                 </list></t>
                 <t>ADN only<list style="empty">
                     <t>+ Minimal one-off direct configuration, only a human recognisable domain name needed</t>
-                    <t>- SRV, A/AAAA meta queries leaked to network provided DNS server</t>
+                    <t>- A/AAAA meta queries leaked to network provided DNS server</t>
                 </list></t>
                 <t>DHCP<list style="empty">
                     <t>+ No static config</t>
@@ -671,7 +671,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       necessary to protect against active attacks on DNS privacy.</t>
 
       <t>A DNS client requiring Strict Privacy MUST either use one of the
-      sources listed in <xref target="identifier-sources"></xref> to obtain an
+      sources listed in <xref target="authdomainname"></xref> to obtain an
       authentication domain name for the server it contacts, or use an SPKI pinset as
       described in <xref target="RFC7858"></xref>.</t>
 
@@ -708,21 +708,6 @@ please see http://xml.resource.org/authoring/README.html. -->
     
     <section anchor="authdomainname" title="Sources of Authentication Domain Names">
 
-    <section anchor="srv"
-             title="In Band Sources: SRV Service Label">
-      <t>This specification adds a SRV service label "domain-s" for
-      privacy-enabling DNS servers.</t>
-
-      <t>Example service records (for TLS and DTLS respectively): <list>
-          <t>_domain-s._tcp.dns.example.com. SRV 0 1 853 dns1.example.com.
-          _domain-s._tcp.dns.example.com. SRV 0 1 853 dns2.example.com.</t>
-
-          <t>_domain-s._udp.dns.example.com. SRV 0 1 853 dns3.example.com.</t>
-        </list></t>
-    </section>
-
-    <section anchor="identifier-sources"
-             title="Out of Band Sources">
       <section anchor="Fullconfig" title="Full direct configuration">
         <t>DNS clients may be directly and securely provisioned with the
         authentication domain name of each privacy-enabling DNS server. For example, using a
@@ -743,31 +728,9 @@ please see http://xml.resource.org/authoring/README.html. -->
         target="RFC3646"></xref>). It can then use opportunistic DNS
         connections to an untrusted recursive DNS resolver to establish the IP
         address of the intended privacy-enabling DNS server by doing a lookup
-        of SRV records. Such records MUST be validated using DNSSEC. Private
+        of A/AAAA records. Private
         DNS resolution can now be done by the DNS client against the
         learned privacy-enabling DNS server.</t>
-
-        <t>Example: <list style="symbols">
-            <t>A DNSSEC validating DNS client is configured with the domain
-            name dns.example.net for a privacy-enabling DNS server</t>
-
-            <t>Using Opportunistic Privacy to a default DNS resolver
-            (acquired, for example, using DHCP) the client performs look ups
-            for <list style="symbols">
-                <t>SRV record for _domain-s._tcp.dns.example.net to obtain the
-                server host name</t>
-
-                <t>A and/or AAAA records to obtain IP addresses for the server
-                host name(s)</t>
-              </list></t>
-
-            <t>The client validates all the records obtained in the previous step
-            using DNSSEC.</t>
-
-            <t>If the records successfully validate the client proceeds to
-            connect to the privacy-enabling DNS server using Strict
-            Privacy.</t>
-          </list></t>
 
         <t>A DNS client so configured that successfully connects to a
         privacy-enabling DNS server MAY choose to locally cache the server host IP
@@ -803,7 +766,6 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       </section>
     </section>
-    </section>
 
     <section anchor="credentials" title="Authentication Domain Name based Credential Verification">
       <section anchor="certs" title="PKIX Certificate Based Authentication">
@@ -815,30 +777,17 @@ please see http://xml.resource.org/authoring/README.html. -->
         target="RFC6125"></xref> validation techniques to compare the domain
         name to the certificate provided.</t>
 
-        <t>A DNS client constructs two Reference Identifiers for the server
-        based on the authentication domain name: A DNS-ID and an <xref
-        target="RFC4985">SRV-ID</xref>. The DNS-ID is simply the authentication domain name
-        itself. The SRV-ID uses a "_domain-s." prefix. So if the configured
-        authentication domain name is "dns.example.com", then the two Reference Identifiers
-        are: <list style="ordered">
-            <t>DNS-ID: dns.example.com</t>
+        <t>A DNS client constructs one Reference Identifier for the server
+        based on the authentication domain name: A DNS-ID which is simply the authentication domain name
+        itself. </t>
 
-            <t>SRV-ID: _domain-s.dns.example.com</t>
-          </list></t>
-
-        <t>If either of the Reference Identifiers are found in the PKIX
+        <t>If the Reference Identifier is found in the PKIX
         certificate's subjectAltName extension as described in section 6 of
         <xref target="RFC6125"></xref>, the DNS client should accept the
         certificate for the server.</t>
 
-        <!--<t>
-              [ QUESTION: do we want to talk about multiple domain names
-              for a single server here? ]
-              After review, not in this version of the draft.
-            </t>-->
-
         <t>A compliant DNS client MUST only inspect the certificate's
-        subjectAltName extension for these Reference Identifiers. In
+        subjectAltName extension for the Reference Identifier. In
         particular, it MUST NOT inspect the Subject field itself.</t>
       </section>
 
@@ -881,9 +830,9 @@ please see http://xml.resource.org/authoring/README.html. -->
          </t>
 
         <t>The specific DANE record for a DNS Privacy Server would take the form: <list>
-            <t>_853._tcp.[server-domain-name] for TLS</t>
+            <t>_853._tcp.[authentication-domain-name] for TLS</t>
 
-            <t>_853._udp.[server-domain-name] for DTLS</t>
+            <t>_853._udp.[authentication-domain-name] for DTLS</t>
           </list></t>
 
         <section anchor="directDANE" title="Direct DNS Lookup">
@@ -940,7 +889,8 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t><list style="symbols">
           <t><xref target="RFC5077">TLS session resumption without server-side
           state</xref> which eliminates the need for the server to retain
-          cryptographic state for longer than necessary.</t>
+          cryptographic state for longer than necessary. (This statement updates
+          <xref target="RFC7858"></xref>).</t>
 
           <t><xref target="RFC7250">Raw public keys</xref> which reduce the
           size of the ServerHello, and can be used by servers that cannot
@@ -976,6 +926,11 @@ please see http://xml.resource.org/authoring/README.html. -->
       <xref target="I-D.ietf-dprive-dnsodtls"></xref> and <xref
       target="RFC7858"></xref> apply to this
       document.</t>
+
+	 <t>DNS Clients SHOULD consider implementing support for the mechanisms described in 
+		<xref target="dane"></xref> and offering a configuration option which limits authentication to using
+		only those mechanisms (i.e. with no fallback to pure PKIX based authentication) 
+		such that authenticating solely via the PKIX infrastructure can be avoided.</t>
 
       <section anchor="traffic"
                title="Counter-measures to DNS Traffic Analysis">
@@ -1031,8 +986,6 @@ please see http://xml.resource.org/authoring/README.html. -->
       <?rfc include="reference.RFC.6347"?>
 
       <?rfc include="reference.RFC.5246"?>
-
-      <?rfc include="reference.RFC.4985"?>
 
       <?rfc include="reference.RFC.6698"?>
 
@@ -1128,6 +1081,13 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+
+      <section title="-09 version">
+           <t>Remove the SRV record to simplify the draft. </t>
+		   <t>Add suggestion that clients offer option to avoid using only PKIX authentication.</t>
+           <t>Clarify that the MUST on implementing TLS session resumption updates RFC7858.</t>
+		   <t>Update page header to be '(D)TLS Authentication for TLS'.</t>
+       </section>
 
       <section title="-08 version">
            <t>Removed hard failure as an option for Opportunistic Usage profile.</t>
