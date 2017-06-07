@@ -32,7 +32,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-09"
+<rfc category="std" docName="draft-ietf-dprive-dtls-and-tls-profiles-10"
      ipr="trust200902" updates="7858">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -119,7 +119,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </address>
     </author>
 
-    <date month="April" year="2017" />
+    <date month="Jun" year="2017" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
           in the current day for you. If only the current year is specified, xml2rfc will fill
@@ -156,7 +156,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           This document also specifies new authentication mechanisms - it describes
           several ways a DNS client can use an authentication domain name to
           authenticate a DNS server. Additionally, it defines (D)TLS profiles for DNS
-          clients and servers implementing DNS-over-(D)TLS.</t>
+          clients and servers implementing DNS-over-(D)TLS. This document updates RFC 7858.</t>
     </abstract>
   </front>
 
@@ -167,8 +167,8 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t><xref
           target="RFC7858">Specification for DNS over Transport Layer Security (TLS)</xref>, referred to here as simply 'DNS-over-TLS'</t>
 
-          <t><xref target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS (DNSoD)</xref>, referred to here simply as 'DNS-over-DTLS'. 
-          Note that this document has the Intended status of Experimental.</t>
+          <t><xref target="RFC8094">DNS over Datagram Transport Layer Security (DTLS)</xref>, referred to here simply as 'DNS-over-DTLS'. 
+          Note that this document has the Category of Experimental.</t>
         </list>
         Both documents are limited in scope to encrypting DNS messages between stub clients
         and recursive resolvers and the same scope is applied to this document 
@@ -263,7 +263,7 @@ please see http://xml.resource.org/authoring/README.html. -->
               <t>MUST implement <xref
               target="RFC7858">DNS-over-TLS</xref> and
               MAY implement <xref
-              target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>.</t>
+              target="RFC8094">DNS-over-DTLS</xref>.</t>
 
               <t>Can offer at least one of the credentials described in <xref
               target="credentials"></xref>.</t>
@@ -281,7 +281,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>DNS-over-(D)TLS: For brevity this term is used for statements
           that apply to both <xref
           target="RFC7858">DNS-over-TLS</xref> and <xref
-          target="I-D.ietf-dprive-dnsodtls">DNS-over-DTLS</xref>. Specific
+          target="RFC8094">DNS-over-DTLS</xref>. Specific
           terms will be used for any statement that applies to either protocol
           alone.</t>
 
@@ -363,7 +363,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         <t>A DNS client has a choice of privacy Usage Profiles available. This
         choice is briefly discussed in both <xref
         target="RFC7858"></xref> and <xref
-        target="I-D.ietf-dprive-dnsodtls"></xref>. These Usage
+        target="RFC8094"></xref>. These Usage
         Profiles are: <list style="symbols">
             <t>Strict Privacy: the DNS client requires both an encrypted and
             authenticated connection to a privacy-enabling DNS Server. A hard
@@ -407,7 +407,9 @@ please see http://xml.resource.org/authoring/README.html. -->
             case scenario it is equivalent to clear text.
             Clients using Opportunistic Privacy SHOULD try for the best case but MAY fallback to
             the intermediate case and eventually the worst case scenario in order
-            to obtain a response. It therefore provides no privacy
+            to obtain a response. (One reason to fallback without trying every available
+            DNS Privacy Server is if latency is more important than privacy, see <xref target="probing"></xref>). 
+            Opportunistic Privacy therefore provides no privacy
             guarantee to the user and varying protection depending on what kind of connection is
             actually used.</t>
 
@@ -494,8 +496,11 @@ please see http://xml.resource.org/authoring/README.html. -->
         <section title="DNS Resolution">
         <t>A DNS client SHOULD select a particular Usage Profile when
         resolving a query. A DNS client MUST NOT fallback from Strict Privacy
-        to Opportunistic Privacy during the resolution process as this could
-        invalidate the protection offered against active attackers.</t>
+        to Opportunistic Privacy during the resolution of a given query as this could
+        invalidate the protection offered against active attackers. It is 
+        anticipated that clients will use a particular Usage Profile for all 
+        queries until an operational issue or policy update dictates a change 
+        in the profile used.</t>
         </section>
       </section>
 
@@ -650,7 +655,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <t>DNS clients issuing queries under an opportunistic profile which know
       authentication information for a given privacy-enabling DNS server
-      MAY choose to try to authenticate the server using the mechanisms
+      SHOULD try to authenticate the server using the mechanisms
       described here. This is useful for detecting (but not preventing) active
       attack, since the fact that authentication information is available
       indicates that the server in question is a privacy-enabling DNS server
@@ -915,7 +920,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <t>Guidance specific to TLS is provided in <xref
         target="RFC7858"></xref> and that specific to DTLS it is provided in<xref
-      target="I-D.ietf-dprive-dnsodtls"></xref>.</t>
+      target="RFC8094"></xref>.</t>
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
@@ -924,7 +929,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
     <section anchor="security" title="Security Considerations">
       <t>Security considerations discussed in <xref target="RFC7525"></xref>,
-      <xref target="I-D.ietf-dprive-dnsodtls"></xref> and <xref
+      <xref target="RFC8094"></xref> and <xref
       target="RFC7858"></xref> apply to this
       document.</t>
 
@@ -945,8 +950,10 @@ please see http://xml.resource.org/authoring/README.html. -->
         the following relevant DNS extensions <list style="symbols">
             <t><xref target="RFC7830">EDNS(0)
             padding</xref>, which allows encrypted queries and responses to
-            hide their size.</t>
-          </list></t>
+            hide their size making analysis of encrypted traffic harder.</t>
+            </list></t>
+
+        <t>Guidance on padding policies is provided in <xref target="I-D.ietf-dprive-padding-policy">Padding Policy for EDNS(0)</xref></t>
 
         <t>DNS-over-(D)TLS clients SHOULD consider implementing the following
         relevant DNS extensions <list style="symbols">
@@ -964,7 +971,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>Thanks to the authors of both <xref
-      target="I-D.ietf-dprive-dnsodtls"></xref> and <xref
+      target="RFC8094"></xref> and <xref
       target="RFC7858"></xref> for laying the ground work
       that this draft builds on and for reviewing the contents. The authors
       would also like to thank John Dickinson, Shumon Huque, Melinda Shore,
@@ -999,6 +1006,12 @@ please see http://xml.resource.org/authoring/README.html. -->
       <?rfc include="reference.RFC.7830"?>
 
       <?rfc include="reference.RFC.7671"?>
+
+      <?rfc include="reference.RFC.7918"?>
+
+      <?rfc include="reference.RFC.7924"?>
+
+      <?rfc include="reference.RFC.8094"?>
     </references>
 
     <references title="Informative References">
@@ -1016,14 +1029,9 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <?rfc include="reference.RFC.7871"?>
 
-      <?rfc include="reference.RFC.7918"?>
-
-      <?rfc include="reference.RFC.7924"?>
-
-      <?rfc include="reference.I-D.ietf-dprive-dnsodtls"?>
-
       <?rfc include="reference.I-D.ietf-tls-dnssec-chain-extension"?>
 
+      <?rfc include="reference.I-D.ietf-dprive-padding-policy"?>
       <reference anchor="CRIME">
         <front>
           <title>The CRIME Attack</title>
