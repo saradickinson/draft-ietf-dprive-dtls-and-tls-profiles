@@ -182,7 +182,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             target="RFC5246">TLS</xref> which define the
           security properties a user should expect when using that profile to
           connect to the available DNS servers. <xref target="usageprofiles"></xref> presents a 
-          generalised discussion of Usage Profiles by separating the Usage Profile,
+          generalized discussion of Usage Profiles by separating the Usage Profile,
           which is based purely on the
           security properties it offers the user, from the specific
           mechanism(s) that are used for authentication. The Profiles described are:
@@ -204,7 +204,7 @@ please see http://xml.resource.org/authoring/README.html. -->
               will determine if the connection should proceed, fallback or fail. </t>
 
              <t>One authentication mechanism is already described in <xref target="RFC7858"></xref>.
-              That document specifies an SPKI based authentication mechanism for DNS-over-TLS in the context of a specific case of a Strict Usage Profile
+              That document specifies an Subject Public Key Info (SPKI) based authentication mechanism for DNS-over-TLS in the context of a specific case of a Strict Usage Profile
               using that single authentication mechanism. Therefore
                the "Out-of-band Key-pinned Privacy Profile" described in 
                <xref
@@ -258,19 +258,12 @@ please see http://xml.resource.org/authoring/README.html. -->
                 in this document the term does not apply to
                 authoritative servers.</t>
 
-          <t>Privacy-enabling DNS server: A DNS server that: <list
-              style="symbols">
-              <t>MUST implement <xref
-              target="RFC7858">DNS-over-TLS</xref> and
-              MAY implement <xref
-              target="RFC8094">DNS-over-DTLS</xref>.</t>
-
-              <t>Can offer at least one of the credentials described in <xref
-              target="credentials"></xref>.</t>
-
-              <t>Implements the (D)TLS profile described in <xref
+          <t>Privacy-enabling DNS server: A DNS server that implements 
+              <xref target="RFC7858">DNS-over-TLS</xref> and may optionally implement <xref
+                target="RFC8094">DNS-over-DTLS</xref>. The server should also offer at least one of the
+              credentials described in <xref
+              target="credentials"></xref> and implement the (D)TLS profile described in <xref
               target="tls-profile"></xref>.</t>
-            </list></t>
 
           <t>(D)TLS: For brevity this term is used for statements that apply
           to both <xref target="RFC5246">Transport Layer Security</xref> and
@@ -291,8 +284,8 @@ please see http://xml.resource.org/authoring/README.html. -->
 
           <t>SPKI Pinsets: <xref target="RFC7858"></xref>
           describes the use of cryptographic digests to "pin" public key
-          information in a manner similar to <xref
-          target="RFC7469">HPKP</xref>. An SPKI pinset is a collection of
+          information in a manner similar to  <xref
+          target="RFC7469">HTTP Public Key Pinning</xref> (HPKP). An SPKI pinset is a collection of
           these pins that constrains a DNS server.</t>
 
           <t>Authentication information: Information a DNS client may use as the basis of
@@ -357,6 +350,20 @@ please see http://xml.resource.org/authoring/README.html. -->
             with a particular set of DNS Servers or with reference
             to other external factors. A description of the variety of usage policies
             is out of scope of this document, but may be the subject of future work.</t>
+            
+            <t>The term 'privacy-enabling DNS server' is used throughout this document. To clarify this is a DNS server that: <list
+                style="symbols">
+                <t>MUST implement <xref
+                target="RFC7858">DNS-over-TLS</xref>.</t>
+                <t> MAY implement <xref
+                  target="RFC8094">DNS-over-DTLS</xref>.</t>
+
+                <t>SHOULD offer at least one of the credentials described in <xref
+                target="credentials"></xref>.</t>
+
+                <t>Implements the (D)TLS profile described in <xref
+                target="tls-profile"></xref>.</t>
+              </list></t>
       </section>
 
       <section anchor="usageprofiles" title="Usage Profiles">
@@ -474,7 +481,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         </texttable>
 
         <t>Strict Privacy provides the strongest privacy guarantees and therefore SHOULD
-        always be implemented in DNS clients along with Opportunistic Privacy.</t>
+        always be implemented in DNS clients that implement Opportunistic Privacy.</t>
 
         <t>A DNS client that implements DNS-over-(D)TLS SHOULD NOT default to the use of
         clear text (no privacy).</t>
@@ -522,7 +529,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           discussed in <xref target="authdomainname"></xref>.</t>
 
           <t>One advantage of this domain name based approach is that it
-          encourages association of stable, human recognisable identifiers
+          encourages association of stable, human recognizable identifiers
           with secure DNS service providers.</t>
 
         </section>
@@ -589,7 +596,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
             <t><list style="numbers"> 
                 <t>SPKI<list style="empty">
-                    <t>+ Minimal leakage (Note that the ADN is always leaked in the SNI field in the Client Hello in TLS when communicating with a privacy enabling DNS server)</t>
+                    <t>+ Minimal leakage (Note that the ADN is always leaked in the Server Name Indication (SNI) field in the Client Hello in TLS when communicating with a privacy enabling DNS server)</t>
                     <t>- Overhead of on-going key management required</t>
                 </list></t>
                 <t>ADN<list style="empty">
@@ -597,7 +604,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                     <t>+ One-off direct configuration only</t>
                 </list></t>
                 <t>ADN only<list style="empty">
-                    <t>+ Minimal one-off direct configuration, only a human recognisable domain name needed</t>
+                    <t>+ Minimal one-off direct configuration, only a human recognizable domain name needed</t>
                     <t>- A/AAAA meta queries leaked to network provided DNS server</t>
                 </list></t>
                 <t>DHCP<list style="empty">
@@ -607,7 +614,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                 </list></t>
                 <t>DANE<list style="empty">
                     <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
-                    <t>+ DANE options (e.g. matching on entire certificate)</t>
+                    <t>+ DANE options (e.g., matching on entire certificate)</t>
                     <t>- Requires a DNSSEC validating stub implementation (deployment of which is limited at the time of writing)</t>
                     <t>- DNSSEC chain meta queries leaked to network provided DNS server</t>
                 </list></t>
@@ -615,7 +622,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                     <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
                     <t>+ Reduced latency compared with 'DANE'</t>
                     <t>+ No network provided DNS server required if ADN and IP statically configured</t>
-                    <t>+ DANE options (e.g. matching on entire certificate)</t>
+                    <t>+ DANE options (e.g., matching on entire certificate)</t>
                     <t>- Requires a DNSSEC validating stub implementation</t>
                 </list></t>
         </list></t>
@@ -653,13 +660,13 @@ please see http://xml.resource.org/authoring/README.html. -->
       described in <xref target="RFC7858"></xref> which
       MAY be used for DNS-over-(D)TLS.</t>
 
-      <t>DNS clients issuing queries under an opportunistic profile which know
+      <t>DNS clients issuing queries under an opportunistic profile and which know
       authentication information for a given privacy-enabling DNS server
       SHOULD try to authenticate the server using the mechanisms
       described here. This is useful for detecting (but not preventing) active
       attack, since the fact that authentication information is available
       indicates that the server in question is a privacy-enabling DNS server
-      to which it should be possible to establish an authenticated, encrypted
+      to which it should be possible to establish an authenticated and encrypted
       connection. In this case, whilst a client cannot know the reason for an
       authentication failure, from a privacy standpoint the client should
       consider an active attack in progress and proceed under that assumption.
@@ -743,33 +750,43 @@ please see http://xml.resource.org/authoring/README.html. -->
         addresses in order to not have to repeat the opportunistic lookup.</t>
 
       </section>
+      
+      <section title="No configuration: Dynamic discovery of ADN">
+
+      <t>This section discusses the general case of a DNS client discovering both 
+      the authentication domain name and IP address dynamically. This is not 
+      possible at the time of writing by any standard means. However since, 
+      for example, a future DHCP extension could (in principle) provide this 
+      mechanism the required security properties of such mechanisms are outlined here. </t>
+
+      <t>When using a Strict profile the dynamic discovery technique used as a 
+      source of authentication domain names MUST be
+      considered secure and trustworthy. This requirement does not apply when 
+      using an Opportunistic profile given the
+      security expectation of that profile.</t>
 
       <section anchor="DHCP" title="DHCP">
-        <t>Some clients may have an established trust relationship with a
-        known <xref target="RFC2131">DHCP</xref> server for discovering their
-        network configuration. In the typical case, such a DHCP server
-        provides a list of IP addresses for DNS servers (see section 3.8 of
-        <xref target="RFC2132"></xref>), but does not provide a domain name
-        for the DNS server itself.</t>
 
-        <t>In the future, a DHCP server might use a DHCP extension to provide a list of
-        authentication domain names for the offered DNS servers, which correspond to IP
-        addresses listed.</t>
+      <t>In the typical case today, a DHCP server <xref target="RFC2131"></xref>
+      <xref target="RFC3315"></xref> provides a list
+      of IP addresses for DNS resolvers (see Section 3.8 of <xref target="RFC2132"></xref>), but
+      does not provide a domain name for the DNS resolver, thus preventing
+      the use of most of the authentication methods described here (all
+      those that are based on a mechanism with ADN in  <xref target="table_summary"></xref>).</t>
 
-        <t>Use of such a mechanism with any DHCP server when using an Opportunistic 
-            profile is reasonable, given the security expectation of that profile. 
-            However when using a Strict profile the DHCP servers used as sources 
-            of authentication domain names MUST be considered secure
-            and trustworthy. 
-           This document
-        does not attempt to describe secured and trusted relationships to DHCP
-        servers.</t>
+        <t>This document does not specify or request any DHCP extension to provide 
+            authentication domain names. However, if one is developed in future work 
+            the issues outlined in Section 8 of <xref target="RFC7227"></xref> should be taken into account 
+            as should the Security Considerations in Section 23 of <xref target="RFC3315"></xref>). </t>
 
-        <t>It is noted (at the time of writing) that whilst some
+        <t>This document does not attempt to describe secured and
+        trusted relationships to DHCP servers, which is a purely DHCP
+        issue (still open, at the time of writing.) Whilst some
         implementation work is in progress to secure IPv6 connections for
         DHCP, IPv4 connections have received little to no implementation
         attention in this area.</t>
 
+      </section>
       </section>
     </section>
 
@@ -821,7 +838,8 @@ please see http://xml.resource.org/authoring/README.html. -->
             <list style='symbols'>
                 <t>Section 4.1: Opportunistic Security and PKIX Usages and Section 14:
                     Security Considerations, which both discuss the use 
-                    of PKIX-TA(0) and PKIX-EE(1) for Opportunistic Security.</t>
+                    of Trust Anchor and End Entity based schemes (PKIX-TA(0) and PKIX-EE(1) 
+                    respectively) for Opportunistic Security.</t>
                 <t>Section 5: Certificate-Usage-Specific DANE Updates and Guidelines.
                     Specifically Section 5.1 which outlines the combination of
                     Certificate Usage DANE-EE(3) and Selector Usage SPKI(1) with
@@ -933,20 +951,20 @@ please see http://xml.resource.org/authoring/README.html. -->
       target="RFC7858"></xref> apply to this
       document.</t>
 
-	 <t>DNS Clients SHOULD consider implementing support for the mechanisms described in 
+	 <t>DNS Clients SHOULD implement support for the mechanisms described in 
 		<xref target="dane"></xref> and offering a configuration option which limits authentication to using
-		only those mechanisms (i.e. with no fallback to pure PKIX based authentication) 
+		only those mechanisms (i.e., with no fallback to pure PKIX based authentication) 
 		such that authenticating solely via the PKIX infrastructure can be avoided.</t>
 
       <section anchor="traffic"
                title="Counter-measures to DNS Traffic Analysis">
         <t>This section makes suggestions for measures that can reduce the
         ability of attackers to infer information pertaining to encrypted
-        client queries by other means (e.g. via an analysis of encrypted
+        client queries by other means (e.g., via an analysis of encrypted
         traffic size, or via monitoring of resolver to authoritative
         traffic).</t>
 
-        <t>DNS-over-(D)TLS clients and servers SHOULD consider implementing
+        <t>DNS-over-(D)TLS clients and servers SHOULD implement
         the following relevant DNS extensions <list style="symbols">
             <t><xref target="RFC7830">EDNS(0)
             padding</xref>, which allows encrypted queries and responses to
@@ -955,7 +973,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <t>Guidance on padding policies is provided in <xref target="I-D.ietf-dprive-padding-policy">Padding Policy for EDNS(0)</xref></t>
 
-        <t>DNS-over-(D)TLS clients SHOULD consider implementing the following
+        <t>DNS-over-(D)TLS clients SHOULD implement the following
         relevant DNS extensions <list style="symbols">
             <t><xref target="RFC7871">Privacy
             Election using Client Subnet in DNS Queries</xref>. If a DNS
@@ -969,7 +987,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       </section>
     </section>
 
-    <section anchor="Acknowledgements" title="Acknowledgements">
+    <section anchor="Acknowledgements" title="Acknowledgments">
       <t>Thanks to the authors of both <xref
       target="RFC8094"></xref> and <xref
       target="RFC7858"></xref> for laying the ground work
@@ -1023,9 +1041,13 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <?rfc include="reference.RFC.2132"?>
 
+      <?rfc include="reference.RFC.3315"?>
+
       <?rfc include="reference.RFC.7435"?>
 
       <?rfc include="reference.RFC.3646"?>
+
+      <?rfc include="reference.RFC.7227"?>
 
       <?rfc include="reference.RFC.7871"?>
 
