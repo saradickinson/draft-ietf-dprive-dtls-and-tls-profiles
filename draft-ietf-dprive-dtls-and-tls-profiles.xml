@@ -45,7 +45,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     <!-- The abbreviated title is used in the page header - it is only necessary if the
     full title is longer than 39 characters -->
 
-    <title abbrev="(D)TLS Authentication for DNS">Authentication and (D)TLS Profile
+    <title abbrev="(D)TLS Authentication for DNS">Usage and (D)TLS Profiles
     for DNS-over-(D)TLS</title>
 
     <!-- add 'role="editor"' below for the editors if appropriate -->
@@ -152,27 +152,37 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t> This document discusses Usage Profiles, based on one or more
           authentication mechanisms, which can be used
           for DNS over Transport Layer Security (TLS) or
-          Datagram TLS (DTLS).
+          Datagram TLS (DTLS). These profiles can increase the privacy of DNS transactions
+          compared to using only clear text DNS.
           This document also specifies new authentication mechanisms - it describes
           several ways a DNS client can use an authentication domain name to
-          authenticate a DNS server. Additionally, it defines (D)TLS profiles for DNS
+          authenticate a (D)TLS connection to a DNS server. Additionally, it defines (D)TLS protocol
+          profiles for DNS
           clients and servers implementing DNS-over-(D)TLS. This document updates RFC 7858.</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>DNS Privacy issues are discussed in <xref target="RFC7626"></xref>. Two 
-	     documents that provide DNS
+      <t>DNS Privacy issues are discussed in <xref target="RFC7626"></xref>. The specific
+      issues described there that are most relevant to this document are
+      <list style="symbols"><t>Passive attacks which eavesdrop on clear text DNS transactions on the wire 
+              (Section 2.4) and</t>
+            <t>Active attacks which redirect clients to rogue servers to monitor DNS traffic
+              (Section 2.5.3).</t></list>
+      Mitigating against these attacks increases the privacy of DNS transactions, however many of the 
+      other issues raised in <xref target="RFC7626"></xref> still apply.</t>
+      
+      <t>Two documents that provide ways to increase DNS
          privacy between DNS clients and DNS servers are: <list style="symbols">
           <t><xref
           target="RFC7858">Specification for DNS over Transport Layer Security (TLS)</xref>, 
-		  referred to here as simply 'DNS-over-TLS'</t>
+          referred to here as simply 'DNS-over-TLS'</t>
           <t><xref target="RFC8094">DNS over Datagram Transport Layer Security (DTLS)</xref>, 
-		  referred to here simply as 'DNS-over-DTLS'. 
+          referred to here simply as 'DNS-over-DTLS'. 
           Note that this document has the Category of Experimental.</t>
         </list>
-        Both documents are limited in scope to encrypting DNS messages between stub clients
+        Both documents are limited in scope to communications between stub clients
         and recursive resolvers and the same scope is applied to this document 
         (see <xref target="Terminology"></xref> and <xref target="Scope"></xref>).
         The proposals here might be adapted or extended in future to be used for
@@ -181,21 +191,22 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <t>This document specifies two Usage Profiles (Strict and Opportunistic) 
           for <xref target="RFC6347">DTLS</xref> and <xref
-            target="RFC5246">TLS</xref> which define the
-          security properties a user should expect when using that profile to
-          connect to the available DNS servers. <xref target="usageprofiles"></xref> presents a 
+            target="RFC5246">TLS</xref> which provide improved levels of 
+            mitigation against the attacks described above compared to using only clear text DNS. </t>
+            
+            <t><xref target="usageprofiles"></xref> presents a 
           generalized discussion of Usage Profiles by separating the Usage Profile,
           which is based purely on the
           security properties it offers the user, from the specific
-          mechanism(s) that are used for authentication. The Profiles described are:
+          mechanism(s) that are used for DNS server authentication. The Profiles described are:
           <list style="symbols">
               <t> A Strict Profile that
                requires an encrypted connection and successful authentication of the
-               DNS server which provides strong
-               privacy guarantees (at the expense of providing no DNS service if this
+               DNS server which mitigates both passive eavesdropping and client re-direction 
+               (at the expense of providing no DNS service if this
                is not available).</t>
                <t> An Opportunistic Profile that will attempt, but does not require, encryption and 
-               successful authentication; it therefore provides no privacy guarantees but 
+               successful authentication; it therefore provides limited or no mitigation against such attacks but 
                offers maximum chance of DNS service.</t>
           </list> </t> 
 
@@ -207,7 +218,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
              <t>One authentication mechanism is already described in <xref target="RFC7858"></xref>.
               That document specifies a Subject Public Key Info (SPKI) based authentication 
-			  mechanism for DNS-over-TLS in the context of a specific case of a Strict Usage Profile
+              mechanism for DNS-over-TLS in the context of a specific case of a Strict Usage Profile
               using that single authentication mechanism. Therefore
                the "Out-of-band Key-pinned Privacy Profile" described in 
                <xref
@@ -227,7 +238,7 @@ please see http://xml.resource.org/authoring/README.html. -->
               following is described: 
               <list style="symbols">
           <t>How a DNS client can obtain the combination of an authentication domain 
-			  name and IP address for a DNS server. See <xref target="authdomainname"></xref>.</t>
+              name and IP address for a DNS server. See <xref target="authdomainname"></xref>.</t>
 
           <t>What are the acceptable credentials a DNS server can present to
           prove its identity for (D)TLS authentication based on a given authentication domain
@@ -337,15 +348,15 @@ please see http://xml.resource.org/authoring/README.html. -->
     </section>
 
     <section title="Discussion">
-        <t>To protect against passive attacks DNS privacy requires encrypting
-        the query (and response). Such encryption typically provides integrity
+        <t>One way to mitigate against passive attackers eavesdropping on clear text DNS transactions
+           is to encrypt the query (and response). Such encryption typically provides integrity
         protection as a side-effect, which means on-path attackers cannot
-        simply inject bogus DNS responses. For DNS privacy to also provide
-        protection against active attackers pretending to be the server, the
-        client must authenticate the server.</t>
+        simply inject bogus DNS responses. To also mitigate
+        against active attackers pretending to be the server, the
+        client must authenticate the (D)TLS connection to the server.</t>
         
         <t>This document discusses Usage Profiles, which provide differing levels of 
-            privacy guarantees to DNS clients, based on the requirements for 
+            attack mitigation to DNS clients, based on the requirements for 
             authentication and encryption, regardless of the context (for example,
             which network the client is connected to).
             A Usage Profile is a distinct concept to 
@@ -371,19 +382,18 @@ please see http://xml.resource.org/authoring/README.html. -->
       </section>
 
       <section anchor="usageprofiles" title="Usage Profiles">
-        <t>A DNS client has a choice of privacy Usage Profiles available. This
+        <t>A DNS client has a choice of Usage Profiles available to increase the privacy of DNS transactions. This
         choice is briefly discussed in both <xref
         target="RFC7858"></xref> and <xref
         target="RFC8094"></xref>. These Usage
         Profiles are: <list style="symbols">
-            <t>Strict Privacy: the DNS client requires both an encrypted and
+            <t>Strict profile: the DNS client requires both an encrypted and
             authenticated connection to a privacy-enabling DNS Server. A hard
             failure occurs if this is not available. This requires the client
             to securely obtain authentication information it can use to authenticate the
-            server. This
-            profile provides strong privacy guarantees to the client if the authentication
-            information is pre-configured or obtained via a secure and trustworthy
-            mechanism. This Profile is discussed in detail in <xref target="strict"></xref>.</t>
+            server. This profile mitigates against both passive and active attacks providing
+            the client with the best available privacy for DNS.
+            This Profile is discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
             Security as described in <xref target="RFC7435"></xref> 
@@ -392,7 +402,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                 security policy, with encryption and authentication negotiated
                 and applied to the communication when available."</t></list>
                    The use of Opportunistic Privacy is intended to support incremental deployment of
-                   security capabilities with a view to widespread adoption of Strict Privacy.
+                   increased privacy with a view to widespread adoption of the Strict profile.
                    It should be employed when the DNS client might otherwise
                    settle for cleartext; it provides the maximum protection an attacker will allow.
                    As described in <xref target="RFC7435"></xref> it might result in 
@@ -408,7 +418,7 @@ please see http://xml.resource.org/authoring/README.html. -->
               </t> </list></t>
 
               <t>Both profiles can include an initial meta query
-              (performed using Opportunistic Privacy) to obtain the IP
+              (performed using an Opportunistic lookup) to obtain the IP
               address for the privacy-enabling
               DNS server to which the DNS client will subsequently connect. The
               rationale for permitting this for the Strict profile is that requiring such meta
@@ -418,18 +428,17 @@ please see http://xml.resource.org/authoring/README.html. -->
               could result in the client not being able to connect to a privacy-enabling
               DNS server that it can authenticate.</t>
 
-        <t>To compare the two Usage profiles the table below shows successful Strict Privacy
-            along side the 3 possible outcomes of Opportunistic Privacy. 
-            In the best case scenario for Opportunistic Privacy (an authenticated and encrypted
-            connection) it is equivalent to Strict Privacy. In the worst
+        <t>To compare the two Usage profiles the table below shows a successful Strict profile
+            along side the 3 possible outcomes of an Opportunistic profile. 
+            In the best case scenario for the Opportunistic profile (an authenticated and encrypted
+            connection) it is equivalent to the Strict profile. In the worst
             case scenario it is equivalent to clear text.
-            Clients using Opportunistic Privacy SHOULD try for the best case but MAY fallback to
+            Clients using the Opportunistic profile SHOULD try for the best case but MAY fallback to
             the intermediate case and eventually the worst case scenario in order
             to obtain a response. One reason to fallback without trying every available
-            privacy-enabling DNS server is if latency is more important than privacy, see <xref target="probing"></xref>. 
-            Opportunistic Privacy therefore provides no privacy
-            guarantee to the user and varying protection depending on what kind of connection is
-            actually used.</t>
+            privacy-enabling DNS server is if latency is more important than attack mitigation, see <xref target="probing"></xref>. 
+            The Opportunistic profile therefore provides varying protection depending on what kind of connection is
+            actually used including no attack mitigation at all.</t>
 
         <t>Note that there is no requirement in Opportunistic Security to notify
             the user what type of connection is actually used, the 'detection' described below is
@@ -448,7 +457,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
 
         <texttable anchor="table_ex"
-                   title="DNS Privacy Protection by Usage Profile and type of attacker">
+                   title="Attack protection by Usage Profile and type of attacker">
           <ttcol align="center">Usage Profile</ttcol>
 
           <ttcol align="center">Connection</ttcol>
@@ -493,25 +502,25 @@ please see http://xml.resource.org/authoring/README.html. -->
           possible; A == Authenticated connection; E == Encrypted connection</postamble>
         </texttable>
 
-        <t>Strict Privacy provides the strongest privacy guarantees and therefore SHOULD
+        <t>The Strict profile provides the best attack mitigation and therefore SHOULD
         always be implemented in DNS clients that implement Opportunistic Privacy.</t>
 
         <t>A DNS client that implements DNS-over-(D)TLS SHOULD NOT be configured by default 
-            to use only clear text (no privacy).</t>
+            to use only clear text.</t>
 
         <t>The choice between the two profiles depends on a number of factors including
         which is more important to the particular client:<list style="symbols">
-        <t>DNS service at the cost of no privacy guarantee (Opportunistic) or</t>
-        <t>guaranteed privacy at the potential cost of no DNS service (Strict).</t></list></t>
+        <t>DNS service at the cost of no attack mitigation (Opportunistic) or</t>
+        <t>best available attack mitigation at the potential cost of no DNS service (Strict).</t></list></t>
 
         <t>Additionally the two profiles require varying levels of configuration (or a
         trusted relationship with a provider) and DNS server capabilities, therefore DNS
         clients will need to carefully select which profile to use based on their 
-        communication privacy needs. </t>
+        communication needs. </t>
 
         <t>A DNS server that implements DNS-over-(D)TLS SHOULD provide at least one credential
-        so that those DNS clients that wish to do so are able to use Strict
-        Privacy (see Section 2).</t>
+        so that those DNS clients that wish to do so are able to use the Strict
+        profile (see Section 2).</t>
 
         <section title="DNS Resolution">
         <t>A DNS client SHOULD select a particular Usage Profile when
@@ -678,7 +687,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       indicates that the server in question is a privacy-enabling DNS server
       to which it should be possible to establish an authenticated and encrypted
       connection. In this case, whilst a client cannot know the reason for an
-      authentication failure, from a privacy standpoint the client should
+      authentication failure, from a security standpoint the client should
       consider an active attack in progress and proceed under that assumption. For example,
       a client that implements a nameserver selection algorithm that preferentially
       uses nameservers which successfully authenticated (see <xref target="usageprofiles"></xref>)
@@ -695,7 +704,8 @@ please see http://xml.resource.org/authoring/README.html. -->
              title="Authentication in Strict Privacy">
       <t>To authenticate a privacy-enabling DNS server, a DNS client needs to
       know authentication information for each server it is willing to contact. This is
-      necessary to protect against active attacks on DNS privacy.</t>
+      necessary to protect against active attacks which attempt to re-direct clients
+      to rogue DNS servers.</t>
 
       <t>A DNS client requiring Strict Privacy MUST either use one of the
       sources listed in <xref target="authdomainname"></xref> to obtain an
@@ -817,7 +827,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
         <t>A DNS client constructs one Reference Identifier for the server
         based on the authentication domain name: A DNS-ID which is simply the 
-		authentication domain name itself. </t>
+        authentication domain name itself. </t>
 
         <t>If the Reference Identifier is found in the PKIX
         certificate's subjectAltName extension as described in section 6 of
@@ -1100,7 +1110,7 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section anchor="probing"
              title="Server capability probing and caching by DNS clients">
       <t>This section presents a non-normative discussion of how DNS clients
-      might probe for and cache privacy capabilities of DNS servers.</t>
+      might probe for and cache capabilities of privacy-enabling DNS servers.</t>
 
       <t>Deployment of both DNS-over-TLS and DNS-over-DTLS will be gradual.
       Not all servers will support one or both of these protocols and the
@@ -1111,10 +1121,10 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>If no server capability information is available then (unless
       otherwise specified by the configuration of the DNS client) DNS clients
       that implement both TLS and DTLS should try to authenticate using both
-      protocols before failing or falling back to a lower security. DNS
+      protocols before failing or falling back to a unauthenticated or clear text connections. DNS
       clients using an Opportunistic Usage profile should try all available servers
       (possibly in parallel) in order to obtain an authenticated and encrypted
-      connection before falling back to a lower security. (RATIONALE: This
+      connection before falling back. (RATIONALE: This
       approach can increase latency while discovering server capabilities but
       maximizes the chance of sending the query over an authenticated and
       encrypted connection.)</t>
@@ -1130,9 +1140,9 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       <section title="-09 version">
            <t>Remove the SRV record to simplify the draft. </t>
-		   <t>Add suggestion that clients offer option to avoid using only PKIX authentication.</t>
+           <t>Add suggestion that clients offer option to avoid using only PKIX authentication.</t>
            <t>Clarify that the MUST on implementing TLS session resumption updates RFC7858.</t>
-		   <t>Update page header to be '(D)TLS Authentication for TLS'.</t>
+           <t>Update page header to be '(D)TLS Authentication for TLS'.</t>
        </section>
 
       <section title="-08 version">
