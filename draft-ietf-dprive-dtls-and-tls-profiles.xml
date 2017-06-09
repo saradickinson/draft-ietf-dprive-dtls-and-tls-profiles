@@ -162,12 +162,14 @@ please see http://xml.resource.org/authoring/README.html. -->
 
   <middle>
     <section title="Introduction">
-      <t>DNS Privacy issues are discussed in <xref target="RFC7626"></xref>. Two documents that provide DNS
-      privacy between DNS clients and DNS servers are: <list style="symbols">
+      <t>DNS Privacy issues are discussed in <xref target="RFC7626"></xref>. Two 
+	     documents that provide DNS
+         privacy between DNS clients and DNS servers are: <list style="symbols">
           <t><xref
-          target="RFC7858">Specification for DNS over Transport Layer Security (TLS)</xref>, referred to here as simply 'DNS-over-TLS'</t>
-
-          <t><xref target="RFC8094">DNS over Datagram Transport Layer Security (DTLS)</xref>, referred to here simply as 'DNS-over-DTLS'. 
+          target="RFC7858">Specification for DNS over Transport Layer Security (TLS)</xref>, 
+		  referred to here as simply 'DNS-over-TLS'</t>
+          <t><xref target="RFC8094">DNS over Datagram Transport Layer Security (DTLS)</xref>, 
+		  referred to here simply as 'DNS-over-DTLS'. 
           Note that this document has the Category of Experimental.</t>
         </list>
         Both documents are limited in scope to encrypting DNS messages between stub clients
@@ -204,7 +206,8 @@ please see http://xml.resource.org/authoring/README.html. -->
               will determine if the connection should proceed, fallback or fail. </t>
 
              <t>One authentication mechanism is already described in <xref target="RFC7858"></xref>.
-              That document specifies an Subject Public Key Info (SPKI) based authentication mechanism for DNS-over-TLS in the context of a specific case of a Strict Usage Profile
+              That document specifies a Subject Public Key Info (SPKI) based authentication 
+			  mechanism for DNS-over-TLS in the context of a specific case of a Strict Usage Profile
               using that single authentication mechanism. Therefore
                the "Out-of-band Key-pinned Privacy Profile" described in 
                <xref
@@ -223,7 +226,8 @@ please see http://xml.resource.org/authoring/README.html. -->
               authenticate a DNS server based on an 'authentication domain name'. In particular, the 
               following is described: 
               <list style="symbols">
-          <t>How a DNS client can obtain the combination of an authentication domain name and IP address for a DNS server. See <xref target="authdomainname"></xref>.</t>
+          <t>How a DNS client can obtain the combination of an authentication domain 
+			  name and IP address for a DNS server. See <xref target="authdomainname"></xref>.</t>
 
           <t>What are the acceptable credentials a DNS server can present to
           prove its identity for (D)TLS authentication based on a given authentication domain
@@ -279,7 +283,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           alone.</t>
 
           <t>Authentication domain name: A domain name that can be used to authenticate a 
-             DNS Privacy enabling server. Sources of authentication domain names are
+             privacy-enabling DNS server. Sources of authentication domain names are
             discussed in  <xref target="authdomainname"></xref>.</t>
 
           <t>SPKI Pinsets: <xref target="RFC7858"></xref>
@@ -312,7 +316,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>This document is limited to describing
           <list style="symbols">
               <t>Usage Profiles based on general authentication mechanisms</t> 
-              <t>The details of domain-name-based authentication of DNS
+              <t>The details of domain name based authentication of DNS
                  servers by DNS clients (as defined in the terminology section)</t>
             <t>The (D)TLS profiles needed to support authentication in DNS-over-(D)TLS.</t></list></t>
 
@@ -340,7 +344,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         protection against active attackers pretending to be the server, the
         client must authenticate the server.</t>
         
-        <t>This draft discusses Usage Profiles, which provide differing levels of 
+        <t>This document discusses Usage Profiles, which provide differing levels of 
             privacy guarantees to DNS clients, based on the requirements for 
             authentication and encryption, regardless of the context (for example,
             which network the client is connected to).
@@ -351,7 +355,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             to other external factors. A description of the variety of usage policies
             is out of scope of this document, but may be the subject of future work.</t>
             
-            <t>The term 'privacy-enabling DNS server' is used throughout this document. To clarify this is a DNS server that: <list
+            <t>The term 'privacy-enabling DNS server' is used throughout this document. This is a DNS server that: <list
                 style="symbols">
                 <t>MUST implement <xref
                 target="RFC7858">DNS-over-TLS</xref>.</t>
@@ -379,20 +383,19 @@ please see http://xml.resource.org/authoring/README.html. -->
             server. This
             profile provides strong privacy guarantees to the client if the authentication
             information is pre-configured or obtained via a secure and trustworthy
-            mechanism.</t>
-
-            <t>This profile can include some initial meta queries
+            mechanism.
+			
+			This profile can include an initial meta query
             (performed using Opportunistic Privacy) to obtain the IP
             address for the privacy-enabling
             DNS server to which the DNS client will subsequently connect. The
             rationale for this is that requiring Strict Privacy for such meta
             queries would introduce significant deployment obstacles. It should be noted that 
-            in this case the profile is open to active attack on the meta query which
-            could lead to the client not being able to connect to a privacy-enabling
-            DNS server that it can authenticate.</t> 
-            
-            <t>This
-            Profile is discussed in detail in <xref target="strict"></xref>.</t>
+            in this scenario an active attack is possible on the meta query which
+            could result in the client not being able to connect to a privacy-enabling
+            DNS server that it can authenticate.
+			
+			This Profile is discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
             Security as described in <xref target="RFC7435"></xref> 
@@ -424,7 +427,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             Clients using Opportunistic Privacy SHOULD try for the best case but MAY fallback to
             the intermediate case and eventually the worst case scenario in order
             to obtain a response. One reason to fallback without trying every available
-            DNS Privacy Server is if latency is more important than privacy, see <xref target="probing"></xref>. 
+            privacy-enabling DNS server is if latency is more important than privacy, see <xref target="probing"></xref>. 
             Opportunistic Privacy therefore provides no privacy
             guarantee to the user and varying protection depending on what kind of connection is
             actually used.</t>
@@ -440,7 +443,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             connections were encrypted. Similarly if the user is informed that an
             encrypted but unauthenticated connection was used then the user can detect that 
             the connection may be subject to active attack. In other words for the cases
-            where no protection is provided against an attacker (N) it is implicit that 
+            where no protection is provided against an attacker (N) it is possible to detect that 
             an attack might be happening (D). This is discussed in <xref
             target="opportunistic"></xref>.</t>
 
@@ -487,8 +490,8 @@ please see http://xml.resource.org/authoring/README.html. -->
 
           <c>N, D</c>
 
-          <postamble>P == protection; N == no protection; D == detection is
-          possible; A == Authenticated Connection; E == Encrypted Connection</postamble>
+          <postamble>P == Protection; N == No protection; D == Detection is
+          possible; A == Authenticated connection; E == Encrypted connection</postamble>
         </texttable>
 
         <t>Strict Privacy provides the strongest privacy guarantees and therefore SHOULD
@@ -515,7 +518,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         <t>A DNS client SHOULD select a particular Usage Profile when
         resolving a query. A DNS client MUST NOT fallback from Strict Privacy
         to Opportunistic Privacy during the resolution of a given query as this could
-        invalidate the protection offered against active attackers. It is 
+        invalidate the protection offered against attackers. It is 
         anticipated that DNS clients will use a particular Usage Profile for all 
         queries to all configured servers until an operational issue or policy update dictates a change 
         in the profile used.</t>
@@ -566,7 +569,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                 The table below indicates how the DNS client obtains information to use for
                     authentication for each option; either statically via direct configuration or dynamically. Of course, the
                 Opportunistic Usage Profile does not require authentication and so a client using that profile may choose to
-                connect to a Privacy Enabling DNS server on the basis of just an IP address.</t>
+                connect to a privacy-enabling DNS server on the basis of just an IP address.</t>
 
             <texttable anchor="table_summary"
                        title="Overview of Authentication Mechanisms">
@@ -607,7 +610,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
             <t><list style="numbers"> 
                 <t>SPKI<list style="empty">
-                    <t>+ Minimal leakage (Note that the ADN is always leaked in the Server Name Indication (SNI) field in the Client Hello in TLS when communicating with a privacy enabling DNS server)</t>
+                    <t>+ Minimal leakage (Note that the ADN is always leaked in the Server Name Indication (SNI) field in the Client Hello in TLS when communicating with a privacy-enabling DNS server)</t>
                     <t>- Overhead of on-going key management required</t>
                 </list></t>
                 <t>ADN<list style="empty">
@@ -616,18 +619,18 @@ please see http://xml.resource.org/authoring/README.html. -->
                 </list></t>
                 <t>ADN only<list style="empty">
                     <t>+ Minimal one-off direct configuration, only a human recognizable domain name needed</t>
-                    <t>- A/AAAA meta queries leaked to network provided DNS server</t>
+                    <t>- A/AAAA meta queries leaked to network provided DNS server that may be subject to active attack</t>
                 </list></t>
                 <t>DHCP<list style="empty">
                     <t>+ No static config</t>
                     <t>- Requires a non-standard or future DHCP option in order to provide the ADN</t>
-                    <t>- Requires secure and trustworthy connection to DHCP server</t>
+                    <t>- Requires secure and trustworthy connection to DHCP server if used with a Strict Usage profile</t>
                 </list></t>
                 <t>DANE<list style="empty">
                     <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
                     <t>+ DANE options (e.g., matching on entire certificate)</t>
                     <t>- Requires a DNSSEC validating stub implementation (deployment of which is limited at the time of writing)</t>
-                    <t>- DNSSEC chain meta queries leaked to network provided DNS server</t>
+                    <t>- DNSSEC chain meta queries leaked to network provided DNS server that may be subject to active attack</t>
                 </list></t>
                 <t>TLS extension<list style="empty">
                     <t> The ADN and/or IP may be obtained statically or dynamically and the relevant attributes of that method apply</t>
@@ -678,14 +681,15 @@ please see http://xml.resource.org/authoring/README.html. -->
       connection. In this case, whilst a client cannot know the reason for an
       authentication failure, from a privacy standpoint the client should
       consider an active attack in progress and proceed under that assumption. For example,
-      a client that implemented a nameserver selection algorithm that preferentially
-      used nameservers which successfully authenticated (see <xref target="usageprofiles"></xref>)
-      would not continue to use the failing server if there were alternative servers available.
-      Attempting authentication is also useful for debugging or diagnostic
+      a client that implements a nameserver selection algorithm that preferentially
+      uses nameservers which successfully authenticated (see <xref target="usageprofiles"></xref>)
+      might not continue to use the failing server if there were alternative servers available.</t>
+
+      <t>Attempting authentication is also useful for debugging or diagnostic
       purposes if there are means to report the result. This information can
       provide a basis for a DNS client to switch to (preferred) Strict Privacy
       where it is viable e.g, where all the configured servers support 
-      DNS-over-TLS and successfully authenticate. </t>
+      DNS-over-(D)TLS and successfully authenticate. </t>
     </section>
 
     <section anchor="strict"
@@ -717,7 +721,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       as those used by DNSSEC-trigger <xref target="dnssec-trigger"></xref>
       MAY be used during network configuration, with the intent to transition
       to the designated privacy-enabling DNS servers after captive portal
-      registration. The system MUST alert by some means that the DNS is not
+      registration. If using a Strict Usage profile the system MUST alert by some means that the DNS is not
       private during such bootstrap.</t>
 
     </section>
@@ -738,18 +742,18 @@ please see http://xml.resource.org/authoring/README.html. -->
         client specific configuration file or API.</t>
 
         <t>In this case, direct configuration for a DNS client would consist
-        of both an IP address and a domain name for each DNS server.</t>
+        of both an IP address and an authentication domain name for each DNS server.</t>
       </section>
 
       <section anchor="ADNonly" title="Direct configuration of name only">
 
         <t>A DNS client may be configured directly and securely with only the
-        authentication domain name of its privacy-enabling DNS server. For example, using a
+        authentication domain name of each of its privacy-enabling DNS servers. For example, using a
         client specific configuration file or API.</t>
 
         <t>A DNS client might learn of a default recursive DNS resolver from
         an untrusted source (such as DHCP's DNS server option <xref
-        target="RFC3646"></xref>). It can then use opportunistic DNS
+        target="RFC3646"></xref>). It can then use Opportunistic DNS
         connections to an untrusted recursive DNS resolver to establish the IP
         address of the intended privacy-enabling DNS resolver by doing a lookup
         of A/AAAA records. Private
@@ -782,7 +786,7 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>In the typical case today, a DHCP server <xref target="RFC2131"></xref>
       <xref target="RFC3315"></xref> provides a list
       of IP addresses for DNS resolvers (see Section 3.8 of <xref target="RFC2132"></xref>), but
-      does not provide a domain name for the DNS resolver, thus preventing
+      does not provide an authentication domain name for the DNS resolver, thus preventing
       the use of most of the authentication methods described here (all
       those that are based on a mechanism with ADN in  <xref target="table_summary"></xref>).</t>
 
@@ -813,8 +817,8 @@ please see http://xml.resource.org/authoring/README.html. -->
         name to the certificate provided.</t>
 
         <t>A DNS client constructs one Reference Identifier for the server
-        based on the authentication domain name: A DNS-ID which is simply the authentication domain name
-        itself. </t>
+        based on the authentication domain name: A DNS-ID which is simply the 
+		authentication domain name itself. </t>
 
         <t>If the Reference Identifier is found in the PKIX
         certificate's subjectAltName extension as described in section 6 of
@@ -874,7 +878,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         <section anchor="directDANE" title="Direct DNS Lookup">
           <t>The DNS client MAY choose to perform the DNS lookups to retrieve
           the required DANE records itself. The DNS queries for such DANE
-          records MAY use opportunistic encryption or be in the clear to avoid
+          records MAY use Opportunistic encryption or be in the clear to avoid
           trust recursion. The records MUST be validated using DNSSEC as
           described above in <xref target="RFC6698"></xref>.</t>
         </section>
@@ -938,16 +942,16 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t><xref target="RFC7918">TLS False Start</xref>
           which reduces round-trips by allowing the TLS second flight of
           messages (ChangeCipherSpec) to also contain the (encrypted) DNS
-          query</t>
+          query.</t>
 
           <t><xref target="RFC7924">Cached Information
           Extension</xref> which avoids transmitting the server's certificate
           and certificate chain if the client has cached that information from
-          a previous TLS handshake</t>
+          a previous TLS handshake.</t>
         </list></t>
 
       <t>Guidance specific to TLS is provided in <xref
-        target="RFC7858"></xref> and that specific to DTLS it is provided in<xref
+        target="RFC7858"></xref> and that specific to DTLS it is provided in <xref
       target="RFC8094"></xref>.</t>
     </section>
 
@@ -1109,11 +1113,11 @@ please see http://xml.resource.org/authoring/README.html. -->
       otherwise specified by the configuration of the DNS client) DNS clients
       that implement both TLS and DTLS should try to authenticate using both
       protocols before failing or falling back to a lower security. DNS
-      clients using opportunistic security should try all available servers
-      (possibly in parallel) in order to obtain an authenticated encrypted
+      clients using an Opportunistic Usage profile should try all available servers
+      (possibly in parallel) in order to obtain an authenticated and encrypted
       connection before falling back to a lower security. (RATIONALE: This
       approach can increase latency while discovering server capabilities but
-      maximizes the chance of sending the query over an authenticated
+      maximizes the chance of sending the query over an authenticated and
       encrypted connection.)</t>
 
       <!--<t> [TODO: Should we make recommendations about what to do if
