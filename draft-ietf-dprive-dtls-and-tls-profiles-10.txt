@@ -711,8 +711,8 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    privacy standpoint the client should consider an active attack in
    progress and proceed under that assumption.  For example, a client
    that implemented a nameserver selection algorithm that preferentially
-   used nameservers which successfully authenticated (as described in
-   Section 5 would not continue to use the failing server if there were
+   used nameservers which successfully authenticated (see Section 5)
+   would not continue to use the failing server if there were
    alternative servers available.  Attempting authentication is also
    useful for debugging or diagnostic purposes if there are means to
    report the result.  This information can provide a basis for a DNS

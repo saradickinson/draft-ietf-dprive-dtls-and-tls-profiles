@@ -327,7 +327,7 @@ please see http://xml.resource.org/authoring/README.html. -->
           target="RFC7858"></xref>.</t>
 
           <t>Any server identifier other than domain names, including IP
-          address, organizational name, country of origin, etc.</t>
+          addresses, organizational names, country of origin, etc.</t>
         </list></t>
 
     </section>
@@ -394,7 +394,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                    The use of Opportunistic Privacy is intended to support incremental deployment of
                    security capabilities with a view to widespread adoption of Strict Privacy.
                    It should be employed when the DNS client might otherwise
-                   settle for cleartext; it provides the maximum protection available.
+                   settle for cleartext; it provides the maximum protection an attacker will allow.
                    As described in <xref target="RFC7435"></xref> it might result in 
                    <list style="symbols">
                        <t>an encrypted and authenticated connection</t> 
@@ -408,14 +408,14 @@ please see http://xml.resource.org/authoring/README.html. -->
               </t> </list></t>
               
         <t>To compare the two Usage profiles the table below shows successful Strict Privacy
-            along side the 3 possible outcomes of Opportunistic Privacy.
+            along side the 3 possible outcomes of Opportunistic Privacy. 
             In the best case scenario for Opportunistic Privacy (an authenticated and encrypted
             connection) it is equivalent to Strict Privacy. In the worst
             case scenario it is equivalent to clear text.
             Clients using Opportunistic Privacy SHOULD try for the best case but MAY fallback to
             the intermediate case and eventually the worst case scenario in order
-            to obtain a response. (One reason to fallback without trying every available
-            DNS Privacy Server is if latency is more important than privacy, see <xref target="probing"></xref>). 
+            to obtain a response. One reason to fallback without trying every available
+            DNS Privacy Server is if latency is more important than privacy, see <xref target="probing"></xref>. 
             Opportunistic Privacy therefore provides no privacy
             guarantee to the user and varying protection depending on what kind of connection is
             actually used.</t>
@@ -430,7 +430,9 @@ please see http://xml.resource.org/authoring/README.html. -->
             if a new connection to a certain server is unencrypted when all previous
             connections were encrypted. Similarly if the user is informed that an
             encrypted but unauthenticated connection was used then the user can detect that 
-            the connection may be subject to active attack. This is discussed in <xref
+            the connection may be subject to active attack. In other words for the cases
+            where no protection is provided against an attacker (N) it is implicit that 
+            an attack might be happening (D). This is discussed in <xref
             target="opportunistic"></xref>.</t>
 
 
@@ -483,8 +485,8 @@ please see http://xml.resource.org/authoring/README.html. -->
         <t>Strict Privacy provides the strongest privacy guarantees and therefore SHOULD
         always be implemented in DNS clients that implement Opportunistic Privacy.</t>
 
-        <t>A DNS client that implements DNS-over-(D)TLS SHOULD NOT default to the use of
-        clear text (no privacy).</t>
+        <t>A DNS client that implements DNS-over-(D)TLS SHOULD NOT be configured by default 
+            to use only clear text (no privacy).</t>
 
         <t>The choice between the two profiles depends on a number of factors including
         which is more important to the particular client:<list style="symbols">
@@ -505,8 +507,8 @@ please see http://xml.resource.org/authoring/README.html. -->
         resolving a query. A DNS client MUST NOT fallback from Strict Privacy
         to Opportunistic Privacy during the resolution of a given query as this could
         invalidate the protection offered against active attackers. It is 
-        anticipated that clients will use a particular Usage Profile for all 
-        queries until an operational issue or policy update dictates a change 
+        anticipated that DNS clients will use a particular Usage Profile for all 
+        queries to all configured servers until an operational issue or policy update dictates a change 
         in the profile used.</t>
         </section>
       </section>
@@ -644,14 +646,11 @@ please see http://xml.resource.org/authoring/README.html. -->
           <t>A DNS client that is configured with both an authentication domain name and a SPKI
           pinset for a DNS server SHOULD match on both a valid credential for the
           authentication domain name and a valid SPKI pinset (if both are available)
-          when connecting to that DNS server. The overall authentication result should only
+          when connecting to that DNS server. In this case the client SHOULD treat the 
+          SPKI pin as specified in Section 2.6 of <xref target="RFC7469"></xref> with regard to user defined 
+          trust anchors. The overall authentication result SHOULD only
           be considered successful if both authentication mechanisms are successful.</t>
 
-          <!--<t>
-                [ TODO: describe in more detail why this conservative
-                approach is the right one, and what implementations should
-                do if they want a more lenient approach. ]
-              </t>-->
         </section>
 
     <section anchor="opportunistic"
@@ -669,11 +668,15 @@ please see http://xml.resource.org/authoring/README.html. -->
       to which it should be possible to establish an authenticated and encrypted
       connection. In this case, whilst a client cannot know the reason for an
       authentication failure, from a privacy standpoint the client should
-      consider an active attack in progress and proceed under that assumption.
+      consider an active attack in progress and proceed under that assumption. For example,
+      a client that implemented a nameserver selection algorithm that preferentially
+      used nameservers which successfully authenticated (see <xref target="usageprofiles"></xref>)
+      would not continue to use the failing server if there were alternative servers available.
       Attempting authentication is also useful for debugging or diagnostic
       purposes if there are means to report the result. This information can
       provide a basis for a DNS client to switch to (preferred) Strict Privacy
-      where it is viable.</t>
+      where it is viable e.g, where all the configured servers support 
+      DNS-over-TLS and successfully authenticate. </t>
     </section>
 
     <section anchor="strict"
@@ -888,18 +891,14 @@ please see http://xml.resource.org/authoring/README.html. -->
       <t>This section defines the (D)TLS protocol profile of
       DNS-over-(D)TLS.</t>
 
-      <t>There are known attacks on (D)TLS, such as machine-in-the-middle and
-      protocol downgrade. These are general attacks on (D)TLS and not specific
-      to DNS-over-TLS; please refer to the (D)TLS RFCs for discussion of these
-      security issues.</t>
-
       <t>Clients and servers MUST adhere to the (D)TLS
       implementation recommendations and security considerations of <xref
       target="RFC7525"></xref> except with respect to (D)TLS version.</t> 
 
       <t>Since
       encryption of DNS using (D)TLS is a green-field deployment DNS
-      clients and servers MUST implement only (D)TLS 1.2 or later.</t>
+      clients and servers MUST implement only (D)TLS 1.2 or later. For example,
+      implementing <xref target="I-D.ietf-tls-tls13">TLS 1.3</xref> is also an option.</t>
 
       <t>Implementations MUST NOT offer or provide TLS compression, since
       compression can leak significant amounts of information, especially to a
@@ -918,7 +917,9 @@ please see http://xml.resource.org/authoring/README.html. -->
 
           <t><xref target="RFC7250">Raw public keys</xref> which reduce the
           size of the ServerHello, and can be used by servers that cannot
-          obtain certificates (e.g., DNS servers on private networks).</t>
+          obtain certificates (e.g., DNS servers on private networks). A client
+          MUST only indicate support for raw public keys if it has an SPKI pinset
+          pre-configured (for interoperability reasons).</t>
         </list></t>
 
       <t>Implementations compliant with this profile SHOULD implement all of
@@ -971,7 +972,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             hide their size making analysis of encrypted traffic harder.</t>
             </list></t>
 
-        <t>Guidance on padding policies is provided in <xref target="I-D.ietf-dprive-padding-policy">Padding Policy for EDNS(0)</xref></t>
+        <t>Guidance on padding policies for EDNS(0) is provided in <xref target="I-D.ietf-dprive-padding-policy"></xref></t>
 
         <t>DNS-over-(D)TLS clients SHOULD implement the following
         relevant DNS extensions <list style="symbols">
@@ -1050,6 +1051,8 @@ please see http://xml.resource.org/authoring/README.html. -->
       <?rfc include="reference.RFC.7227"?>
 
       <?rfc include="reference.RFC.7871"?>
+
+      <?rfc include="reference.I-D.ietf-tls-tls13"?>
 
       <?rfc include="reference.I-D.ietf-tls-dnssec-chain-extension"?>
 
