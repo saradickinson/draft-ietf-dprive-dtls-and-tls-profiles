@@ -383,19 +383,7 @@ please see http://xml.resource.org/authoring/README.html. -->
             server. This
             profile provides strong privacy guarantees to the client if the authentication
             information is pre-configured or obtained via a secure and trustworthy
-            mechanism.
-			
-			This profile can include an initial meta query
-            (performed using Opportunistic Privacy) to obtain the IP
-            address for the privacy-enabling
-            DNS server to which the DNS client will subsequently connect. The
-            rationale for this is that requiring Strict Privacy for such meta
-            queries would introduce significant deployment obstacles. It should be noted that 
-            in this scenario an active attack is possible on the meta query which
-            could result in the client not being able to connect to a privacy-enabling
-            DNS server that it can authenticate.
-			
-			This Profile is discussed in detail in <xref target="strict"></xref>.</t>
+            mechanism. This Profile is discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
             Security as described in <xref target="RFC7435"></xref> 
@@ -418,7 +406,18 @@ please see http://xml.resource.org/authoring/README.html. -->
                    the DNS Server. In all these cases the DNS client is willing to continue with
                    a connection to the DNS Server and perform resolution of queries.
               </t> </list></t>
-              
+
+              <t>Both profiles can include an initial meta query
+              (performed using Opportunistic Privacy) to obtain the IP
+              address for the privacy-enabling
+              DNS server to which the DNS client will subsequently connect. The
+              rationale for permitting this for the Strict profile is that requiring such meta
+              queries to also be performed using the Strict profile would introduce 
+              significant deployment obstacles. However, it should be noted that 
+              in this scenario an active attack is possible on the meta query which
+              could result in the client not being able to connect to a privacy-enabling
+              DNS server that it can authenticate.</t>
+
         <t>To compare the two Usage profiles the table below shows successful Strict Privacy
             along side the 3 possible outcomes of Opportunistic Privacy. 
             In the best case scenario for Opportunistic Privacy (an authenticated and encrypted

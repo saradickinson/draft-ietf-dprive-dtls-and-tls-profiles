@@ -82,15 +82,15 @@ Table of Contents
      6.6.  Authentication in Strict Privacy  . . . . . . . . . . . .  14
      6.7.  Implementation guidance . . . . . . . . . . . . . . . . .  14
    7.  Sources of Authentication Domain Names  . . . . . . . . . . .  14
-     7.1.  Full direct configuration . . . . . . . . . . . . . . . .  14
+     7.1.  Full direct configuration . . . . . . . . . . . . . . . .  15
      7.2.  Direct configuration of name only . . . . . . . . . . . .  15
      7.3.  No configuration: Dynamic discovery of ADN  . . . . . . .  15
-       7.3.1.  DHCP  . . . . . . . . . . . . . . . . . . . . . . . .  15
+       7.3.1.  DHCP  . . . . . . . . . . . . . . . . . . . . . . . .  16
    8.  Authentication Domain Name based Credential Verification  . .  16
      8.1.  PKIX Certificate Based Authentication . . . . . . . . . .  16
-     8.2.  DANE  . . . . . . . . . . . . . . . . . . . . . . . . . .  16
-       8.2.1.  Direct DNS Lookup . . . . . . . . . . . . . . . . . .  17
-       8.2.2.  TLS DNSSEC Chain extension  . . . . . . . . . . . . .  17
+     8.2.  DANE  . . . . . . . . . . . . . . . . . . . . . . . . . .  17
+       8.2.1.  Direct DNS Lookup . . . . . . . . . . . . . . . . . .  18
+       8.2.2.  TLS DNSSEC Chain extension  . . . . . . . . . . . . .  18
    9.  (D)TLS Protocol Profile . . . . . . . . . . . . . . . . . . .  18
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  19
    11. Security Considerations . . . . . . . . . . . . . . . . . . .  19
@@ -100,7 +100,7 @@ Table of Contents
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  20
      13.2.  Informative References . . . . . . . . . . . . . . . . .  22
    Appendix A.  Server capability probing and caching by DNS clients  23
-   Appendix B.  Changes between revisions  . . . . . . . . . . . . .  23
+   Appendix B.  Changes between revisions  . . . . . . . . . . . . .  24
      B.1.  -09 version . . . . . . . . . . . . . . . . . . . . . . .  24
      B.2.  -08 version . . . . . . . . . . . . . . . . . . . . . . .  24
      B.3.  -07 version . . . . . . . . . . . . . . . . . . . . . . .  24
@@ -175,7 +175,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    determine if the connection should proceed, fallback or fail.
 
    One authentication mechanism is already described in [RFC7858].  That
-   document specifies an Subject Public Key Info (SPKI) based
+   document specifies a Subject Public Key Info (SPKI) based
    authentication mechanism for DNS-over-TLS in the context of a
    specific case of a Strict Usage Profile using that single
    authentication mechanism.  Therefore the "Out-of-band Key-pinned
@@ -252,7 +252,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
       either protocol alone.
 
    o  Authentication domain name: A domain name that can be used to
-      authenticate a DNS Privacy enabling server.  Sources of
+      authenticate a privacy-enabling DNS server.  Sources of
       authentication domain names are discussed in Section 7.
 
    o  SPKI Pinsets: [RFC7858] describes the use of cryptographic digests
@@ -298,7 +298,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
    o  Usage Profiles based on general authentication mechanisms
 
-   o  The details of domain-name-based authentication of DNS servers by
+   o  The details of domain name based authentication of DNS servers by
       DNS clients (as defined in the terminology section)
 
    o  The (D)TLS profiles needed to support authentication in DNS-
@@ -325,11 +325,11 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    provide protection against active attackers pretending to be the
    server, the client must authenticate the server.
 
-   This draft discusses Usage Profiles, which provide differing levels
-   of privacy guarantees to DNS clients, based on the requirements for
-   authentication and encryption, regardless of the context (for
-   example, which network the client is connected to).  A Usage Profile
-   is a distinct concept to a usage policy or usage model, which might
+   This document discusses Usage Profiles, which provide differing
+   levels of privacy guarantees to DNS clients, based on the
+   requirements for authentication and encryption, regardless of the
+   context (for example, which network the client is connected to).  A
+   Usage Profile is a distinct concept to a usage policy or usage model,
 
 
 
@@ -338,14 +338,14 @@ Dickinson, et al.       Expires December 11, 2017               [Page 6]
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
-   dictate which Profile should be used in a particular context
-   (enterprise vs coffee shop), with a particular set of DNS Servers or
-   with reference to other external factors.  A description of the
-   variety of usage policies is out of scope of this document, but may
-   be the subject of future work.
+   which might dictate which Profile should be used in a particular
+   context (enterprise vs coffee shop), with a particular set of DNS
+   Servers or with reference to other external factors.  A description
+   of the variety of usage policies is out of scope of this document,
+   but may be the subject of future work.
 
    The term 'privacy-enabling DNS server' is used throughout this
-   document.  To clarify this is a DNS server that:
+   document.  This is a DNS server that:
 
    o  MUST implement DNS-over-TLS [RFC7858].
 
@@ -369,30 +369,10 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
       authenticate the server.  This profile provides strong privacy
       guarantees to the client if the authentication information is pre-
       configured or obtained via a secure and trustworthy mechanism.
-
-   o  This profile can include some initial meta queries (performed
-      using Opportunistic Privacy) to obtain the IP address for the
-      privacy-enabling DNS server to which the DNS client will
-      subsequently connect.  The rationale for this is that requiring
-      Strict Privacy for such meta queries would introduce significant
-      deployment obstacles.  It should be noted that in this case the
-      profile is open to active attack on the meta query which could
-      lead to the client not being able to connect to a privacy-enabling
-      DNS server that it can authenticate.
-
-   o  This Profile is discussed in detail in Section 6.6.
+      This Profile is discussed in detail in Section 6.6.
 
    o  Opportunistic Privacy: the DNS client uses Opportunistic Security
       as described in [RFC7435]
-
-
-
-
-
-Dickinson, et al.       Expires December 11, 2017               [Page 7]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
 
          "... the use of cleartext as the baseline communication
          security policy, with encryption and authentication negotiated
@@ -407,6 +387,13 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
       *  an encrypted and authenticated connection
 
+
+
+Dickinson, et al.       Expires December 11, 2017               [Page 7]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
       *  an encrypted connection
 
       *  a clear text connection
@@ -416,6 +403,17 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
       In all these cases the DNS client is willing to continue with a
       connection to the DNS Server and perform resolution of queries.
 
+   Both profiles can include an initial meta query (performed using
+   Opportunistic Privacy) to obtain the IP address for the privacy-
+   enabling DNS server to which the DNS client will subsequently
+   connect.  The rationale for permitting this for the Strict profile is
+   that requiring such meta queries to also be performed using the
+   Strict profile would introduce significant deployment obstacles.
+   However, it should be noted that in this scenario an active attack is
+   possible on the meta query which could result in the client not being
+   able to connect to a privacy-enabling DNS server that it can
+   authenticate.
+
    To compare the two Usage profiles the table below shows successful
    Strict Privacy along side the 3 possible outcomes of Opportunistic
    Privacy.  In the best case scenario for Opportunistic Privacy (an
@@ -424,10 +422,11 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    Clients using Opportunistic Privacy SHOULD try for the best case but
    MAY fallback to the intermediate case and eventually the worst case
    scenario in order to obtain a response.  One reason to fallback
-   without trying every available DNS Privacy Server is if latency is
-   more important than privacy, see Appendix A.  Opportunistic Privacy
-   therefore provides no privacy guarantee to the user and varying
-   protection depending on what kind of connection is actually used.
+   without trying every available privacy-enabling DNS server is if
+   latency is more important than privacy, see Appendix A.
+   Opportunistic Privacy therefore provides no privacy guarantee to the
+   user and varying protection depending on what kind of connection is
+   actually used.
 
    Note that there is no requirement in Opportunistic Security to notify
    the user what type of connection is actually used, the 'detection'
@@ -445,13 +444,14 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
+
 Dickinson, et al.       Expires December 11, 2017               [Page 8]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
-   implicit that an attack might be happening (D).  This is discussed in
-   Section 6.5.
+   possible to detect that an attack might be happening (D).  This is
+   discussed in Section 6.5.
 
     +---------------+------------+------------------+-----------------+
     | Usage Profile | Connection | Passive Attacker | Active Attacker |
@@ -462,8 +462,8 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
     | Opportunistic |            |       N, D       |       N, D      |
     +---------------+------------+------------------+-----------------+
 
-   P == protection; N == no protection; D == detection is possible; A ==
-            Authenticated Connection; E == Encrypted Connection
+   P == Protection; N == No protection; D == Detection is possible; A ==
+            Authenticated connection; E == Encrypted connection
 
    Table 1: DNS Privacy Protection by Usage Profile and type of attacker
 
@@ -496,8 +496,8 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    A DNS client SHOULD select a particular Usage Profile when resolving
    a query.  A DNS client MUST NOT fallback from Strict Privacy to
    Opportunistic Privacy during the resolution of a given query as this
-   could invalidate the protection offered against active attackers.  It
-   is anticipated that DNS clients will use a particular Usage Profile
+   could invalidate the protection offered against attackers.  It is
+   anticipated that DNS clients will use a particular Usage Profile for
 
 
 
@@ -506,8 +506,8 @@ Dickinson, et al.       Expires December 11, 2017               [Page 9]
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
-   for all queries to all configured servers until an operational issue
-   or policy update dictates a change in the profile used.
+   all queries to all configured servers until an operational issue or
+   policy update dictates a change in the profile used.
 
 6.  Authentication in DNS-over(D)TLS
 
@@ -562,7 +562,7 @@ Dickinson, et al.       Expires December 11, 2017              [Page 10]
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
-   client using that profile may choose to connect to a Privacy Enabling
+   client using that profile may choose to connect to a privacy-enabling
    DNS server on the basis of just an IP address.
 
    +---+------------+-------------+------------------------------------+
@@ -608,7 +608,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
           + Minimal leakage (Note that the ADN is always leaked in the
           Server Name Indication (SNI) field in the Client Hello in TLS
-          when communicating with a privacy enabling DNS server)
+          when communicating with a privacy-enabling DNS server)
 
 
 
@@ -632,6 +632,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
           recognizable domain name needed
 
           - A/AAAA meta queries leaked to network provided DNS server
+          that may be subject to active attack
 
    4.  DHCP
 
@@ -640,7 +641,8 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
           - Requires a non-standard or future DHCP option in order to
           provide the ADN
 
-          - Requires secure and trustworthy connection to DHCP server
+          - Requires secure and trustworthy connection to DHCP server if
+          used with a Strict Usage profile
 
    5.  DANE
 
@@ -653,7 +655,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
           of which is limited at the time of writing)
 
           - DNSSEC chain meta queries leaked to network provided DNS
-          server
+          server that may be subject to active attack
 
    6.  TLS extension
 
@@ -665,14 +667,14 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
           + No network provided DNS server required if ADN and IP
           statically configured
 
-          + DANE options (e.g., matching on entire certificate)
-
 
 
 Dickinson, et al.       Expires December 11, 2017              [Page 12]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+          + DANE options (e.g., matching on entire certificate)
 
           - Requires a DNSSEC validating stub implementation
 
@@ -712,16 +714,14 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    client cannot know the reason for an authentication failure, from a
    privacy standpoint the client should consider an active attack in
    progress and proceed under that assumption.  For example, a client
-   that implemented a nameserver selection algorithm that preferentially
-   used nameservers which successfully authenticated (see Section 5)
-   would not continue to use the failing server if there were
-   alternative servers available.  Attempting authentication is also
-   useful for debugging or diagnostic purposes if there are means to
-   report the result.  This information can provide a basis for a DNS
-   client to switch to (preferred) Strict Privacy where it is viable
-   e.g, where all the configured servers support DNS-over-TLS and
-   successfully authenticate.
+   that implements a nameserver selection algorithm that preferentially
+   uses nameservers which successfully authenticated (see Section 5)
+   might not continue to use the failing server if there were
+   alternative servers available.
 
+   Attempting authentication is also useful for debugging or diagnostic
+   purposes if there are means to report the result.  This information
+   can provide a basis for a DNS client to switch to (preferred) Strict
 
 
 
@@ -729,6 +729,9 @@ Dickinson, et al.       Expires December 11, 2017              [Page 13]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+   Privacy where it is viable e.g, where all the configured servers
+   support DNS-over-(D)TLS and successfully authenticate.
 
 6.6.  Authentication in Strict Privacy
 
@@ -760,8 +763,9 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    spoofing.  Techniques such as those used by DNSSEC-trigger
    [dnssec-trigger] MAY be used during network configuration, with the
    intent to transition to the designated privacy-enabling DNS servers
-   after captive portal registration.  The system MUST alert by some
-   means that the DNS is not private during such bootstrap.
+   after captive portal registration.  If using a Strict Usage profile
+   the system MUST alert by some means that the DNS is not private
+   during such bootstrap.
 
 6.7.  Implementation guidance
 
@@ -771,11 +775,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 7.  Sources of Authentication Domain Names
 
-7.1.  Full direct configuration
 
-   DNS clients may be directly and securely provisioned with the
-   authentication domain name of each privacy-enabling DNS server.  For
-   example, using a client specific configuration file or API.
 
 
 
@@ -786,18 +786,26 @@ Dickinson, et al.       Expires December 11, 2017              [Page 14]
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
+7.1.  Full direct configuration
+
+   DNS clients may be directly and securely provisioned with the
+   authentication domain name of each privacy-enabling DNS server.  For
+   example, using a client specific configuration file or API.
+
    In this case, direct configuration for a DNS client would consist of
-   both an IP address and a domain name for each DNS server.
+   both an IP address and an authentication domain name for each DNS
+   server.
 
 7.2.  Direct configuration of name only
 
    A DNS client may be configured directly and securely with only the
-   authentication domain name of its privacy-enabling DNS server.  For
-   example, using a client specific configuration file or API.
+   authentication domain name of each of its privacy-enabling DNS
+   servers.  For example, using a client specific configuration file or
+   API.
 
    A DNS client might learn of a default recursive DNS resolver from an
    untrusted source (such as DHCP's DNS server option [RFC3646]).  It
-   can then use opportunistic DNS connections to an untrusted recursive
+   can then use Opportunistic DNS connections to an untrusted recursive
    DNS resolver to establish the IP address of the intended privacy-
    enabling DNS resolver by doing a lookup of A/AAAA records.  Private
    DNS resolution can now be done by the DNS client against the pre-
@@ -822,18 +830,10 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    trustworthy.  This requirement does not apply when using an
    Opportunistic profile given the security expectation of that profile.
 
-7.3.1.  DHCP
 
-   In the typical case today, a DHCP server [RFC2131] [RFC3315] provides
-   a list of IP addresses for DNS resolvers (see Section 3.8 of
-   [RFC2132]), but does not provide a domain name for the DNS resolver,
-   thus preventing the use of most of the authentication methods
-   described here (all those that are based on a mechanism with ADN in
-   Table 2).
 
-   This document does not specify or request any DHCP extension to
-   provide authentication domain names.  However, if one is developed in
-   future work the issues outlined in Section 8 of [RFC7227] should be
+
+
 
 
 
@@ -842,6 +842,18 @@ Dickinson, et al.       Expires December 11, 2017              [Page 15]
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
+7.3.1.  DHCP
+
+   In the typical case today, a DHCP server [RFC2131] [RFC3315] provides
+   a list of IP addresses for DNS resolvers (see Section 3.8 of
+   [RFC2132]), but does not provide an authentication domain name for
+   the DNS resolver, thus preventing the use of most of the
+   authentication methods described here (all those that are based on a
+   mechanism with ADN in Table 2).
+
+   This document does not specify or request any DHCP extension to
+   provide authentication domain names.  However, if one is developed in
+   future work the issues outlined in Section 8 of [RFC7227] should be
    taken into account as should the Security Considerations in
    Section 23 of [RFC3315]).
 
@@ -874,6 +886,18 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    subjectAltName extension for the Reference Identifier.  In
    particular, it MUST NOT inspect the Subject field itself.
 
+
+
+
+
+
+
+
+Dickinson, et al.       Expires December 11, 2017              [Page 16]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
 8.2.  DANE
 
    DANE [RFC6698] provides mechanisms to anchor certificate and raw
@@ -890,14 +914,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
       "Clients that validate the DNSSEC signatures themselves MUST use
       standard DNSSEC validation procedures.  Clients that rely on
-
-
-
-Dickinson, et al.       Expires December 11, 2017              [Page 16]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
-
       another entity to perform the DNSSEC signature validation MUST use
       a secure mechanism between themselves and the validator."
 
@@ -926,11 +942,23 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
       _853._udp.[authentication-domain-name] for DTLS
 
+
+
+
+
+
+
+
+Dickinson, et al.       Expires December 11, 2017              [Page 17]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
 8.2.1.  Direct DNS Lookup
 
    The DNS client MAY choose to perform the DNS lookups to retrieve the
    required DANE records itself.  The DNS queries for such DANE records
-   MAY use opportunistic encryption or be in the clear to avoid trust
+   MAY use Opportunistic encryption or be in the clear to avoid trust
    recursion.  The records MUST be validated using DNSSEC as described
    above in [RFC6698].
 
@@ -946,13 +974,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    the leaf.  If the supplied DNSSEC chain does not validate, the client
    MUST ignore the DNSSEC chain and validate only via other supplied
    credentials.
-
-
-
-Dickinson, et al.       Expires December 11, 2017              [Page 17]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
 
 9.  (D)TLS Protocol Profile
 
@@ -981,6 +1002,14 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    o  Raw public keys [RFC7250] which reduce the size of the
       ServerHello, and can be used by servers that cannot obtain
       certificates (e.g., DNS servers on private networks).  A client
+
+
+
+Dickinson, et al.       Expires December 11, 2017              [Page 18]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
       MUST only indicate support for raw public keys if it has an SPKI
       pinset pre-configured (for interoperability reasons).
 
@@ -989,26 +1018,14 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
    o  TLS False Start [RFC7918] which reduces round-trips by allowing
       the TLS second flight of messages (ChangeCipherSpec) to also
-      contain the (encrypted) DNS query
+      contain the (encrypted) DNS query.
 
    o  Cached Information Extension [RFC7924] which avoids transmitting
       the server's certificate and certificate chain if the client has
-      cached that information from a previous TLS handshake
+      cached that information from a previous TLS handshake.
 
    Guidance specific to TLS is provided in [RFC7858] and that specific
-   to DTLS it is provided in[RFC8094].
-
-
-
-
-
-
-
-
-Dickinson, et al.       Expires December 11, 2017              [Page 18]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
+   to DTLS it is provided in [RFC8094].
 
 10.  IANA Considerations
 
@@ -1040,6 +1057,15 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
       responses to hide their size making analysis of encrypted traffic
       harder.
 
+
+
+
+
+Dickinson, et al.       Expires December 11, 2017              [Page 19]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
    Guidance on padding policies for EDNS(0) is provided in
    [I-D.ietf-dprive-padding-policy]
 
@@ -1054,17 +1080,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
       inform the DNS Resolver that it does not want any address
       information leaked, and the DNS Resolver should honor that
       request.
-
-
-
-
-
-
-
-Dickinson, et al.       Expires December 11, 2017              [Page 19]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
 
 12.  Acknowledgments
 
@@ -1100,6 +1115,13 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
               (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
               <http://www.rfc-editor.org/info/rfc5280>.
 
+
+
+Dickinson, et al.       Expires December 11, 2017              [Page 20]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
    [RFC6125]  Saint-Andre, P. and J. Hodges, "Representation and
               Verification of Domain-Based Application Service Identity
               within Internet Public Key Infrastructure Using X.509
@@ -1110,17 +1132,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    [RFC6347]  Rescorla, E. and N. Modadugu, "Datagram Transport Layer
               Security Version 1.2", RFC 6347, DOI 10.17487/RFC6347,
               January 2012, <http://www.rfc-editor.org/info/rfc6347>.
-
-
-
-
-
-
-
-Dickinson, et al.       Expires December 11, 2017              [Page 20]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
 
    [RFC6698]  Hoffman, P. and J. Schlyter, "The DNS-Based Authentication
               of Named Entities (DANE) Transport Layer Security (TLS)
@@ -1158,6 +1169,15 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
               DOI 10.17487/RFC7918, August 2016,
               <http://www.rfc-editor.org/info/rfc7918>.
 
+
+
+
+
+Dickinson, et al.       Expires December 11, 2017              [Page 21]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
    [RFC7924]  Santesson, S. and H. Tschofenig, "Transport Layer Security
               (TLS) Cached Information Extension", RFC 7924,
               DOI 10.17487/RFC7924, July 2016,
@@ -1167,16 +1187,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
               Transport Layer Security (DTLS)", RFC 8094,
               DOI 10.17487/RFC8094, February 2017,
               <http://www.rfc-editor.org/info/rfc8094>.
-
-
-
-
-
-
-Dickinson, et al.       Expires December 11, 2017              [Page 21]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
 
 13.2.  Informative References
 
@@ -1215,6 +1225,15 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
               for IPv6 (DHCPv6)", RFC 3315, DOI 10.17487/RFC3315, July
               2003, <http://www.rfc-editor.org/info/rfc3315>.
 
+
+
+
+
+Dickinson, et al.       Expires December 11, 2017              [Page 22]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
    [RFC3646]  Droms, R., Ed., "DNS Configuration options for Dynamic
               Host Configuration Protocol for IPv6 (DHCPv6)", RFC 3646,
               DOI 10.17487/RFC3646, December 2003,
@@ -1224,15 +1243,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
               S. Krishnan, "Guidelines for Creating New DHCPv6 Options",
               BCP 187, RFC 7227, DOI 10.17487/RFC7227, May 2014,
               <http://www.rfc-editor.org/info/rfc7227>.
-
-
-
-
-
-Dickinson, et al.       Expires December 11, 2017              [Page 22]
-
-Internet-Draft        (D)TLS Authentication for DNS            June 2017
-
 
    [RFC7435]  Dukhovni, V., "Opportunistic Security: Some Protection
               Most of the Time", RFC 7435, DOI 10.17487/RFC7435,
@@ -1266,22 +1276,12 @@ Appendix A.  Server capability probing and caching by DNS clients
    otherwise specified by the configuration of the DNS client) DNS
    clients that implement both TLS and DTLS should try to authenticate
    using both protocols before failing or falling back to a lower
-   security.  DNS clients using opportunistic security should try all
-   available servers (possibly in parallel) in order to obtain an
-   authenticated encrypted connection before falling back to a lower
-   security.  (RATIONALE: This approach can increase latency while
+   security.  DNS clients using an Opportunistic Usage profile should
+   try all available servers (possibly in parallel) in order to obtain
+   an authenticated and encrypted connection before falling back to a
+   lower security.  (RATIONALE: This approach can increase latency while
    discovering server capabilities but maximizes the chance of sending
-   the query over an authenticated encrypted connection.)
-
-Appendix B.  Changes between revisions
-
-   [Note to RFC Editor: please remove this section prior to
-   publication.]
-
-
-
-
-
+   the query over an authenticated and encrypted connection.)
 
 
 
@@ -1289,6 +1289,11 @@ Dickinson, et al.       Expires December 11, 2017              [Page 23]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+Appendix B.  Changes between revisions
+
+   [Note to RFC Editor: please remove this section prior to
+   publication.]
 
 B.1.  -09 version
 
@@ -1333,11 +1338,6 @@ B.4.  -06 version
 
    Terminology: Change forwarder/proxy to just forwarder
 
-   Terminology: Add definition of 'Authentication domain name' and use
-   this throughout
-
-   Section 4.2: Remove parenthesis in the table.
-
 
 
 
@@ -1345,6 +1345,11 @@ Dickinson, et al.       Expires December 11, 2017              [Page 24]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+   Terminology: Add definition of 'Authentication domain name' and use
+   this throughout
+
+   Section 4.2: Remove parenthesis in the table.
 
    Section 4.2: Change the text after the table as agreed with Paul
    Hoffman.
@@ -1390,17 +1395,14 @@ B.8.  -02 version
    Section 8.3: Clarified statement about use of DHCP in Opportunistic
    profile
 
-   Title abbreviated.
-
-
-
-
 
 
 Dickinson, et al.       Expires December 11, 2017              [Page 25]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+   Title abbreviated.
 
 B.9.  -01 version
 
@@ -1444,8 +1446,6 @@ Authors' Addresses
    USA
 
    Email: dkg@fifthhorseman.net
-
-
 
 
 
