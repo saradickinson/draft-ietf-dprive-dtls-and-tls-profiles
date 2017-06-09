@@ -366,26 +366,26 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
       authenticated connection to a privacy-enabling DNS Server.  A hard
       failure occurs if this is not available.  This requires the client
       to securely obtain authentication information it can use to
-      authenticate the server.  This profile can include some initial
-      meta queries (performed using Opportunistic Privacy) to securely
-      obtain the IP address and authentication information for the
+      authenticate the server.  This profile provides strong privacy
+      guarantees to the client if the authentication information is pre-
+      configured or obtained via a secure and trustworthy mechanism.
+
+   o  This profile can include some initial meta queries (performed
+      using Opportunistic Privacy) to obtain the IP address for the
       privacy-enabling DNS server to which the DNS client will
       subsequently connect.  The rationale for this is that requiring
       Strict Privacy for such meta queries would introduce significant
-      deployment obstacles.  This profile provides strong privacy
-      guarantees to the client.  This Profile is discussed in detail in
-      Section 6.6.
+      deployment obstacles.  It should be noted that in this case the
+      profile is open to active attack on the meta query which could
+      lead to the client not being able to connect to a privacy-enabling
+      DNS server that it can authenticate.
+
+   o  This Profile is discussed in detail in Section 6.6.
 
    o  Opportunistic Privacy: the DNS client uses Opportunistic Security
       as described in [RFC7435]
 
-         "... the use of cleartext as the baseline communication
-         security policy, with encryption and authentication negotiated
-         and applied to the communication when available."
 
-      The use of Opportunistic Privacy is intended to support
-      incremental deployment of security capabilities with a view to
-      widespread adoption of Strict Privacy.  It should be employed when
 
 
 
@@ -394,6 +394,13 @@ Dickinson, et al.       Expires December 11, 2017               [Page 7]
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
+         "... the use of cleartext as the baseline communication
+         security policy, with encryption and authentication negotiated
+         and applied to the communication when available."
+
+      The use of Opportunistic Privacy is intended to support
+      incremental deployment of security capabilities with a view to
+      widespread adoption of Strict Privacy.  It should be employed when
       the DNS client might otherwise settle for cleartext; it provides
       the maximum protection an attacker will allow.  As described in
       [RFC7435] it might result in
@@ -435,13 +442,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    unauthenticated connection was used then the user can detect that the
    connection may be subject to active attack.  In other words for the
    cases where no protection is provided against an attacker (N) it is
-   implicit that an attack might be happening (D).  This is discussed in
-   Section 6.5.
-
-
-
-
-
 
 
 
@@ -449,6 +449,9 @@ Dickinson, et al.       Expires December 11, 2017               [Page 8]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+   implicit that an attack might be happening (D).  This is discussed in
+   Section 6.5.
 
     +---------------+------------+------------------+-----------------+
     | Usage Profile | Connection | Passive Attacker | Active Attacker |
@@ -495,9 +498,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    Opportunistic Privacy during the resolution of a given query as this
    could invalidate the protection offered against active attackers.  It
    is anticipated that DNS clients will use a particular Usage Profile
-   for all queries to all configured servers until an operational issue
-   or policy update dictates a change in the profile used.
-
 
 
 
@@ -505,6 +505,9 @@ Dickinson, et al.       Expires December 11, 2017               [Page 9]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+   for all queries to all configured servers until an operational issue
+   or policy update dictates a change in the profile used.
 
 6.  Authentication in DNS-over(D)TLS
 
@@ -550,9 +553,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    information to use for authentication for each option; either
    statically via direct configuration or dynamically.  Of course, the
    Opportunistic Usage Profile does not require authentication and so a
-   client using that profile may choose to connect to a Privacy Enabling
-   DNS server on the basis of just an IP address.
-
 
 
 
@@ -561,6 +561,9 @@ Dickinson, et al.       Expires December 11, 2017              [Page 10]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+   client using that profile may choose to connect to a Privacy Enabling
+   DNS server on the basis of just an IP address.
 
    +---+------------+-------------+------------------------------------+
    | # | Static     | Dynamically | Short name: Description            |
@@ -607,9 +610,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
           Server Name Indication (SNI) field in the Client Hello in TLS
           when communicating with a privacy enabling DNS server)
 
-          - Overhead of on-going key management required
-
-   2.  ADN
 
 
 
@@ -617,6 +617,10 @@ Dickinson, et al.       Expires December 11, 2017              [Page 11]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+          - Overhead of on-going key management required
+
+   2.  ADN
 
           + Minimal leakage
 
@@ -663,16 +667,14 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
           + DANE options (e.g., matching on entire certificate)
 
-          - Requires a DNSSEC validating stub implementation
-
-
-
 
 
 Dickinson, et al.       Expires December 11, 2017              [Page 12]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
+
+          - Requires a DNSSEC validating stub implementation
 
 6.4.  Combining Authentication Mechanisms
 
@@ -719,8 +721,6 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    client to switch to (preferred) Strict Privacy where it is viable
    e.g, where all the configured servers support DNS-over-TLS and
    successfully authenticate.
-
-
 
 
 

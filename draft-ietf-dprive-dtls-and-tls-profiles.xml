@@ -376,13 +376,22 @@ please see http://xml.resource.org/authoring/README.html. -->
             authenticated connection to a privacy-enabling DNS Server. A hard
             failure occurs if this is not available. This requires the client
             to securely obtain authentication information it can use to authenticate the
-            server. This profile can include some initial meta queries
-            (performed using Opportunistic Privacy) to securely obtain the IP
-            address and authentication information for the privacy-enabling
+            server. This
+            profile provides strong privacy guarantees to the client if the authentication
+            information is pre-configured or obtained via a secure and trustworthy
+            mechanism.</t>
+
+            <t>This profile can include some initial meta queries
+            (performed using Opportunistic Privacy) to obtain the IP
+            address for the privacy-enabling
             DNS server to which the DNS client will subsequently connect. The
             rationale for this is that requiring Strict Privacy for such meta
-            queries would introduce significant deployment obstacles. This
-            profile provides strong privacy guarantees to the client. This
+            queries would introduce significant deployment obstacles. It should be noted that 
+            in this case the profile is open to active attack on the meta query which
+            could lead to the client not being able to connect to a privacy-enabling
+            DNS server that it can authenticate.</t> 
+            
+            <t>This
             Profile is discussed in detail in <xref target="strict"></xref>.</t>
 
             <t>Opportunistic Privacy: the DNS client uses Opportunistic
