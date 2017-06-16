@@ -6,9 +6,9 @@ dprive                                                      S. Dickinson
 Internet-Draft                                                   Sinodun
 Updates: 7858 (if approved)                                   D. Gillmor
 Intended status: Standards Track                                    ACLU
-Expires: December 11, 2017                                      T. Reddy
-                                                                   Cisco
-                                                            June 9, 2017
+Expires: December 18, 2017                                      T. Reddy
+                                                                  McAfee
+                                                           June 16, 2017
 
 
              Usage and (D)TLS Profiles for DNS-over-(D)TLS
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 11, 2017.
+   This Internet-Draft will expire on December 18, 2017.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 1]
+Dickinson, et al.       Expires December 18, 2017               [Page 1]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -86,8 +86,8 @@ Table of Contents
      6.7.  Implementation guidance . . . . . . . . . . . . . . . . .  15
    7.  Sources of Authentication Domain Names  . . . . . . . . . . .  15
      7.1.  Full direct configuration . . . . . . . . . . . . . . . .  15
-     7.2.  Direct configuration of name only . . . . . . . . . . . .  16
-     7.3.  No configuration: Dynamic discovery of ADN  . . . . . . .  16
+     7.2.  Direct configuration of ADN only  . . . . . . . . . . . .  16
+     7.3.  Dynamic discovery of ADN  . . . . . . . . . . . . . . . .  16
        7.3.1.  DHCP  . . . . . . . . . . . . . . . . . . . . . . . .  16
    8.  Authentication Domain Name based Credential Verification  . .  17
      8.1.  PKIX Certificate Based Authentication . . . . . . . . . .  17
@@ -104,25 +104,26 @@ Table of Contents
      13.2.  Informative References . . . . . . . . . . . . . . . . .  23
    Appendix A.  Server capability probing and caching by DNS clients  24
    Appendix B.  Changes between revisions  . . . . . . . . . . . . .  24
-     B.1.  -09 version . . . . . . . . . . . . . . . . . . . . . . .  25
-     B.2.  -08 version . . . . . . . . . . . . . . . . . . . . . . .  25
+     B.1.  -10 version . . . . . . . . . . . . . . . . . . . . . . .  25
+     B.2.  -09 version . . . . . . . . . . . . . . . . . . . . . . .  26
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 2]
+Dickinson, et al.       Expires December 18, 2017               [Page 2]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
-     B.3.  -07 version . . . . . . . . . . . . . . . . . . . . . . .  25
-     B.4.  -06 version . . . . . . . . . . . . . . . . . . . . . . .  25
-     B.5.  -05 version . . . . . . . . . . . . . . . . . . . . . . .  26
-     B.6.  -04 version . . . . . . . . . . . . . . . . . . . . . . .  26
-     B.7.  -03 version . . . . . . . . . . . . . . . . . . . . . . .  26
-     B.8.  -02 version . . . . . . . . . . . . . . . . . . . . . . .  26
-     B.9.  -01 version . . . . . . . . . . . . . . . . . . . . . . .  27
-     B.10. draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  27
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.3.  -08 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.4.  -07 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.5.  -06 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.6.  -05 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.7.  -04 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.8.  -03 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.9.  -02 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.10. -01 version . . . . . . . . . . . . . . . . . . . . . . .  28
+     B.11. draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  28
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
 
 1.  Introduction
 
@@ -164,8 +165,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-
-Dickinson, et al.       Expires December 11, 2017               [Page 3]
+Dickinson, et al.       Expires December 18, 2017               [Page 3]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -221,7 +221,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 4]
+Dickinson, et al.       Expires December 18, 2017               [Page 4]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -277,7 +277,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 5]
+Dickinson, et al.       Expires December 18, 2017               [Page 5]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -333,7 +333,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 6]
+Dickinson, et al.       Expires December 18, 2017               [Page 6]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -389,7 +389,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 7]
+Dickinson, et al.       Expires December 18, 2017               [Page 7]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -445,7 +445,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 8]
+Dickinson, et al.       Expires December 18, 2017               [Page 8]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -501,7 +501,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017               [Page 9]
+Dickinson, et al.       Expires December 18, 2017               [Page 9]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -557,7 +557,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 10]
+Dickinson, et al.       Expires December 18, 2017              [Page 10]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -613,7 +613,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 11]
+Dickinson, et al.       Expires December 18, 2017              [Page 11]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -669,7 +669,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 12]
+Dickinson, et al.       Expires December 18, 2017              [Page 12]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -725,7 +725,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 13]
+Dickinson, et al.       Expires December 18, 2017              [Page 13]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -781,7 +781,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 14]
+Dickinson, et al.       Expires December 18, 2017              [Page 14]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -837,7 +837,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 15]
+Dickinson, et al.       Expires December 18, 2017              [Page 15]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -846,7 +846,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    both an IP address and an authentication domain name for each DNS
    server.
 
-7.2.  Direct configuration of name only
+7.2.  Direct configuration of ADN only
 
    A DNS client may be configured directly and securely with only the
    authentication domain name of each of its privacy-enabling DNS
@@ -866,7 +866,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
    enabling DNS server MAY choose to locally cache the server host IP
    addresses in order to not have to repeat the opportunistic lookup.
 
-7.3.  No configuration: Dynamic discovery of ADN
+7.3.  Dynamic discovery of ADN
 
    This section discusses the general case of a DNS client discovering
    both the authentication domain name and IP address dynamically.  This
@@ -893,7 +893,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 16]
+Dickinson, et al.       Expires December 18, 2017              [Page 16]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -949,7 +949,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 17]
+Dickinson, et al.       Expires December 18, 2017              [Page 17]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1005,7 +1005,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 18]
+Dickinson, et al.       Expires December 18, 2017              [Page 18]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1061,7 +1061,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 19]
+Dickinson, et al.       Expires December 18, 2017              [Page 19]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1117,7 +1117,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 20]
+Dickinson, et al.       Expires December 18, 2017              [Page 20]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1173,7 +1173,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 21]
+Dickinson, et al.       Expires December 18, 2017              [Page 21]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1229,7 +1229,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 22]
+Dickinson, et al.       Expires December 18, 2017              [Page 22]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1285,7 +1285,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 23]
+Dickinson, et al.       Expires December 18, 2017              [Page 23]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1341,12 +1341,68 @@ Appendix B.  Changes between revisions
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 24]
+Dickinson, et al.       Expires December 18, 2017              [Page 24]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
-B.1.  -09 version
+B.1.  -10 version
+
+   Clarified the specific attacks the Usage profiles mitigate against.
+
+   Revised wording in the draft relating 'security/privacy guarantees'
+   and generally improved consistency of wording throughout the
+   document.
+
+   Corrected and added a number of references:
+
+   o  RFC7924 is now Normative
+
+   o  RFC7918 and RFC8094 are now Normative (and therefore Downrefs)
+
+   o  draft-ietf-tls-tls13, draft-ietf-dprive-padding-policy, RFC3315
+      and RFC7227 added
+
+   Terminology: Update definition of Privacy-enabling DNS server and
+   moved normative definition to section 4.
+
+   Section 5 and 6.3: Included discussion of the additional attacks
+   possible when using meta-queries to bootstrap the DNS service
+
+   Section 5: Added sentence on why Opportunistic Profile may fallback
+   for latency reasons.
+
+   Section 5.1: Added discussion of when clients might change Usage
+   Profiles.
+
+   Section 6.4: Added caveat on use of combined authentication re
+   RFC7469.
+
+   Section 6.5: Added more detail on how authentication results might be
+   used in Opportunistic.  Opportunistic clients now SHOULD try for the
+   best case.
+
+   Section 7.3: Re-worked this section and the discussion of DHCP.
+
+   Section 9: Removed unnecessary text, added condition on use of
+   RFC7250 (Raw public keys).
+
+   Section 11.: More detail on padding policies.
+
+   Numerous editorial corrections.
+
+
+
+
+
+
+
+Dickinson, et al.       Expires December 18, 2017              [Page 25]
+
+Internet-Draft        (D)TLS Authentication for DNS            June 2017
+
+
+B.2.  -09 version
 
    Remove the SRV record to simplify the draft.
 
@@ -1358,13 +1414,13 @@ B.1.  -09 version
 
    Update page header to be '(D)TLS Authentication for TLS'.
 
-B.2.  -08 version
+B.3.  -08 version
 
    Removed hard failure as an option for Opportunistic Usage profile.
 
    Added a new section comparing the Authentication Mechanisms
 
-B.3.  -07 version
+B.4.  -07 version
 
    Re-work of the Abstract and Introduction to better describe the
    contents in this version.
@@ -1378,7 +1434,7 @@ B.3.  -07 version
    Changes to the section headings and groupings to make the
    presentation more logical.
 
-B.4.  -06 version
+B.5.  -06 version
 
    Introduction: Re-word discussion of Working group charter.
 
@@ -1397,7 +1453,7 @@ B.4.  -06 version
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 25]
+Dickinson, et al.       Expires December 18, 2017              [Page 26]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
@@ -1410,7 +1466,7 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
    Section 11: Split second paragraph.
 
-B.5.  -05 version
+B.6.  -05 version
 
    Add more details on detecting passive attacks to section 4.2
 
@@ -1418,18 +1474,18 @@ B.5.  -05 version
 
    Change comment about future I-D on usage policies.
 
-B.6.  -04 version
+B.7.  -04 version
 
    Introduction: Add comment that DNS-over-DTLS draft is Experiments
 
    Update 2 I-D references to RFCs.
 
-B.7.  -03 version
+B.8.  -03 version
 
    Section 9: Update DANE section with better references to RFC7671 and
    RFC7250
 
-B.8.  -02 version
+B.9.  -02 version
 
    Introduction: Added paragraph on the background and scope of the
    document.
@@ -1453,12 +1509,12 @@ B.8.  -02 version
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 26]
+Dickinson, et al.       Expires December 18, 2017              [Page 27]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
-B.9.  -01 version
+B.10.  -01 version
 
    Section 4.2: Make clear that the Strict Privacy Profile can include
    meta queries performed using Opportunistic Privacy.
@@ -1474,7 +1530,7 @@ B.9.  -01 version
 
    Section 8.2: Clarify description and example.
 
-B.10.  draft-ietf-dprive-dtls-and-tls-profiles-00
+B.11.  draft-ietf-dprive-dtls-and-tls-profiles-00
 
    Re-submission of draft-dgr-dprive-dtls-and-tls-profiles with name
    change to draft-ietf-dprive-dtls-and-tls-profiles.  Also minor nits
@@ -1509,19 +1565,18 @@ Authors' Addresses
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 27]
+Dickinson, et al.       Expires December 18, 2017              [Page 28]
 
 Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
    Tirumaleswar Reddy
-   Cisco Systems, Inc.
-   Cessna Business Park, Varthur Hobli
-   Sarjapur Marathalli Outer Ring Road
-   Bangalore, Karnataka  560103
+   McAfee, Inc.
+   Embassy Golf Link Business Park
+   Bangalore, Karnataka  560071
    India
 
-   Email: tireddy@cisco.com
+   Email: TirumaleswarReddy_Konda@McAfee.com
 
 
 
@@ -1565,4 +1620,5 @@ Internet-Draft        (D)TLS Authentication for DNS            June 2017
 
 
 
-Dickinson, et al.       Expires December 11, 2017              [Page 28]
+
+Dickinson, et al.       Expires December 18, 2017              [Page 29]

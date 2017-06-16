@@ -98,24 +98,22 @@ please see http://xml.resource.org/authoring/README.html. -->
     </author>
 
     <author fullname="Tirumaleswar Reddy" initials="T." surname="Reddy">
-      <organization abbrev="Cisco">Cisco Systems, Inc.</organization>
+      <organization abbrev="McAfee"> McAfee, Inc.</organization>
 
       <address>
         <postal>
-          <street>Cessna Business Park, Varthur Hobli</street>
-
-          <street>Sarjapur Marathalli Outer Ring Road</street>
+          <street>Embassy Golf Link Business Park</street>
 
           <city>Bangalore</city>
 
           <region>Karnataka</region>
 
-          <code>560103</code>
+          <code>560071</code>
 
           <country>India</country>
         </postal>
 
-        <email>tireddy@cisco.com</email>
+        <email>TirumaleswarReddy_Konda@McAfee.com</email>
       </address>
     </author>
 
@@ -754,7 +752,7 @@ please see http://xml.resource.org/authoring/README.html. -->
         of both an IP address and an authentication domain name for each DNS server.</t>
       </section>
 
-      <section anchor="ADNonly" title="Direct configuration of name only">
+      <section anchor="ADNonly" title="Direct configuration of ADN only">
 
         <t>A DNS client may be configured directly and securely with only the
         authentication domain name of each of its privacy-enabling DNS servers. For example, using a
@@ -776,7 +774,7 @@ please see http://xml.resource.org/authoring/README.html. -->
 
       </section>
       
-      <section title="No configuration: Dynamic discovery of ADN">
+      <section title="Dynamic discovery of ADN">
 
       <t>This section discusses the general case of a DNS client discovering both 
       the authentication domain name and IP address dynamically. This is not 
@@ -1137,6 +1135,27 @@ please see http://xml.resource.org/authoring/README.html. -->
     <section title="Changes between revisions">
       <t>[Note to RFC Editor: please remove this section prior to
       publication.]</t>
+
+      <section title="-10 version">
+          <t>Clarified the specific attacks the Usage profiles mitigate against.</t>
+          <t>Revised wording in the draft relating 'security/privacy guarantees' 
+             and generally improved consistency of wording throughout the document.</t>
+          <t>Corrected and added a number of references:
+              <list style="symbols"><t>RFC7924 is now Normative</t>
+                  <t>RFC7918 and RFC8094 are now Normative (and therefore Downrefs)</t>
+                  <t>draft-ietf-tls-tls13, draft-ietf-dprive-padding-policy, RFC3315 and RFC7227 added</t></list></t>
+         <t>Terminology: Update definition of Privacy-enabling DNS server and moved normative definition to section 4.</t>
+         <t>Section 5 and 6.3: Included discussion of the additional attacks possible when using meta-queries to bootstrap the DNS service</t>
+         <t>Section 5: Added sentence on why Opportunistic Profile may fallback for latency reasons.</t>
+         <t>Section 5.1: Added discussion of when clients might change Usage Profiles.</t>
+         <t>Section 6.4: Added caveat on use of combined authentication re RFC7469.</t>
+         <t>Section 6.5: Added more detail on how authentication results might be used in Opportunistic. Opportunistic clients now SHOULD try for the best case.</t>
+         <t>Section 7.3: Re-worked this section and the discussion of DHCP.</t>
+         <t>Section 9: Removed unnecessary text, added condition on use of RFC7250 (Raw public keys).</t>
+         <t>Section 11.: More detail on padding policies.</t>
+         <t>Numerous editorial corrections.</t>
+      </section>
+
 
       <section title="-09 version">
            <t>Remove the SRV record to simplify the draft. </t>
