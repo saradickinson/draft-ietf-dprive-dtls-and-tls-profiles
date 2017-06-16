@@ -1360,8 +1360,8 @@ B.1.  -10 version
 
    o  RFC7918 and RFC8094 are now Normative (and therefore Downrefs)
 
-   o  draft-ietf-tls-tls13, draft-ietf-dprive-padding-policy, RFC3315
-      and RFC7227 added
+   o  draft-ietf-tls-tls13, draft-ietf-dprive-padding-policy,RFC3315 and
+      RFC7227 added
 
    Terminology: Update definition of Privacy-enabling DNS server and
    moved normative definition to section 4.
