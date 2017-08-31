@@ -684,7 +684,8 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
           recognizable domain name needed
 
           - A/AAAA meta queries leaked to network provided DNS server
-          that may be subject to active attack if not DNSSEC validated.
+          that may be subject to active attack (can be mitigated by
+          DNSSEC validation).
 
    4.  DHCP
 
@@ -721,7 +722,6 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
           + DANE options (e.g., matching on entire certificate)
 
-          - Requires a DNSSEC validating stub implementation
 
 
 
@@ -729,6 +729,8 @@ Dickinson, et al.         Expires March 4, 2018                [Page 13]
 
 Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
+
+          - Requires a DNSSEC validating stub implementation
 
 6.4.  Combining Authentication Mechanisms
 
@@ -776,8 +778,6 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
    can provide a basis for a DNS client to switch to (preferred) Strict
    Privacy where it is viable e.g, where all the configured servers
    support DNS-over-(D)TLS and successfully authenticate.
-
-
 
 
 

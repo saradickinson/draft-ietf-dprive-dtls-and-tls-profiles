@@ -629,7 +629,7 @@ please see http://xml.resource.org/authoring/README.html. -->
                 </list></t>
                 <t>ADN only<list style="empty">
                     <t>+ Minimal one-off direct configuration, only a human recognizable domain name needed</t>
-                    <t>- A/AAAA meta queries leaked to network provided DNS server that may be subject to active attack if not DNSSEC validated.</t>
+                    <t>- A/AAAA meta queries leaked to network provided DNS server that may be subject to active attack (can be mitigated by DNSSEC validation).</t>
                 </list></t>
                 <t>DHCP<list style="empty">
                     <t>+ No static config</t>
