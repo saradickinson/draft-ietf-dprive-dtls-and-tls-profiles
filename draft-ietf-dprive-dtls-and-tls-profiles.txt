@@ -6,9 +6,9 @@ dprive                                                      S. Dickinson
 Internet-Draft                                                   Sinodun
 Updates: 7858 (if approved)                                   D. Gillmor
 Intended status: Standards Track                                    ACLU
-Expires: March 4, 2018                                          T. Reddy
+Expires: March 15, 2018                                         T. Reddy
                                                                   McAfee
-                                                         August 31, 2017
+                                                      September 11, 2017
 
 
              Usage and (D)TLS Profiles for DNS-over-(D)TLS
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 4, 2018.
+   This Internet-Draft will expire on March 15, 2018.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Dickinson, et al.         Expires March 4, 2018                 [Page 1]
+Dickinson, et al.        Expires March 15, 2018                 [Page 1]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -104,25 +104,26 @@ Table of Contents
      13.2.  Informative References . . . . . . . . . . . . . . . . .  23
    Appendix A.  Server capability probing and caching by DNS clients  24
    Appendix B.  Changes between revisions  . . . . . . . . . . . . .  24
-     B.1.  -10 version . . . . . . . . . . . . . . . . . . . . . . .  25
-     B.2.  -09 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.1.  -11 version . . . . . . . . . . . . . . . . . . . . . . .  25
+     B.2.  -10 version . . . . . . . . . . . . . . . . . . . . . . .  25
 
 
 
-Dickinson, et al.         Expires March 4, 2018                 [Page 2]
+Dickinson, et al.        Expires March 15, 2018                 [Page 2]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
-     B.3.  -08 version . . . . . . . . . . . . . . . . . . . . . . .  26
-     B.4.  -07 version . . . . . . . . . . . . . . . . . . . . . . .  26
-     B.5.  -06 version . . . . . . . . . . . . . . . . . . . . . . .  26
-     B.6.  -05 version . . . . . . . . . . . . . . . . . . . . . . .  27
-     B.7.  -04 version . . . . . . . . . . . . . . . . . . . . . . .  27
-     B.8.  -03 version . . . . . . . . . . . . . . . . . . . . . . .  27
-     B.9.  -02 version . . . . . . . . . . . . . . . . . . . . . . .  27
-     B.10. -01 version . . . . . . . . . . . . . . . . . . . . . . .  28
-     B.11. draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  28
+     B.3.  -09 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.4.  -08 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.5.  -07 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.6.  -06 version . . . . . . . . . . . . . . . . . . . . . . .  26
+     B.7.  -05 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.8.  -04 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.9.  -03 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.10. -02 version . . . . . . . . . . . . . . . . . . . . . . .  27
+     B.11. -01 version . . . . . . . . . . . . . . . . . . . . . . .  28
+     B.12. draft-ietf-dprive-dtls-and-tls-profiles-00  . . . . . . .  28
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
 
 1.  Introduction
@@ -164,10 +165,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-
-Dickinson, et al.         Expires March 4, 2018                 [Page 3]
+Dickinson, et al.        Expires March 15, 2018                 [Page 3]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    Section 5 presents a generalized discussion of Usage Profiles by
@@ -221,9 +221,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                 [Page 4]
+Dickinson, et al.        Expires March 15, 2018                 [Page 4]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    o  How a DNS client can verify that any given credential matches the
@@ -277,9 +277,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                 [Page 5]
+Dickinson, et al.        Expires March 15, 2018                 [Page 5]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    o  SPKI Pinsets: [RFC7858] describes the use of cryptographic digests
@@ -333,9 +333,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                 [Page 6]
+Dickinson, et al.        Expires March 15, 2018                 [Page 6]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    o  Any server identifier other than domain names, including IP
@@ -389,9 +389,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                 [Page 7]
+Dickinson, et al.        Expires March 15, 2018                 [Page 7]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
       available privacy for DNS.  This Profile is discussed in detail in
@@ -432,24 +432,25 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
    that requiring such meta queries to also be performed using the
    Strict profile would introduce significant deployment obstacles.
    However, it should be noted that in this scenario an active attack is
-   possible on the meta query.  DNSSEC validation of these meta-queries
-   mitigates this attack which could otherwise result in a Strict
-   profile client failing to authenticate the connection to the privacy-
-   enabling DNS server and not obtaining DNS service, and an
-   Opportunistic Privacy client connecting to a server controlled by the
-   attacker (see Section 7.2).
+   possible on the meta query.  Such an attack could result in a Strict
+   profile client connecting to a server it cannot authenticate and so
+   not obtaining DNS service, or an Opportunistic Privacy client
+   connecting to a server controlled by the attacker.  DNSSEC validation
+   can detect the attack on the meta query and results in the client not
+   obtaining DNS service (for both Usage profiles) because it will not
+   proceed to connect to the server in question (see Section 7.2)
 
    To compare the two Usage profiles the table below shows a successful
    Strict profile along side the 3 possible outcomes of an Opportunistic
-   profile.  In the best case scenario for the Opportunistic profile (an
 
 
 
-Dickinson, et al.         Expires March 4, 2018                 [Page 8]
+Dickinson, et al.        Expires March 15, 2018                 [Page 8]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
+   profile.  In the best case scenario for the Opportunistic profile (an
    authenticated and encrypted connection) it is equivalent to the
    Strict profile.  In the worst case scenario it is equivalent to clear
    text.  Clients using the Opportunistic profile SHOULD try for the
@@ -500,10 +501,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-
-Dickinson, et al.         Expires March 4, 2018                 [Page 9]
+Dickinson, et al.        Expires March 15, 2018                 [Page 9]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    The choice between the two profiles depends on a number of factors
@@ -557,9 +557,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 10]
+Dickinson, et al.        Expires March 15, 2018                [Page 10]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    One advantage of this domain name based approach is that it
@@ -613,9 +613,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 11]
+Dickinson, et al.        Expires March 15, 2018                [Page 11]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    +---+------------+-------------+------------------------------------+
@@ -669,9 +669,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 12]
+Dickinson, et al.        Expires March 15, 2018                [Page 12]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
           + Minimal leakage
@@ -684,8 +684,8 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
           recognizable domain name needed
 
           - A/AAAA meta queries leaked to network provided DNS server
-          that may be subject to active attack (can be mitigated by
-          DNSSEC validation).
+          that may be subject to active attack (attack can be mitigated
+          by DNSSEC validation).
 
    4.  DHCP
 
@@ -725,9 +725,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 13]
+Dickinson, et al.        Expires March 15, 2018                [Page 13]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
           - Requires a DNSSEC validating stub implementation
@@ -781,9 +781,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 14]
+Dickinson, et al.        Expires March 15, 2018                [Page 14]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
 6.6.  Authentication in Strict Privacy
@@ -837,9 +837,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 15]
+Dickinson, et al.        Expires March 15, 2018                [Page 15]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    In this case, direct configuration for a DNS client would consist of
@@ -893,9 +893,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 16]
+Dickinson, et al.        Expires March 15, 2018                [Page 16]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    This document does not specify or request any DHCP extension to
@@ -949,9 +949,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 17]
+Dickinson, et al.        Expires March 15, 2018                [Page 17]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
       "Clients that validate the DNSSEC signatures themselves MUST use
@@ -1005,9 +1005,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 18]
+Dickinson, et al.        Expires March 15, 2018                [Page 18]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    MUST ignore the DNSSEC chain and validate only via other supplied
@@ -1061,9 +1061,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 19]
+Dickinson, et al.        Expires March 15, 2018                [Page 19]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
 10.  IANA Considerations
@@ -1117,9 +1117,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 20]
+Dickinson, et al.        Expires March 15, 2018                [Page 20]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
 12.  Acknowledgments
@@ -1173,9 +1173,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 21]
+Dickinson, et al.        Expires March 15, 2018                [Page 21]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    [RFC6698]  Hoffman, P. and J. Schlyter, "The DNS-Based Authentication
@@ -1229,9 +1229,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 22]
+Dickinson, et al.        Expires March 15, 2018                [Page 22]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
 13.2.  Informative References
@@ -1285,9 +1285,9 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 23]
+Dickinson, et al.        Expires March 15, 2018                [Page 23]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
    [RFC7435]  Dukhovni, V., "Opportunistic Security: Some Protection
@@ -1341,12 +1341,24 @@ Appendix B.  Changes between revisions
 
 
 
-Dickinson, et al.         Expires March 4, 2018                [Page 24]
+Dickinson, et al.        Expires March 15, 2018                [Page 24]
 
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
 
 
-B.1.  -10 version
+B.1.  -11 version
+
+   Section 5: Re-ordered and re-worded the text in section on
+   Opportunistic profile to make the protection offered by Opportunistic
+   clearer.
+
+   Section 5: Provide a more detailed analysis of attacks on the meta
+   queries
+
+   Section 7.2: Re-introduce a requirement to DNSSEC validate the meta-
+   queries making it as SHOULD for Strict and a MUST for Opportunistic.
+
+B.2.  -10 version
 
    Clarified the specific attacks the Usage profiles mitigate against.
 
@@ -1382,6 +1394,14 @@ B.1.  -10 version
    used in Opportunistic.  Opportunistic clients now SHOULD try for the
    best case.
 
+
+
+
+Dickinson, et al.        Expires March 15, 2018                [Page 25]
+
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
+
+
    Section 7.3: Re-worked this section and the discussion of DHCP.
 
    Section 9: Removed unnecessary text, added condition on use of
@@ -1391,18 +1411,7 @@ B.1.  -10 version
 
    Numerous editorial corrections.
 
-
-
-
-
-
-
-Dickinson, et al.         Expires March 4, 2018                [Page 25]
-
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
-
-
-B.2.  -09 version
+B.3.  -09 version
 
    Remove the SRV record to simplify the draft.
 
@@ -1414,13 +1423,13 @@ B.2.  -09 version
 
    Update page header to be '(D)TLS Authentication for TLS'.
 
-B.3.  -08 version
+B.4.  -08 version
 
    Removed hard failure as an option for Opportunistic Usage profile.
 
    Added a new section comparing the Authentication Mechanisms
 
-B.4.  -07 version
+B.5.  -07 version
 
    Re-work of the Abstract and Introduction to better describe the
    contents in this version.
@@ -1434,12 +1443,20 @@ B.4.  -07 version
    Changes to the section headings and groupings to make the
    presentation more logical.
 
-B.5.  -06 version
+B.6.  -06 version
 
    Introduction: Re-word discussion of Working group charter.
 
    Introduction: Re-word first and third bullet point about 'obtaining'
    a domain name and IP address.
+
+
+
+
+Dickinson, et al.        Expires March 15, 2018                [Page 26]
+
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
+
 
    Introduction: Update reference to DNS-over-TLS draft.
 
@@ -1450,14 +1467,6 @@ B.5.  -06 version
 
    Section 4.2: Remove parenthesis in the table.
 
-
-
-
-Dickinson, et al.         Expires March 4, 2018                [Page 26]
-
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
-
-
    Section 4.2: Change the text after the table as agreed with Paul
    Hoffman.
 
@@ -1466,7 +1475,7 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
    Section 11: Split second paragraph.
 
-B.6.  -05 version
+B.7.  -05 version
 
    Add more details on detecting passive attacks to section 4.2
 
@@ -1474,18 +1483,18 @@ B.6.  -05 version
 
    Change comment about future I-D on usage policies.
 
-B.7.  -04 version
+B.8.  -04 version
 
    Introduction: Add comment that DNS-over-DTLS draft is Experiments
 
    Update 2 I-D references to RFCs.
 
-B.8.  -03 version
+B.9.  -03 version
 
    Section 9: Update DANE section with better references to RFC7671 and
    RFC7250
 
-B.9.  -02 version
+B.10.  -02 version
 
    Introduction: Added paragraph on the background and scope of the
    document.
@@ -1496,6 +1505,15 @@ B.9.  -02 version
    Introduction: Added paragraph to make a comparison with the Strict
    profile in RFC7858 clearer.
 
+
+
+
+
+Dickinson, et al.        Expires March 15, 2018                [Page 27]
+
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
+
+
    Section 4.2: Re-worked the description of Opportunistic and the
    table.
 
@@ -1504,17 +1522,7 @@ B.9.  -02 version
 
    Title abbreviated.
 
-
-
-
-
-
-Dickinson, et al.         Expires March 4, 2018                [Page 27]
-
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
-
-
-B.10.  -01 version
+B.11.  -01 version
 
    Section 4.2: Make clear that the Strict Privacy Profile can include
    meta queries performed using Opportunistic Privacy.
@@ -1530,7 +1538,7 @@ B.10.  -01 version
 
    Section 8.2: Clarify description and example.
 
-B.11.  draft-ietf-dprive-dtls-and-tls-profiles-00
+B.12.  draft-ietf-dprive-dtls-and-tls-profiles-00
 
    Re-submission of draft-dgr-dprive-dtls-and-tls-profiles with name
    change to draft-ietf-dprive-dtls-and-tls-profiles.  Also minor nits
@@ -1549,6 +1557,19 @@ Authors' Addresses
    URI:   http://sinodun.com
 
 
+
+
+
+
+
+
+
+
+Dickinson, et al.        Expires March 15, 2018                [Page 28]
+
+Internet-Draft        (D)TLS Authentication for DNS       September 2017
+
+
    Daniel Kahn Gillmor
    ACLU
    125 Broad Street, 18th Floor
@@ -1556,18 +1577,6 @@ Authors' Addresses
    USA
 
    Email: dkg@fifthhorseman.net
-
-
-
-
-
-
-
-
-
-Dickinson, et al.         Expires March 4, 2018                [Page 28]
-
-Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
    Tirumaleswar Reddy
@@ -1612,13 +1621,4 @@ Internet-Draft        (D)TLS Authentication for DNS          August 2017
 
 
 
-
-
-
-
-
-
-
-
-
-Dickinson, et al.         Expires March 4, 2018                [Page 29]
+Dickinson, et al.        Expires March 15, 2018                [Page 29]
